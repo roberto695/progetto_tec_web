@@ -9,13 +9,35 @@
 body {
     font-family: "Noto Sans", sans-serif;
 }
+:root{
+    --azzurro: #cfe5ff;
+    --blu: #4171ab;
+}
 
 /* ------------------------------
    header
 ------------------------------ */
+body{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
 
-#intestazione{
-    background-color: blue;
-    padding: 20px;
-    text-align: center;
+#intestazione div{
+    background: var(--azzurro);
+    padding: 30px;
+    text-align: left;
+    border-radius: 1.5em;
+    margin: 0.4em;
+    
+}
+#intestazione h1{
+    font-size: 2em;
+}
+#intestazione nav{
+    display: flex;
+    flex-direction: column;
+    padding: 0.2em;
+}
+#intestazione nav a{
+    margin-bottom: 1em;
 }
