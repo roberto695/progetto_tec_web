@@ -1,0 +1,21 @@
+/* ------------------------------
+   standard
+------------------------------ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: "Noto Sans", sans-serif;
+}
+
+/* ------------------------------
+   header
+------------------------------ */
+
+#intestazione{
+    background-color: blue;
+    padding: 20px;
+    text-align: center;
+}
