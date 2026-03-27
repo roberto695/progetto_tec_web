@@ -44,6 +44,17 @@ body{
 #intestazione nav a{
     margin-bottom: 1em;
 }
+#logo{
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 50%;
+    align-items: center;
+    border: 0.8em;
+}
+#intestazione img {
+  display: block;
+  margin: 0 auto;
+}
 
 
 /* ------------------------------
