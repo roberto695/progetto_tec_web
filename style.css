@@ -8,10 +8,13 @@
 }
 body {
     font-family: "Noto Sans", sans-serif;
+    background-color: var(--background);
 }
 :root{
     --azzurro: #cfe5ff;
     --blu: #4171ab;
+    --background: #a6acac;
+    --background_sezione : #f2f6f6;
 }
 
 /* ------------------------------
@@ -41,3 +44,32 @@ body{
 #intestazione nav a{
     margin-bottom: 1em;
 }
+
+
+/* ------------------------------
+   main
+------------------------------ */
+
+main div{
+    background: var(--background_sezione);
+    padding: 30px;
+    text-align: left;
+    border-radius: 1.5em;
+    margin: 0.4em;
+}
+
+.bottone {
+  display: inline-block;
+  padding: 12px 20px;
+  background-color: #1A73E8;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.bottone:hover {
+  background-color: #1558b0;
+}
+
