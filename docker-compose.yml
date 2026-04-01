@@ -1,6 +1,6 @@
 services:
   web:
-    image: php:8.2-apache
+    build: ./web
     ports:
       - "127.0.0.1:8000:80"
     volumes:
@@ -13,11 +13,11 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: A7l1ks18BATaaUmOqKEktvr4j7xFkaGYlXtM7EQc7rDAWH6nvG
-      MYSQL_DATABASE: prelievi
+      MYSQL_DATABASE: prelievi_db
       MYSQL_USER: user_web
       MYSQL_PASSWORD: 8A2cU25SoU9zmUrewcib2FgGsY9juEyPrSnFdXBJypa6xfhOmC
     ports:
       - "3306:3306"
     volumes:
-      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./db/init_scripts:/docker-entrypoint-initdb.d
       - ./db/db_data:/var/lib/mysql

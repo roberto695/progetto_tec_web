@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<!-- <?php
+    try {
+        $pdo = new PDO("mysql:host=database;dbname=prelievi_db", "user_web", "8A2cU25SoU9zmUrewcib2FgGsY9juEyPrSnFdXBJypa6xfhOmC");
+        echo "Database: Connessione Riuscita!";
+    }
+    catch (PDOException $e) {
+        echo "Database: Errore: " . $e->getMessage();
+    }
+?> -->
+
+<head>
+    <title>Home</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header id="intestazione">
+        <div>
+            <img src="immagini/logo.png" alt="logo della clinica" id="logo">
+        </div>
+
+        <div>
+            <h1>Home</h1>
+            <nav>
+                <a href="home.html">Home</a>
+                <a href="about.html">prenotazioni</a>
+                <a href="contact.html">account</a>
+            </nav>
+        </div>
+
+
+    </header>
+
+    <main>
+        <div>
+            <h1>Headline</h1>
+        </div>
+
+        <div>
+            <h1>notizie</h1>
+        </div>
+
+        <div>
+            <h1>Prelievi</h1>
+            <p>
+                Fare un prelievo non è solo un controllo di routine: è un modo semplice
+                e veloce per prenderti cura della tua salute. In pochi minuti puoi ottenere
+                informazioni preziose che ti aiutano a prevenire problemi, capire meglio
+                come stai e intervenire in tempo se qualcosa non va.
+                Spesso basta un piccolo gesto oggi per evitare preoccupazioni domani.
+                E se hai dubbi o timori, ricorda che il personale è lì proprio per accompagnarti,
+                spiegarti ogni passaggio e rendere tutto il più tranquillo possibile.
+                La tua salute merita attenzione, e questo è uno dei modi più facili per
+                darle valore.
+            </p>
+            <a href="#" class="bottone">Prenota ora</a>
+        </div>
+
+    </main>
+</body>
+
+</html>
