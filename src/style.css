@@ -8,28 +8,50 @@
 }
 body {
     font-family: "Noto Sans", sans-serif;
-    background-color: var(--background);
+    background-color: var(--background_intestazione);
 }
 :root{
     
-    --background: #f9f9ff;
-
-    --colore_pagina_attuale: #4171ab;
+    --background_intestazione: #ffffff;
+    --background_main: #f9f9ff;
+    --colore_link_pagina_corrente: #005db6;
+    --colore_link_generale: #000000;
 }
 
 /* ------------------------------
    header
 ------------------------------ */
-body{
-    display: grid;
-    grid-template-columns: 1fr 3fr;
+#intestazione {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 0.6em;
+    align-items: center;
 }
-
-
+#menu{
+    width: 100%;
+    text-align: right;
+}
+#menu a{
+    color: var(--colore_link_generale);
+    padding-right: 1.2em;
+    font-size: 1.4em;
+}
+#menu a.active{
+    color: var(--colore_link_pagina_corrente);
+}
+#logo{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
 
 /* ------------------------------
    main
 ------------------------------ */
 
+main{
+    background-color: var(--background_main);
+}
 
 

@@ -1,5 +1,5 @@
 
- <?php
+<?php
  /*
     try {
         $pdo = new PDO("mysql:host=database;dbname=prelievi_db", "user_web", "8A2cU25SoU9zmUrewcib2FgGsY9juEyPrSnFdXBJypa6xfhOmC");
