@@ -1,49 +1,69 @@
 <!DOCTYPE html>
 <html lang="it">
-
 <head>
-    <title>Home</title>
+    <title>Home - Prenotazione Prelievi</title>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../style.css">
 </head>
-
-<body> 
+<body>
 
     <header id="intestazione">
-
-        <img src="../immagini/logo.png" id="logo" alt="logo">
-        
-        <nav id="menu">
-            <a href="index.php" class="active">Home</a>
-            <a href="prenotazioni.php">prenotazioni</a>
-            <a href="account.php">account</a>
-            <a href="login.php">login</a>
-        </nav>
-        
-    </header>
-    
-    <main>
-
-        <div id="iniziale">
-            <h1>Prelievi</h1>
-            <p>
-                Fare un prelievo non è solo un controllo di routine: è un modo semplice
-                e veloce per prenderti cura della tua salute. In pochi minuti puoi ottenere
-                informazioni preziose che ti aiutano a prevenire problemi, capire meglio
-                come stai e intervenire in tempo se qualcosa non va.
-                Spesso basta un piccolo gesto oggi per evitare preoccupazioni domani.
-                E se hai dubbi o timori, ricorda che il personale è lì proprio per accompagnarti,
-                spiegarti ogni passaggio e rendere tutto il più tranquillo possibile.
-                La tua salute merita attenzione, e questo è uno dei modi più facili per
-                darle valore.
-            </p>
-            <a href="#" class="bottone">Prenota ora</a>
+        <div class="header-content">
+            <img src="../immagini/logo.png" id="logo" alt="logo prelievi">
+            <nav id="menu">
+                <a href="index.php" class="active">Home</a>
+                <a href="prenotazioni.php">Prenotazioni</a>
+                <a href="account.php">Account</a>
+                <a href="login.php">Login</a>
+                <div class="lang-dropdown">
+                    <button class="lang-btn">🇮🇹 Italiano <span class="arrow">▼</span></button>
+                    <div class="lang-menu">
+                        <a href="#" class="active-lang">🇮🇹 Italiano</a>
+                        <a href="#">🇬🇧 English</a>
+                        <a href="#">🇫🇷 Français</a>
+                        <a href="#">🇪🇸 Español</a>
+                        <a href="#">🇩🇪 Deutsch</a>
+                    </div>
+                </div>
+            </nav>
         </div>
+    </header>
 
+    <main>
+        <section id="hero">
+            <div class="hero-content">
+                <h1>Prenota il tuo prelievo</h1>
+                <p class="subtitle">Salute e prevenzione, semplici e veloci</p>
+                <p class="description">
+                    Fare un prelievo non è solo un controllo di routine: è un modo semplice
+                    e veloce per prenderti cura della tua salute. In pochi minuti puoi ottenere
+                    informazioni preziose che ti aiutano a prevenire problemi, capire meglio
+                    come stai e intervenire in tempo se qualcosa non va.
+                </p>
+                <a href="prenotazioni.php" class="bottone">Prenota ora</a>
+            </div>
+        </section>
+
+        <section id="info">
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>Perché prenotare</h3>
+                    <p>Fare un prelievo è il modo più semplice per controllare che tutto vada bene.
+                    Pochi minuti del tuo tempo possono darti tranquillità per molto tempo.</p>
+                </div>
+                <div class="info-card">
+                    <h3>Come funziona</h3>
+                    <p>Scegli il giorno e l'ora che fanno per te, prenoti in pochi click e vai al
+                    centro quando ti è comodo. Il personale ti segue in tutto, senza stress.</p>
+                </div>
+            </div>
+        </section>
     </main>
-<!--
--->
+
+    <footer id="footer">
+        <p>&copy; 2026 Centro Prelievi - Tutti i diritti riservati</p>
+    </footer>
 
 </body>
-
 </html>

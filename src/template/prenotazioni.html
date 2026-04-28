@@ -1,27 +1,51 @@
 <!DOCTYPE html>
 <html lang="it">
-
 <head>
-    <title>prenotazioni</title>
+    <title>Prenotazioni - Prenotazione Prelievi</title>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../style.css">
 </head>
-
 <body>
 
     <header id="intestazione">
-
-        <img src="../immagini/logo.png" id="logo" alt="logo">
-        
-        <nav id="menu">
-            <a href="index.php">Home</a>
-            <a href="prenotazioni.php" class="active">prenotazioni</a>
-            <a href="account.php">account</a>
-            <a href="login.php">login</a>
-        </nav>
-        
+        <div class="header-content">
+            <img src="../immagini/logo.png" id="logo" alt="logo prelievi">
+            <nav id="menu">
+                <a href="index.php">Home</a>
+                <a href="prenotazioni.php" class="active">Prenotazioni</a>
+                <a href="account.php">Account</a>
+                <a href="login.php">Login</a>
+                <div class="lang-dropdown">
+                    <button class="lang-btn">🇮🇹 Italiano <span class="arrow">▼</span></button>
+                    <div class="lang-menu">
+                        <a href="#" class="active-lang">🇮🇹 Italiano</a>
+                        <a href="#">🇬🇧 English</a>
+                        <a href="#">🇫🇷 Français</a>
+                        <a href="#">🇪🇸 Español</a>
+                        <a href="#">🇩🇪 Deutsch</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
     </header>
 
-</body>
+    <main>
+        <section id="page-content">
+            <div class="container">
+                <h1>Le tue prenotazioni</h1>
+                <p class="subtitle">Gestisci i tuoi appuntamenti per i prelievi</p>
+                <div class="placeholder-box">
+                    <p>Effettua il login per visualizzare e prenotare i tuoi appuntamenti.</p>
+                    <a href="login.php" class="bottone">Vai al login</a>
+                </div>
+            </div>
+        </section>
+    </main>
 
+    <footer id="footer">
+        <p>&copy; 2026 Centro Prelievi - Tutti i diritti riservati</p>
+    </footer>
+
+</body>
 </html>

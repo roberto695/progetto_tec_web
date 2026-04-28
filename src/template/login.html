@@ -1,27 +1,59 @@
 <!DOCTYPE html>
 <html lang="it">
-
 <head>
-    <title>prenotazioni</title>
+    <title>Login - Prenotazione Prelievi</title>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../style.css">
 </head>
-
 <body>
 
     <header id="intestazione">
-
-        <img src="../immagini/logo.png" id="logo" alt="logo">
-        
-        <nav id="menu">
-            <a href="index.php">Home</a>
-            <a href="prenotazioni.php">prenotazioni</a>
-            <a href="account.php">account</a>
-            <a href="login.php" class="active">login</a>
-        </nav>
-        
+        <div class="header-content">
+            <img src="../immagini/logo.png" id="logo" alt="logo prelievi">
+            <nav id="menu">
+                <a href="index.php">Home</a>
+                <a href="prenotazioni.php">Prenotazioni</a>
+                <a href="account.php">Account</a>
+                <a href="login.php" class="active">Login</a>
+                <div class="lang-dropdown">
+                    <button class="lang-btn">🇮🇹 Italiano <span class="arrow">▼</span></button>
+                    <div class="lang-menu">
+                        <a href="#" class="active-lang">🇮🇹 Italiano</a>
+                        <a href="#">🇬🇧 English</a>
+                        <a href="#">🇫🇷 Français</a>
+                        <a href="#">🇪🇸 Español</a>
+                        <a href="#">🇩🇪 Deutsch</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
     </header>
 
-</body>
+    <main>
+        <section id="page-content">
+            <div class="container">
+                <h1>Accedi al tuo account</h1>
+                <p class="subtitle">Inserisci le tue credenziali per accedere</p>
+                <form class="form-box">
+                    <div class="form-group">
+                        <label for="cf">Codice Fiscale</label>
+                        <input type="text" id="cf" name="cf" placeholder="Inserisci il tuo codice fiscale" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Inserisci la tua password" required>
+                    </div>
+                    <button type="submit" class="bottone">Accedi</button>
+                </form>
+                <p class="form-footer">Non hai un account? <a href="registrazione.php">Registrati qui</a></p>
+            </div>
+        </section>
+    </main>
 
+    <footer id="footer">
+        <p>&copy; 2026 Centro Prelievi - Tutti i diritti riservati</p>
+    </footer>
+
+</body>
 </html>
