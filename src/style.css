@@ -157,10 +157,42 @@ body {
     color: #ffffff;
     padding: 4em 1.5em;
     text-align: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
+.hero-orari {
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+}
+.hero-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 4px;
+    padding: 1.5rem;
+    width: 320px;
+    backdrop-filter: blur(4px);
+    position: relative; 
+    z-index: 1;
+}
+.hero-card-title {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+.info-row {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+
 .hero-content {
-    max-width: 700px;
+    max-width: 450px;
     margin: 0 auto;
 }
 
