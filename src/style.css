@@ -301,6 +301,27 @@ body {
 
 
 /* ------------------------------
+   sezione contatti
+------------------------------ */
+
+#contatti{
+    text-align: center;
+    padding:2em;
+}
+.contatti-grid{
+    display: grid;
+    grid-template-columns: 1fr 3.5fr;
+    gap: 2em;
+    padding-top: 1.5em;
+}
+.contatto-card{
+    padding: 1.5em;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+}
+
+
+/* ------------------------------
    page content (pagine interne)
 ------------------------------ */
 #page-content {
