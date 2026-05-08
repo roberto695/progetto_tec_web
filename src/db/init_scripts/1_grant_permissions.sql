@@ -1,0 +1,2 @@
+GRANT ALL PRIVILEGES ON prelievi_db.* TO 'user_web'@'%' IDENTIFIED BY '8A2cU25SoU9zmUrewcib2FgGsY9juEyPrSnFdXBJypa6xfhOmC';
+FLUSH PRIVILEGES;
