@@ -453,6 +453,20 @@ body {
 }
 
 /* ------------------------------
+   pagina login
+------------------------------ */
+
+.errore_login {
+    color: #b30000;
+    background: #ffe6e6;
+    padding: 6px 10px;
+    border-radius: 5px;
+    margin-top: 5px;
+    font-size: 0.9rem;
+    animation: slideDown 0.3s ease-out;
+}
+
+/* ------------------------------
    responsive
 ------------------------------ */
 @media (max-width: 600px) {

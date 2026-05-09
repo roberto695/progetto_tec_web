@@ -2,8 +2,7 @@ CREATE DATABASE IF NOT EXISTS prelievi_db;
 USE prelievi_db;
 
 CREATE TABLE persona (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    cf VARCHAR(16) UNIQUE,
+    cf VARCHAR(16) PRIMARY KEY,
     nome VARCHAR(20) NOT NULL,
     cognome VARCHAR(20) NOT NULL,
     telefono VARCHAR(20),
