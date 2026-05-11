@@ -16,6 +16,9 @@ $password = "";
 $errore_cf="";
 $errore_password="";
 
+$menu_login = "";
+$menu_account = "";
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cf = trim($_POST['cf']);
     $password = $_POST['password'];
@@ -35,10 +38,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+// pagina login e utente loggato dinamica
+if (isset($_SESSION['cf'])) {
+    $menu_login = "";
+    $menu_account = '<a href="account.php">Account</a>';
+} else {
+    $menu_login = '<a href="login.php">Login</a>';
+    $menu_account = "";
+}
+
+
 $content = file_get_contents(__DIR__ . "/template/login.html");
 
 $content = str_replace("[errore_cf]", $errore_cf, $content);
 $content = str_replace("[errore_password]", $errore_password, $content);
+$content = str_replace("[menu_login]", $menu_login, $content);
+$content = str_replace("[menu_account]", $menu_account, $content);
 
 echo $content;
 ?>

@@ -11,36 +11,34 @@
     <header id="intestazione">
         <div class="header-content">
             <img src="../immagini/logo.png" id="logo" alt="logo prelievi">
-            <nav id="menu">
-                <a href="index.php">Home</a>
-                <a href="prenotazioni.php">Prenotazioni</a>
-                <a href="account.php" class="active">Account</a>
-                <a href="login.php">Login</a>
-                <div class="lang-dropdown">
-                    <button class="lang-btn">🇮🇹 Italiano <span class="arrow">▼</span></button>
-                    <div class="lang-menu">
-                        <a href="#" class="active-lang">🇮🇹 Italiano</a>
-                        <a href="#">🇬🇧 English</a>
-                        <a href="#">🇫🇷 Français</a>
-                        <a href="#">🇪🇸 Español</a>
-                        <a href="#">🇩🇪 Deutsch</a>
-                    </div>
-                </div>
-            </nav>
+            [header_menu]
         </div>
     </header>
 
     <main>
         <section id="page-content">
             <div class="container">
-                <h1>Il tuo account</h1>
+                <h1>Benvenuto [nome] [cognome]</h1>
                 <p class="subtitle">Gestisci i tuoi dati personali</p>
+                <!--
                 <div class="placeholder-box">
                     <p>Effettua il login per visualizzare i tuoi dati e le tue prenotazioni.</p>
                     <a href="login.php" class="bottone">Vai al login</a>
                 </div>
+                dopo qua si puo cambiare e farlo anche meglio, per ora penso ci sta
+                -->
+                <p>Email: [email]</p>
+                <p>Telefono: [telefono]</p>
             </div>
+
+            <div class="logout-container">
+                <a href="logout.php" class="logout-btn">Esci dall\'account</a>
+            </div>
+
         </section>
+    
+</div>
+
     </main>
 
     <footer id="footer">
