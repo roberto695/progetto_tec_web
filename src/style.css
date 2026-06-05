@@ -346,6 +346,23 @@ body {
     margin-bottom: 2em;
 }
 
+.prenotazioni-table{
+    width: 100%;
+    margin-top: 1.5em;
+}
+
+.bottone_prenotazione{
+    display: inline-block;
+    background: var(--primary);
+    color: var(--bg );
+    padding: 0.8em 2em;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.05em;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
 .placeholder-box {
     background: var(--bg-light);
     border: 1px solid var(--border);

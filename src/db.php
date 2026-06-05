@@ -35,6 +35,7 @@ function loginUser($cf, $password) {
     }
 
     return "ok";
+
     
 }
 
@@ -67,6 +68,18 @@ function logoutUser() {
     session_destroy();
 
     return true;
+}
+
+function getPrenotazioni($cf){
+    global $conn;
+
+    $sql = "SELECT id, persona_id, data_ora, stato FROM prenotazione WHERE persona_id  = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $cf);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    return $result;
 }
 
 

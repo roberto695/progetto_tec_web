@@ -17,7 +17,17 @@ services:
       MYSQL_USER: user_web
       MYSQL_PASSWORD: 8A2cU25SoU9zmUrewcib2FgGsY9juEyPrSnFdXBJypa6xfhOmC
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - ./src/db/init_scripts:/docker-entrypoint-initdb.d
-      - ./src/db/db_data:/var/lib/mysql
+      - ./src/db/db_data:/var/lib/mysql  
+  phpmyadmin:
+    image: phpmyadmin:latest
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: database
+      PMA_PORT: 3306
+    depends_on:
+      - database
