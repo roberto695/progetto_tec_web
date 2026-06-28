@@ -1,86 +1,316 @@
-/* ------------------------------
-   standard
------------------------------- */
+:root {
+    /* Colori principali ad alto contrasto */
+    --primary-clinical: #1e40af;  /* Blu medico scuro, profondo e rassicurante */
+    --primary-dark: #0f172a;      /* Grigio ardesia scuro per titoli ad altissima leggibilità */
+    --text-main: #334155;         /* Grigio neutro scuro per il testo (superiore al rapporto 4.5:1) */
+    --bg-light-blue: #f0f7ff;     /* Sfondo azzurrato morbido per la sezione Hero */
+    --bg-body: #f8fafc;           /* Sfondo generale del sito pulito e moderno */
+    --white: #ffffff;
+    
+    /* Colori di stato e interazione */
+    --accent-hover: #1d4ed8;
+    --focus-ring: #ea580c;        /* Arancione vivo per un indicatore di focus inequivocabile */
+    --border-color: #e2e8f0;      /* Grigio leggero per bordi eleganti */
+    
+    /* Spaziature rigide dal prompt */
+    --space-8: 8px;
+    --space-16: 16px;
+    --space-24: 24px;
+    --space-32: 32px;
+    --space-48: 48px;
+}
+
+/* Ottimizzazione accessibilità: rispetto delle preferenze di movimento */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
+
 body {
-    font-family: "Noto Sans", sans-serif;
-    background-color: var(--background);
-}
-:root{
-    --azzurro: #cfe5ff;
-    --blu: #4171ab;
-    --background: #a6acac;
-    --background_sezione : #f2f6f6;
+    font-family: 'Inter', 'Segoe UI', 'Arial', sans-serif;
+    font-size: 1.125rem; /* 18px per agevolare la lettura dei senior */
+    line-height: 1.6;
+    color: var(--text-main);
+    background-color: var(--bg-body);
 }
 
-/* ------------------------------
-   header
------------------------------- */
-body{
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-}
-
-#intestazione div{
-    background: var(--azzurro);
-    padding: 30px;
-    text-align: left;
-    border-radius: 1.5em;
-    margin: 0.4em;
+/* Link di accessibilità "Salta al contenuto" */
+.skip-link {
+    /* Forziamo il comportamento a blocco intero */
+    display: block; 
+    width: 100%;
+    text-align: center;
     
+    /* Lo ancoriamo al top assoluto dello schermo */
+    position: fixed; 
+    top: -1000px; /* Nascosto sopra lo schermo */
+    left: 0;
+    z-index: 9999; /* Sta sopra a QUALSIASI cosa */
+    
+    /* Stile */
+    background-color: var(--focus-ring, #ea580c);
+    color: #ffffff;
+    padding: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    
+    /* Trucco accessibilità per nasconderlo senza usare display:none */
+    height: 1px;
+    overflow: hidden;
 }
-#intestazione h1{
-    font-size: 2em;
+
+/* Quando l'utente preme TAB, ricompare esattamente in cima a tutto */
+.skip-link:focus,
+.skip-link:focus-visible {
+    top: 0;
+    height: auto;
+    overflow: visible;
 }
-#intestazione nav{
+
+/* Gestione dei Focus da tastiera (Belli da vedere, impossibili da mancare) */
+*:focus-visible {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+#intestazione {
+    background-color: var(--white);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05); /* Ombra finissima */
+    padding: var(--space-16);
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    padding: 0.2em;
+    gap: var(--space-16);
 }
-#intestazione nav a{
-    margin-bottom: 1em;
-}
-#logo{
-    max-width: 200px;
-    max-height: 200px;
-    border-radius: 50%;
+
+.logo-area {
+    display: flex;
     align-items: center;
-    border: 0.8em;
-}
-#intestazione img {
-  display: block;
-  margin: 0 auto;
+    gap: var(--space-16);
 }
 
-
-/* ------------------------------
-   main
------------------------------- */
-
-main div{
-    background: var(--background_sezione);
-    padding: 30px;
-    text-align: left;
-    border-radius: 1.5em;
-    margin: 0.4em;
+#logo {
+    max-height: 48px;
+    width: auto;
 }
 
-.bottone {
-  display: inline-block;
-  padding: 12px 20px;
-  background-color: #1A73E8;
-  color: white;
-  text-decoration: none;
-  border-radius: 6px;
-  font-weight: 600;
-  transition: 0.2s;
+#intestazione h1 {
+    font-size: 1.5rem;
+    color: var(--primary-dark);
+    font-weight: 700;
 }
 
-.bottone:hover {
-  background-color: #1558b0;
+/* Menu di navigazione */
+nav ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
 }
 
+nav a {
+    display: flex;
+    align-items: center;
+    min-height: 46px; /* Touch target ottimale */
+    padding: 0 var(--space-16);
+    color: var(--text-main);
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 6px;
+}
+
+nav a:hover {
+    background-color: #f1f5f9;
+    color: var(--primary-clinical);
+}
+
+nav a.active {
+    background-color: var(--bg-light-blue);
+    color: var(--primary-clinical);
+    border-left: 4px solid var(--primary-clinical);
+}
+
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--space-32) var(--space-16);
+}
+
+section {
+    margin-bottom: var(--space-48);
+}
+
+/* Titoli delle sezioni eleganti */
+.section-heading {
+    font-size: 1.75rem;
+    color: var(--primary-dark);
+    margin-bottom: var(--space-24);
+    font-weight: 700;
+}
+
+/* Stile base delle Card */
+.card {
+    background-color: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: var(--space-24);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+}
+
+/* --- SEZIONE HERO (Impatto visivo pulito) --- */
+.hero-section {
+    background-color: var(--bg-light-blue);
+    border: 1px solid #d0e7ff;
+    border-radius: 16px;
+    padding: var(--space-32) var(--space-24);
+}
+
+#hero-title {
+    font-size: 2rem;
+    color: var(--primary-dark);
+    margin-bottom: var(--space-16);
+    line-height: 1.3;
+}
+
+.lead-text {
+    font-size: 1.25rem;
+    color: var(--text-main);
+    margin-bottom: var(--space-24);
+    max-width: 800px;
+}
+
+/* Bottone Call to Action principale */
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    padding: 0 var(--space-32);
+    background-color: var(--primary-clinical);
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(30, 64, 175, 0.2);
+}
+
+.cta-button:hover {
+    background-color: var(--accent-hover);
+    box-shadow: 0 4px 16px rgba(30, 64, 175, 0.3);
+}
+
+/* --- SEZIONE NOTIZIE (Griglia responsive) --- */
+.grid-news {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-24);
+}
+
+.news-card h3 {
+    font-size: 1.35rem;
+    color: var(--primary-dark);
+    margin-bottom: var(--space-8);
+}
+
+.card-badge {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    background-color: #fee2e2;
+    color: #991b1b;
+    padding: var(--space-4) var(--space-12);
+    border-radius: 4px;
+    margin-bottom: var(--space-12);
+}
+
+.card-badge.novità {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+/* --- SEZIONE INFORMATIVA --- */
+.info-card {
+    border-left: 6px solid var(--primary-clinical);
+}
+
+.info-body-text p {
+    margin-bottom: var(--space-16);
+}
+.info-body-text p:last-child {
+    margin-bottom: 0;
+}
+
+.site-footer {
+    background-color: var(--primary-dark);
+    color: var(--white);
+    padding: var(--space-48) var(--space-16);
+    margin-top: var(--space-48);
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.footer-sub {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-top: var(--space-8);
+}
+
+@media (min-width: 768px) {
+    .header-container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    nav ul {
+        flex-direction: row;
+        gap: var(--space-8);
+    }
+
+    nav a {
+        border-left: none;
+    }
+
+    nav a.active {
+        border-left: none;
+        background-color: var(--primary-clinical);
+        color: var(--white);
+    }
+
+    main {
+        padding: var(--space-48) var(--space-24);
+    }
+
+    .hero-section {
+        padding: var(--space-48);
+    }
+
+    #hero-title {
+        font-size: 2.5rem;
+    }
+
+    .grid-news {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-32);
+    }
+}
