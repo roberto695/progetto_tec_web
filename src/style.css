@@ -314,3 +314,227 @@ section {
         gap: var(--space-32);
     }
 }
+/* ============================================================
+   STILI PER LA PAGINA DI LOGIN
+   ============================================================ */
+
+/* Sezione login */
+.login-section {
+    display: flex;
+    justify-content: center;
+    padding: var(--space-24) 0;
+}
+
+.login-card {
+    background-color: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: var(--space-32) var(--space-24);
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+.login-card h2 {
+    font-size: 1.75rem;
+    color: var(--primary-dark);
+    margin-bottom: var(--space-8);
+    font-weight: 700;
+}
+
+.login-subtitle {
+    color: var(--text-main);
+    margin-bottom: var(--space-24);
+    font-size: 1rem;
+}
+
+/* Messaggio di errore */
+.error-message {
+    background-color: #fee2e2;
+    color: #991b1b;
+    border-left: 4px solid #dc2626;
+    padding: var(--space-16);
+    border-radius: 6px;
+    margin-bottom: var(--space-24);
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    font-weight: 600;
+}
+
+/* Gruppo di form */
+.form-group {
+    margin-bottom: var(--space-20);
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: var(--primary-dark);
+    margin-bottom: var(--space-8);
+    font-size: 0.95rem;
+}
+
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="text"] {
+    width: 100%;
+    padding: var(--space-12) var(--space-16);
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background-color: var(--bg-body);
+    min-height: 48px;
+}
+
+.form-group input:focus {
+    border-color: var(--primary-clinical);
+    box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.15);
+    outline: none;
+}
+
+/* Stato di errore del campo */
+.form-group.error input {
+    border-color: #dc2626;
+    background-color: #fef2f2;
+}
+
+.field-error {
+    display: block;
+    color: #dc2626;
+    font-size: 0.9rem;
+    margin-top: var(--space-8);
+    font-weight: 500;
+}
+
+.field-hint {
+    display: block;
+    font-size: 0.85rem;
+    color: #64748b;
+    margin-top: var(--space-4);
+}
+
+/* Wrapper per la password con toggle */
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper input {
+    padding-right: 52px;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: var(--space-8);
+    cursor: pointer;
+    min-height: 44px;
+    min-width: 44px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.password-toggle:hover {
+    background-color: #f1f5f9;
+}
+
+.password-toggle:focus-visible {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 2px;
+}
+
+/* Pulsante full-width */
+.cta-button-full {
+    width: 100%;
+    justify-content: center;
+    min-height: 52px;
+}
+
+/* Link nel form */
+.login-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-8);
+    margin-top: var(--space-20);
+    padding-top: var(--space-20);
+    border-top: 1px solid var(--border-color);
+}
+
+.link-forgot,
+.link-register {
+    color: var(--primary-clinical);
+    text-decoration: none;
+    font-weight: 500;
+    padding: var(--space-4) var(--space-8);
+    border-radius: 4px;
+}
+
+.link-forgot:hover,
+.link-register:hover {
+    text-decoration: underline;
+    background-color: #f1f5f9;
+}
+
+.separator {
+    color: #94a3b8;
+}
+
+/* Sezione sicurezza */
+.security-section {
+    margin-top: var(--space-32);
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.security-card {
+    background-color: var(--bg-light-blue);
+    border: 1px solid #d0e7ff;
+    border-radius: 12px;
+    padding: var(--space-24);
+}
+
+.security-heading {
+    font-size: 1.1rem;
+    color: var(--primary-dark);
+    margin-bottom: var(--space-8);
+    font-weight: 700;
+}
+
+.security-list {
+    list-style: none;
+    margin-top: var(--space-12);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.security-list li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    font-size: 0.95rem;
+    color: var(--text-main);
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+    .login-card {
+        padding: var(--space-48);
+    }
+    
+    .login-card h2 {
+        font-size: 2rem;
+    }
+}
