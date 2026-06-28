@@ -1,56 +1,59 @@
 <?php
-// login.php
-// Avvia la sessione per gestire lo stato di login
+// ============================================================
+// pages/login.php – Login utente VitalPath
+// ============================================================
 session_start();
 
-// Se l'utente è già loggato, reindirizzalo alla dashboard
+// Se già loggato, reindirizza
 if (isset($_SESSION['cf'])) {
     header('Location: account.php');
     exit;
 }
 
-// Variabili per i messaggi di errore
-$error = '';
-$cf = '';
+require_once __DIR__ . '/db.php';
 
-// Gestione del submit del form
+$errori = [];
+$cf_val = '';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Validazione lato server
-    $cf = strtoupper(trim($_POST['cf'] ?? ''));
-    $telefono = trim($_POST['telefono'] ?? '');
-    
-    if (empty($cf) || empty($telefono)) {
-        $error = 'Per favore, compila tutti i campi.';
-    } elseif (strlen($cf) !== 16 || !preg_match('/^[A-Z0-9]{16}$/', $cf)) {
-        $error = 'Inserisci un Codice Fiscale valido di 16 caratteri alfanumerici.';
-    } else {
-        // Connessione al database
-        try {
-            $pdo = new PDO("mysql:host=database;dbname=prelievi_db", "user_web", "8A2cU25SoU9zmUrewcib2FgGsY9juEyPrSnFdXBJypa6xfhOmC");
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // --- Recupero e sanitizzazione input ---
+    $cf       = trim($_POST['cf']       ?? '');
+    $password = trim($_POST['password'] ?? '');
+
+    $cf_val = htmlspecialchars($cf, ENT_QUOTES, 'UTF-8');
+
+    // --- Validazione server ---
+    if ($cf === '') {
+        $errori['cf'] = 'Il Codice Fiscale è obbligatorio.';
+    } elseif (!preg_match('/^[A-Z0-9]{16}$/i', $cf)) {
+        $errori['cf'] = 'Il Codice Fiscale deve essere di 16 caratteri alfanumerici.';
+    }
+
+    if ($password === '') {
+        $errori['password'] = 'La password è obbligatoria.';
+    }
+
+    // --- Query DB (solo se non ci sono errori di formato) ---
+    if (empty($errori)) {
+        $stmt = $pdo->prepare(
+            'SELECT cf, nome, cognome, password FROM persona WHERE cf = ?'
+        );
+        $stmt->execute([strtoupper($cf)]);
+        $utente = $stmt->fetch();
+
+        if (!$utente || $utente['password'] !== $password) {
+            $errori['generale'] = 'Codice Fiscale o password non corretti.';
+        } else {
+            // Login riuscito
+            session_regenerate_id(true);
+            $_SESSION['cf']      = $utente['cf'];
+            $_SESSION['nome']    = $utente['nome'];
+            $_SESSION['cognome'] = $utente['cognome'];
+
             
-            $stmt = $pdo->prepare("SELECT cf, nome, cognome, telefono FROM persona WHERE cf = :cf AND telefono = :telefono");
-            $stmt->execute([
-                ':cf' => $cf,
-                ':telefono' => $telefono
-            ]);
-            $persona = $stmt->fetch(PDO::FETCH_ASSOC);
-            
-            if ($persona) {
-                // Login riuscito
-                $_SESSION['cf'] = $persona['cf'];
-                $_SESSION['nome'] = $persona['nome'];
-                $_SESSION['cognome'] = $persona['cognome'];
-                $_SESSION['telefono'] = $persona['telefono'];
-                
-                // Redirect alla dashboard
-                header('Location: account.php');
-                exit;
-            } else {
-                $error = 'Codice Fiscale o numero di telefono non validi.';
-            }
-        } catch (PDOException $e) {
-            $error = 'Si è verificato un errore tecnico. Riprova più tardi.';
+            header('Location: account.php');
+            exit;
         }
     }
 }
@@ -60,193 +63,179 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Centro Prelievi Sanitario</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Accedi – VitalPath</title>
+    <meta name="description" content="Accedi al tuo account VitalPath per gestire i tuoi appuntamenti.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
 
-    <a href="#main-content" class="skip-link">Salta al contenuto principale</a>
+<a href="#main-content" class="skip-link">Salta al contenuto principale</a>
 
-    <header id="intestazione">
-        <div class="header-container">
-            <div class="logo-area">
-                <img src="immagini/logo.png" alt="Logo ufficiale del Centro Prelievi" id="logo">
-                <h1>Centro Prelievi</h1>
+<!-- HEADER -->
+<header id="intestazione" role="banner">
+    <div class="header-container">
+        <a href="../index.php" class="logo-area" aria-label="VitalPath – torna alla home">
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none"
+                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                <rect width="36" height="36" rx="8" fill="#0066cc"/>
+                <path d="M8 18h4l3-8 4 16 3-10 2 4h4"
+                      stroke="white" stroke-width="2.5"
+                      stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="logo-text">Vital<span>Path</span></span>
+        </a>
+        <nav id="nav-principale" aria-label="Navigazione principale">
+            <ul>
+                <li><a href="../index.php">Home</a></li>
+                <li><a href="login.php" aria-current="page" class="active">Accedi</a></li>
+                <li><a href="registrazione.php">Registrati</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<!-- MAIN -->
+<main id="main-content" tabindex="-1">
+    <div class="auth-page">
+        <div class="auth-card">
+
+            <!-- Logo centrato -->
+            <div class="auth-card__logo" aria-hidden="true">
+                <svg width="48" height="48" viewBox="0 0 36 36" fill="none"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <rect width="36" height="36" rx="8" fill="#0066cc"/>
+                    <path d="M8 18h4l3-8 4 16 3-10 2 4h4"
+                          stroke="white" stroke-width="2.5"
+                          stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
             </div>
-            
-            <nav aria-label="Navigazione principale">
+
+            <h1 class="auth-card__title">Accedi a VitalPath</h1>
+            <p class="auth-card__subtitle">
+                Inserisci il tuo Codice Fiscale e la password per accedere.
+            </p>
+
+            <!-- Riepilogo errori (accessibile con aria-live) -->
+            <?php if (!empty($errori)): ?>
+            <div class="error-summary" role="alert" aria-live="assertive">
+                <h2>
+                    <span aria-hidden="true">⚠</span>
+                    Si sono verificati <?= count($errori) ?> errori
+                </h2>
                 <ul>
-                    <li><a href="index.php">Home</a></li>
-                    <li><a href="prenotazioni.php">Prenotazioni</a></li>
-                    <li><a href="account.php">Area Personale</a></li>
+                    <?php foreach ($errori as $e): ?>
+                        <li><?= htmlspecialchars($e, ENT_QUOTES, 'UTF-8') ?></li>
+                    <?php endforeach; ?>
                 </ul>
-            </nav>
-        </div>
-    </header>
+            </div>
+            <?php endif; ?>
 
-    <main id="main-content">
-        <section class="login-section" aria-labelledby="login-title">
-            <div class="login-card">
-                <h2 id="login-title">Accedi al tuo account</h2>
-                <p class="login-subtitle">Inserisci il tuo Codice Fiscale e numero di telefono per accedere all'area riservata</p>
+            <!-- FORM LOGIN -->
+            <form
+                id="form-login"
+                method="POST"
+                action="login.php"
+                novalidate
+                aria-label="Modulo di accesso"
+            >
 
-                <?php if (!empty($error)): ?>
-                <div class="error-message" role="alert" aria-live="polite">
-                    <span aria-hidden="true">⚠️</span>
-                    <?php echo htmlspecialchars($error); ?>
+                <!-- Codice Fiscale -->
+                <div class="form-group">
+                    <label class="form-label" for="cf">
+                        Codice Fiscale
+                        <span class="required" aria-label="obbligatorio">*</span>
+                    </label>
+                    <input
+                        type="text"
+                        id="cf"
+                        name="cf"
+                        class="form-input<?= isset($errori['cf']) ? ' form-input--error' : '' ?>"
+                        value="<?= $cf_val ?>"
+                        autocomplete="username"
+                        maxlength="16"
+                        required
+                        aria-required="true"
+                        aria-describedby="<?= isset($errori['cf']) ? 'cf-error' : 'cf-hint' ?>"
+                        style="text-transform: uppercase;"
+                    >
+                    <?php if (isset($errori['cf'])): ?>
+                        <span class="form-error" id="cf-error" role="alert">
+                            <?= htmlspecialchars($errori['cf'], ENT_QUOTES, 'UTF-8') ?>
+                        </span>
+                    <?php else: ?>
+                        <span class="form-hint" id="cf-hint">
+                            Es. RSSMRA80A01H501X – 16 caratteri
+                        </span>
+                    <?php endif; ?>
                 </div>
-                <?php endif; ?>
 
-                <form method="POST" action="login.php" class="login-form" novalidate>
-                    <div class="form-group">
-                        <label for="cf">Codice Fiscale</label>
-                        <input 
-                            type="text" 
-                            id="cf" 
-                            name="cf" 
-                            value="<?php echo htmlspecialchars($cf); ?>"
-                            placeholder="RSSMRA80A01H501X"
+                <!-- Password -->
+                <div class="form-group">
+                    <div class="label-row">
+                        <label class="form-label" for="password">
+                            Password
+                            <span class="required" aria-label="obbligatoria">*</span>
+                        </label>
+                    </div>
+                    <div class="password-wrapper">
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            class="form-input<?= isset($errori['password']) ? ' form-input--error' : '' ?>"
+                            autocomplete="current-password"
                             required
-                            autocomplete="off"
-                            maxlength="16"
-                            pattern="[A-Za-z0-9]{16}"
-                            aria-describedby="cf-help"
-                            style="text-transform: uppercase;"
+                            aria-required="true"
+                            <?php if (isset($errori['password'])): ?>
+                            aria-describedby="password-error"
+                            <?php endif; ?>
                         >
-                        <span id="cf-help" class="field-hint">Inserisci il tuo Codice Fiscale di 16 caratteri (es. RSSMRA80A01H501X)</span>
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            id="toggle-password"
+                            aria-label="Mostra password"
+                            aria-pressed="false"
+                        >👁</button>
                     </div>
+                    <?php if (isset($errori['password'])): ?>
+                        <span class="form-error" id="password-error" role="alert">
+                            <?= htmlspecialchars($errori['password'], ENT_QUOTES, 'UTF-8') ?>
+                        </span>
+                    <?php endif; ?>
+                </div>
 
-                    <div class="form-group">
-                        <label for="telefono">Numero di telefono</label>
-                        <div class="phone-wrapper">
-                            <input 
-                                type="tel" 
-                                id="telefono" 
-                                name="telefono" 
-                                placeholder="333 1234567"
-                                required
-                                autocomplete="tel"
-                                aria-describedby="telefono-help"
-                            >
-                        </div>
-                        <span id="telefono-help" class="field-hint">Inserisci il numero di telefono registrato in centro</span>
-                    </div>
+                <!-- Submit -->
+                <button type="submit" class="btn btn--primary btn--full">
+                    Accedi
+                </button>
 
-                    <div class="form-actions">
-                        <button type="submit" class="cta-button cta-button-full">
-                            Accedi
-                        </button>
-                    </div>
+            </form>
 
-                    <div class="login-links">
-                        <span class="help-text">Non hai un account? <a href="registrazione.php" class="link-register">Registrati</a></span>
-                    </div>
-                </form>
-            </div>
-        </section>
+            <hr class="divider">
 
-        <!-- Sezione informativa sulla sicurezza -->
-        <section class="security-section" aria-labelledby="security-title">
-            <div class="security-card">
-                <h3 id="security-title" class="security-heading">🔒 Accesso sicuro</h3>
-                <p>I tuoi dati sono protetti con crittografia avanzata. Il centro rispetta le normative sulla privacy e il trattamento dei dati sanitari.</p>
-                <ul class="security-list">
-                    <li><span aria-hidden="true">✓</span> Connessione crittografata</li>
-                    <li><span aria-hidden="true">✓</span> Accesso riservato ai soli pazienti</li>
-                    <li><span aria-hidden="true">✓</span> Utilizzo del Codice Fiscale come identificativo univoco</li>
-                </ul>
-            </div>
-        </section>
-    </main>
+            <p class="auth-card__footer">
+                Non hai ancora un account?
+                <a href="registrazione.php">Registrati gratuitamente</a>
+            </p>
 
-    <footer class="site-footer">
-        <div class="footer-container">
-            <p>&copy; 2026 Centro Prelievi &bull; Corso di Tecnologie Web &bull; Università di Padova</p>
-            <p class="footer-sub">Sito sviluppato in conformità alle linee guida di accessibilità WCAG 2.2 AA</p>
         </div>
-    </footer>
+    </div>
+</main>
 
-    <script>
-        // Validazione lato client del form
-        document.querySelector('.login-form').addEventListener('submit', function(e) {
-            const cf = document.getElementById('cf');
-            const telefono = document.getElementById('telefono');
-            let hasError = false;
-            
-            // Rimuovi errori precedenti
-            document.querySelectorAll('.form-group.error').forEach(el => {
-                el.classList.remove('error');
-            });
-            document.querySelectorAll('.field-error').forEach(el => {
-                el.remove();
-            });
+<!-- FOOTER -->
+<footer class="site-footer" role="contentinfo">
+    <div class="footer-container">
+        <p>&copy; 2026 VitalPath &bull; Corso di Tecnologie Web &bull; Università di Padova</p>
+        <p>Sito realizzato in conformità alle linee guida WCAG 2.2 AA</p>
+    </div>
+</footer>
 
-            // Validazione Codice Fiscale
-            const cfValue = cf.value.trim().toUpperCase();
-            cf.value = cfValue; // Converti in maiuscolo
-            
-            if (!cfValue) {
-                showFieldError(cf, 'Inserisci il tuo Codice Fiscale.');
-                hasError = true;
-            } else if (!/^[A-Z0-9]{16}$/.test(cfValue)) {
-                showFieldError(cf, 'Il Codice Fiscale deve essere composto da 16 caratteri alfanumerici.');
-                hasError = true;
-            }
-
-            // Validazione telefono
-            if (!telefono.value.trim()) {
-                showFieldError(telefono, 'Inserisci il tuo numero di telefono.');
-                hasError = true;
-            } else if (!/^[\d\s+]{6,20}$/.test(telefono.value.trim())) {
-                showFieldError(telefono, 'Inserisci un numero di telefono valido (es. 333 1234567).');
-                hasError = true;
-            }
-
-            if (hasError) {
-                e.preventDefault();
-                // Focus sul primo campo con errore
-                const firstError = document.querySelector('.form-group.error input');
-                if (firstError) {
-                    firstError.focus();
-                }
-            }
-        });
-
-        function showFieldError(input, message) {
-            const group = input.closest('.form-group');
-            group.classList.add('error');
-            
-            const error = document.createElement('span');
-            error.className = 'field-error';
-            error.setAttribute('role', 'alert');
-            error.textContent = message;
-            
-            // Inserisci dopo l'input
-            input.parentNode.insertBefore(error, input.nextSibling);
-        }
-
-        // Rimuovi lo stato di errore quando l'utente inizia a digitare
-        document.querySelectorAll('.form-group input').forEach(input => {
-            input.addEventListener('input', function() {
-                const group = this.closest('.form-group');
-                group.classList.remove('error');
-                const error = group.querySelector('.field-error');
-                if (error) {
-                    error.remove();
-                }
-            });
-        });
-
-        // Converti automaticamente il CF in maiuscolo
-        document.getElementById('cf').addEventListener('input', function() {
-            this.value = this.value.toUpperCase();
-        });
-
-        // Formatta automaticamente il telefono (opzionale)
-        document.getElementById('telefono').addEventListener('input', function() {
-            // Rimuovi spazi multipli e caratteri non numerici tranne + e spazio
-            this.value = this.value.replace(/[^\d\s+]/g, '');
-        });
-    </script>
+<script src="login.js"></script>
 </body>
 </html>

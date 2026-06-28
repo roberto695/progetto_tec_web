@@ -1,7 +1,100 @@
 <?php
-    /* La connessione al database verrà inserita qui alla fine del corso.
-    Per ora usiamo dati stub (finti) scritti direttamente in HTML.
-    */
+// account.php
+session_start();
+
+// Includi la connessione al database
+require_once __DIR__ . '/db.php';
+
+// Se l'utente non è loggato, reindirizzalo al login
+if (!isset($_SESSION['cf'])) {
+    header('Location: login.php');
+    exit;
+}
+
+$cf = $_SESSION['cf'];
+$nome = $_SESSION['nome'] ?? '';
+$cognome = $_SESSION['cognome'] ?? '';
+$prenotazioni_attive = [];
+$prenotazioni_storico = [];
+$error = '';
+
+try {
+    // Recupera le prenotazioni attive (stato: prenotato, confermato)
+    $stmt = $pdo->prepare("
+        SELECT id, data_ora, stato, note 
+        FROM prenotazione 
+        WHERE persona_id = :cf AND stato IN ('prenotato', 'confermato')
+        ORDER BY data_ora ASC
+    ");
+    $stmt->execute([':cf' => $cf]);
+    $prenotazioni_attive = $stmt->fetchAll();
+    
+    // Recupera lo storico (stato: effettuato, cancellato, expired)
+    $stmt = $pdo->prepare("
+        SELECT id, data_ora, stato, note 
+        FROM prenotazione 
+        WHERE persona_id = :cf AND stato IN ('effettuato', 'cancellato', 'expired')
+        ORDER BY data_ora DESC
+        LIMIT 10
+    ");
+    $stmt->execute([':cf' => $cf]);
+    $prenotazioni_storico = $stmt->fetchAll();
+    
+} catch (PDOException $e) {
+    $error = 'Si è verificato un errore nel caricamento dei dati.';
+}
+
+// Funzione per formattare la data
+function formattaData($data_ora) {
+    $timestamp = strtotime($data_ora);
+    return date('d F Y \o\r\e H:i', $timestamp);
+}
+
+// Funzione per lo stato leggibile
+function statoLeggibile($stato) {
+    $stati = [
+        'prenotato' => 'Prenotato',
+        'confermato' => 'Confermato',
+        'effettuato' => 'Effettuato',
+        'cancellato' => 'Cancellato',
+        'expired' => 'Scaduto'
+    ];
+    return $stati[$stato] ?? $stato;
+}
+
+// Funzione per la classe CSS dello stato
+function statoClasse($stato) {
+    $classi = [
+        'prenotato' => 'status-pending',
+        'confermato' => 'status-pending',
+        'effettuato' => 'status-completed',
+        'cancellato' => 'status-cancelled',
+        'expired' => 'status-expired'
+    ];
+    return $classi[$stato] ?? 'status-pending';
+}
+
+// Funzione per formattare la data in italiano
+function formattaDataItaliana($data_ora) {
+    $timestamp = strtotime($data_ora);
+    $mesi = [
+        'January' => 'Gennaio',
+        'February' => 'Febbraio',
+        'March' => 'Marzo',
+        'April' => 'Aprile',
+        'May' => 'Maggio',
+        'June' => 'Giugno',
+        'July' => 'Luglio',
+        'August' => 'Agosto',
+        'September' => 'Settembre',
+        'October' => 'Ottobre',
+        'November' => 'Novembre',
+        'December' => 'Dicembre'
+    ];
+    $mese_inglese = date('F', $timestamp);
+    $mese_italiano = $mesi[$mese_inglese];
+    return date('d', $timestamp) . ' ' . $mese_italiano . ' ' . date('Y', $timestamp);
+}
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -36,14 +129,25 @@
         
         <section class="user-welcome-section" aria-labelledby="welcome-title">
             <div class="card welcome-card">
-                <h2 id="welcome-title">Bentornato, Mario Rossi</h2>
+                <h2 id="welcome-title">Bentornato, <?php echo htmlspecialchars($nome . ' ' . $cognome); ?></h2>
                 <p>In questa schermata puoi gestire i tuoi appuntamenti prenotati, controllare lo stato degli esami e consultare lo storico delle tue visite in totale sicurezza.</p>
                 <div class="user-meta">
-                    <p><strong>Codice Fiscale:</strong> RSSMRA80A01L049K</p>
-                    <p><strong>Tessera Sanitaria:</strong> 1234567890</p>
+                    <p><strong>Codice Fiscale:</strong> <?php echo htmlspecialchars($_SESSION['cf']); ?></p>
+                    <p><strong>Telefono:</strong> <?php echo htmlspecialchars($_SESSION['telefono'] ?? 'Non disponibile'); ?></p>
+                    <p><strong>Email:</strong> <?php echo htmlspecialchars($_SESSION['email'] ?? 'Non disponibile'); ?></p>
+                </div>
+                <div style="margin-top: var(--space-16);">
+                    <a href="logout.php" class="action-link-sec" style="color: #dc2626;">Logout</a>
                 </div>
             </div>
         </section>
+
+        <?php if (!empty($error)): ?>
+        <div class="error-message" role="alert">
+            <span aria-hidden="true">⚠️</span>
+            <?php echo htmlspecialchars($error); ?>
+        </div>
+        <?php endif; ?>
 
         <section class="dashboard-section" aria-labelledby="appuntamenti-title">
             <h2 id="appuntamenti-title" class="section-heading">I tuoi prossimi prelievi</h2>
@@ -54,21 +158,51 @@
                     <thead>
                         <tr>
                             <th scope="col">Data e Ora</th>
-                            <th scope="col">Tipo di Esame</th>
                             <th scope="col">Stato</th>
+                            <th scope="col">Azioni</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <?php if (empty($prenotazioni_attive)): ?>
                         <tr>
-                            <td><strong class="date-highlight">12 Luglio 2026</strong> ore 07:30</td>
-                            <td>Esami del Sangue di Routine (Emocromo, Glicemia, Colesterolo)</td>
-                            <td><span class="status-badge status-pending">Confermato</span></td>
+                            <td colspan="3" style="text-align: center; padding: var(--space-24); color: var(--text-main);">
+                                Nessuna prenotazione attiva.
+                                <br>
+                                <a href="prenotazioni.php" class="cta-button" style="display: inline-block; margin-top: var(--space-16);">
+                                    Prenota un esame
+                                </a>
+                            </td>
                         </tr>
-                        <tr>
-                            <td><strong class="date-highlight">28 Luglio 2026</strong> ore 08:15</td>
-                            <td>Curva Glicemica e Screening Tiroideo</td>
-                            <td><span class="status-badge status-pending">Confermato</span></td>
-                        </tr>
+                        <?php else: ?>
+                            <?php foreach ($prenotazioni_attive as $prenotazione): ?>
+                            <tr>
+                                <td>
+                                    <strong class="date-highlight"><?php echo formattaDataItaliana($prenotazione['data_ora']); ?></strong>
+                                    <br>
+                                    <span style="font-size: 0.9rem; color: var(--text-main);">
+                                        ore <?php echo date('H:i', strtotime($prenotazione['data_ora'])); ?>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="status-badge <?php echo statoClasse($prenotazione['stato']); ?>">
+                                        <?php echo statoLeggibile($prenotazione['stato']); ?>
+                                    </span>
+                                </td>
+                                <td>
+                                    <?php if ($prenotazione['stato'] === 'prenotato' || $prenotazione['stato'] === 'confermato'): ?>
+                                    <a href="annulla-prenotazione.php?id=<?php echo $prenotazione['id']; ?>" 
+                                       class="action-link-sec" 
+                                       style="color: #dc2626;"
+                                       onclick="return confirm('Sei sicuro di voler annullare questa prenotazione?');">
+                                        Annulla
+                                    </a>
+                                    <?php else: ?>
+                                    <span style="color: var(--text-main); font-size: 0.9rem;">—</span>
+                                    <?php endif; ?>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
                     </tbody>
                 </table>
             </div>
@@ -83,18 +217,28 @@
                     <thead>
                         <tr>
                             <th scope="col">Data Visita</th>
-                            <th scope="col">Tipologia Esame</th>
+                            <th scope="col">Stato</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <?php if (empty($prenotazioni_storico)): ?>
                         <tr>
-                            <td>15 Gennaio 2026</td>
-                            <td>Screening Vitamina D e Calcio</td>
+                            <td colspan="2" style="text-align: center; padding: var(--space-24); color: var(--text-main);">
+                                Nessuna visita passata.
+                            </td>
                         </tr>
-                        <tr>
-                            <td>04 Novembre 2025</td>
-                            <td>Esami del Sangue Completi generali</td>
-                        </tr>
+                        <?php else: ?>
+                            <?php foreach ($prenotazioni_storico as $prenotazione): ?>
+                            <tr>
+                                <td><?php echo formattaDataItaliana($prenotazione['data_ora']); ?></td>
+                                <td>
+                                    <span class="status-badge <?php echo statoClasse($prenotazione['stato']); ?>">
+                                        <?php echo statoLeggibile($prenotazione['stato']); ?>
+                                    </span>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
                     </tbody>
                 </table>
             </div>
