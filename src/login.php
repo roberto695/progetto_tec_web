@@ -5,10 +5,6 @@
 session_start();
 
 // Se già loggato, reindirizza
-if (isset($_SESSION['cf'])) {
-    header('Location: account.php');
-    exit;
-}
 
 require_once __DIR__ . '/db.php';
 
@@ -37,7 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // --- Query DB (solo se non ci sono errori di formato) ---
     if (empty($errori)) {
         $stmt = $pdo->prepare(
-            'SELECT cf, nome, cognome, password FROM persona WHERE cf = ?'
+        'SELECT cf, nome, cognome, telefono, email, password 
+        FROM persona WHERE cf = ?'
         );
         $stmt->execute([strtoupper($cf)]);
         $utente = $stmt->fetch();
@@ -50,12 +47,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['cf']      = $utente['cf'];
             $_SESSION['nome']    = $utente['nome'];
             $_SESSION['cognome'] = $utente['cognome'];
-
+            $_SESSION['telefono'] = $utente['telefono'] ?? 'Non disponibile';
+            $_SESSION['email']    = $utente['email'];
             
-            header('Location: account.php');
+            
+        if ($utente['cf'] === 'ADMINVTLPTH00A00') {
+            header('Location: admin_dashboard.php');
+        } else {
+            header('Location: dashboard.php');
             exit;
         }
     }
+}
 }
 ?>
 <!DOCTYPE html>
@@ -78,17 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!-- HEADER -->
 <header id="intestazione" role="banner">
-    <div class="header-container">
-        <a href="../index.php" class="logo-area" aria-label="VitalPath – torna alla home">
-            <svg width="36" height="36" viewBox="0 0 36 36" fill="none"
-                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-                <rect width="36" height="36" rx="8" fill="#0066cc"/>
-                <path d="M8 18h4l3-8 4 16 3-10 2 4h4"
-                      stroke="white" stroke-width="2.5"
-                      stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <span class="logo-text">Vital<span>Path</span></span>
-        </a>
+    <?php include 'logo.php'; ?>
         <nav id="nav-principale" aria-label="Navigazione principale">
             <ul>
                 <li><a href="../index.php">Home</a></li>

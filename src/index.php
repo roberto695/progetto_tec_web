@@ -3,9 +3,14 @@
 // index.php – Homepage VitalPath
 // ============================================================
 session_start();
+
+define('ADMIN_CF', 'ADMINVTLPTH00A00');
+
 $utente_loggato = isset($_SESSION['cf']);
-$ruolo          = $_SESSION['ruolo'] ?? null;
 $nome_utente    = $_SESSION['nome']  ?? null;
+$cf_utente      = $_SESSION['cf']    ?? null;
+
+$is_admin = ($utente_loggato && $cf_utente === ADMIN_CF);
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -25,7 +30,7 @@ $nome_utente    = $_SESSION['nome']  ?? null;
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
 
@@ -38,36 +43,26 @@ $nome_utente    = $_SESSION['nome']  ?? null;
     <header id="intestazione" role="banner">
         <div class="header-container">
 
-            <a href="index.php" class="logo-area" aria-label="VitalPath – torna alla home">
-                <svg width="36" height="36" viewBox="0 0 36 36" fill="none"
-                     xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-                    <rect width="36" height="36" rx="8" fill="#0066cc"/>
-                    <path d="M8 18h4l3-8 4 16 3-10 2 4h4"
-                          stroke="white" stroke-width="2.5"
-                          stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                <span class="logo-text">Vital<span>Path</span></span>
-            </a>
+            <?php include 'logo.php'; ?>
 
             <nav id="nav-principale" aria-label="Navigazione principale">
                 <ul>
                     <li><a href="index.php" aria-current="page" class="active">Home</a></li>
-                    <li><a href="pages/servizi.php">Servizi</a></li>
                     <?php if ($utente_loggato): ?>
-                        <?php if ($ruolo === 'admin'): ?>
+                        <?php if ($is_admin): ?>
                             <li><a href="admin/dashboard.php">Dashboard Admin</a></li>
                         <?php else: ?>
-                            <li><a href="pages/dashboard.php">Area Personale</a></li>
-                            <li><a href="pages/prenotazione.php">Prenota</a></li>
+                            <li><a href="dashboard.php">Area Personale</a></li>
+                            <li><a href="prenotazione.php">Prenota</a></li>
                         <?php endif; ?>
                         <li>
-                            <a href="pages/logout.php">
+                            <a href="logout.php">
                                 Esci (<?= htmlspecialchars($nome_utente, ENT_QUOTES, 'UTF-8') ?>)
                             </a>
                         </li>
                     <?php else: ?>
-                        <li><a href="pages/login.php">Accedi</a></li>
-                        <li><a href="pages/registrazione.php">Registrati</a></li>
+                        <li><a href="login.php">Accedi</a></li>
+                        <li><a href="registrazione.php">Registrati</a></li>
                     <?php endif; ?>
                 </ul>
             </nav>
@@ -90,22 +85,22 @@ $nome_utente    = $_SESSION['nome']  ?? null;
                 Servizio rapido, accessibile e guidato da personale specializzato.
             </p>
             <div class="hero__actions">
-                <?php if ($utente_loggato && $ruolo === 'user'): ?>
-                    <a href="pages/prenotazione.php" class="btn btn--primary">
+                <?php if ($utente_loggato && !$is_admin): ?>
+                    <a href="/prenotazione.php" class="btn btn--primary">
                         Prenota un esame
                     </a>
-                    <a href="pages/dashboard.php" class="btn btn--secondary">
+                    <a href="/dashboard.php" class="btn btn--secondary">
                         Vai alla tua area
                     </a>
-                <?php elseif ($utente_loggato && $ruolo === 'admin'): ?>
+                <?php elseif ($utente_loggato && $is_admin): ?>
                     <a href="admin/dashboard.php" class="btn btn--primary">
                         Dashboard Admin
                     </a>
                 <?php else: ?>
-                    <a href="pages/registrazione.php" class="btn btn--primary">
-                        Registrati – è gratuito
+                    <a href="registrazione.php" class="btn btn--primary">
+                        Registrati
                     </a>
-                    <a href="pages/login.php" class="btn btn--secondary">
+                    <a href="login.php" class="btn btn--secondary">
                         Accedi al tuo account
                     </a>
                 <?php endif; ?>

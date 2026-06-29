@@ -745,39 +745,62 @@ section:last-child {
    14. STATO APPUNTAMENTI (badge)
    ============================================================ */
 .status-badge {
-    display:      inline-flex;
-    align-items:  center;
-    gap:          var(--space-4);
-    font-size:    0.875rem;
-    font-weight:  700;
-    padding:      var(--space-4) var(--space-12);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-4);
+    font-size: 0.875rem;
+    font-weight: 700;
+    padding: var(--space-4) var(--space-12);
     border-radius: 20px;
-    white-space:  nowrap;
+    white-space: nowrap;
 }
 
 .status-badge::before {
-    content:     "●";
-    font-size:   0.6rem;
+    content: "●";
+    font-size: 0.6rem;
+    margin-right: var(--space-4);
 }
 
+/* Versione per dashboard.php (status-pending, status-completed, ecc) */
+.status-pending {
+    background-color: var(--status-booked-bg);
+    color: var(--status-booked-text);
+}
+
+.status-completed {
+    background-color: var(--status-done-bg);
+    color: var(--status-done-text);
+}
+
+.status-cancelled {
+    background-color: var(--status-cancelled-bg);
+    color: var(--status-cancelled-text);
+}
+
+.status-expired {
+    background-color: var(--color-warning-bg);
+    color: var(--color-warning);
+}
+
+/* Versione per design system (status--prenotato, ecc) */
 .status--prenotato {
     background-color: var(--status-booked-bg);
-    color:            var(--status-booked-text);
-}
-
-.status--confermato {
-    background-color: var(--status-confirmed-bg);
-    color:            var(--status-confirmed-text);
+    color: var(--status-booked-text);
 }
 
 .status--effettuato {
     background-color: var(--status-done-bg);
-    color:            var(--status-done-text);
+    color: var(--status-done-text);
 }
 
 .status--cancellato {
     background-color: var(--status-cancelled-bg);
-    color:            var(--status-cancelled-text);
+    color: var(--status-cancelled-text);
+}
+
+.status--expired {
+    background-color: var(--color-warning-bg);
+    color: var(--color-warning);
 }
 
 
