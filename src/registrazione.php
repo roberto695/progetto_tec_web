@@ -243,11 +243,23 @@ function err_aria(string $f, array $e): string  { return isset($e[$f]) ? ' aria-
 </main>
 
 <footer class="site-footer" role="contentinfo">
-    <div class="footer-container">
-        <p>&copy; 2026 VitalPath &bull; Corso di Tecnologie Web &bull; Università di Padova</p>
-        <p>Sito realizzato in conformità alle linee guida WCAG 2.2 AA</p>
-    </div>
-</footer>
+        <div class="footer-container">
+            <p>
+                <strong>VitalPath</strong> – Centro Prelievi del Sangue<br>
+                Via Roma 12 – Padova &bull; Tel. 049 000 0000 &bull;
+                <a href="mailto:info@vitalpath.it"
+                   style="color: #93c5fd;">info@vitalpath.it</a>
+            </p>
+            <p>
+                &copy; 2026 VitalPath &bull; Corso di Tecnologie Web &bull;
+                Università di Padova
+            </p>
+            <p>
+                Sito realizzato in conformità alle linee guida di accessibilità
+                <abbr title="Web Content Accessibility Guidelines">WCAG</abbr> 2.2 AA
+            </p>
+        </div>
+    </footer>
 
 <script src="registrazione.js"></script>
 </body>

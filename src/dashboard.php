@@ -44,6 +44,10 @@ try {
     $stmt->execute([':cf' => $cf]);
     $prenotazioni_storico = $stmt->fetchAll();
     
+    if (!empty($prenotazioni_attive)) {
+        $warning = 'Hai già una prenotazione attiva! Non puoi prenotare un nuovo esame fino al completamento o all\'annullamento di quella esistente.';
+    }
+
 } catch (PDOException $e) {
     $error = 'Si è verificato un errore nel caricamento dei dati.';
 }
@@ -116,7 +120,9 @@ function formattaDataBreve($data_ora) {
             <nav id="nav-principale" aria-label="Navigazione principale">
                 <ul>
                     <li><a href="index.php">Home</a></li>
-                    <li><a href="prenotazioni.php">Prenotazioni</a></li>
+                    <?php if (empty($prenotazioni_attive)): ?>
+                    <li><a href="prenotazioni.php">Prenota</a></li>
+                    <?php endif; ?>
                     <li><a href="dashboard.php" aria-current="page" class="active">Area Personale</a></li>
                     <li><a href="logout.php">Esci (<?= htmlspecialchars($nome, ENT_QUOTES, 'UTF-8') ?>)</a></li>
                 </ul>
@@ -138,10 +144,20 @@ function formattaDataBreve($data_ora) {
                 </div>
             </div>
         </section>
-
+        <?php if (!empty($warning)): ?>
+        <div class="alert alert--warning" role="alert" aria-live="polite">
+            <span class="alert__icon" aria-hidden="true">⚠</span>
+            <div>
+                <strong><?php echo htmlspecialchars($warning); ?></strong>
+                <p style="margin-top: 8px; font-weight: 400;">
+                    Puoi visualizzare la tua prenotazione qui sotto o annullarla se necessario.
+                </p>
+            </div>
+        </div>
+        <?php endif; ?>
         <?php if (!empty($error)): ?>
         <div class="error-message" role="alert">
-            <span aria-hidden="true">⚠️</span>
+            <span aria-hidden="true">⚠</span>
             <?php echo htmlspecialchars($error); ?>
         </div>
         <?php endif; ?>
@@ -170,8 +186,7 @@ function formattaDataBreve($data_ora) {
 
                     <div class="card card--warning mt-16" style="padding:var(--space-16);">
                         <p class="text-sm mb-0">
-                            <strong>⚠ Ricorda:</strong> presentati a digiuno da almeno 8 ore.
-                            Porta con te documento d'identità e tessera sanitaria.
+                            <strong>⚠ Ricorda:</strong> Porta con te la tessera sanitaria.
                         </p>
                     </div>
 
@@ -236,16 +251,31 @@ function formattaDataBreve($data_ora) {
         </section>
 
         <!-- Promemoria -->
-        <section class="info-section" aria-labelledby="note-title">
+        <!-- INFO PREPARAZIONE -->
+        <section aria-labelledby="prep-title">
             <div class="card card--warning">
-                <h2 id="note-title" class="section-title">Promemoria importante per il prelievo</h2>
-                <div class="info-body-text">
-                    <ul>
-                        <li><strong>Digiuno:</strong> Per tutti gli esami del sangue è necessario presentarsi a digiuno da almeno 8 ore. È consentito bere solo un bicchiere d'acqua naturale.</li>
-                        <li><strong>Documenti da portare:</strong> Ricordati di portare la Tessera Sanitaria (Carta Regionale dei Servizi) e il documento d'identità valido.</li>
-                        <li><strong>Disdetta:</strong> Se non puoi presentarti, ti chiediamo di annullare la prenotazione almeno 48 ore prima per liberare il posto per un altro paziente.</li>
-                    </ul>
-                </div>
+                <h2 id="prep-title">
+                    <span aria-hidden="true">⚠ </span>
+                    Preparazione all'esame del sangue
+                </h2>
+                <p class="mt-16">
+                    Per garantire la correttezza dei risultati è importante seguire
+                    queste indicazioni prima di presentarsi al centro:
+                </p>
+                <ul style="
+                    list-style: disc;
+                    padding-left: var(--space-24);
+                    margin-top: var(--space-16);
+                    display: flex;
+                    flex-direction: column;
+                    gap: var(--space-8);
+                ">
+                    <li>Digiunare per almeno <strong>8 ore</strong> prima del prelievo.</li>
+                    <li>È consentito bere <strong>acqua naturale</strong>.</li>
+                    <li>Evitare attività fisica intensa nelle 24 ore precedenti.</li>
+                    <li>Portare la <strong>tessera sanitaria</strong>.</li>
+                    <li>In caso di farmaci, consultare il proprio medico prima dell'esame.</li>
+                </ul>
             </div>
         </section>
 
@@ -253,8 +283,20 @@ function formattaDataBreve($data_ora) {
 
     <footer class="site-footer" role="contentinfo">
         <div class="footer-container">
-            <p>&copy; 2026 Centro Prelievi &bull; Corso di Tecnologie Web &bull; Università di Padova</p>
-            <p class="footer-sub">Sito sviluppato in conformità alle linee guida di accessibilità WCAG 2.2 AA</p>
+            <p>
+                <strong>VitalPath</strong> – Centro Prelievi del Sangue<br>
+                Via Roma 12 – Padova &bull; Tel. 049 000 0000 &bull;
+                <a href="mailto:info@vitalpath.it"
+                   style="color: #93c5fd;">info@vitalpath.it</a>
+            </p>
+            <p>
+                &copy; 2026 VitalPath &bull; Corso di Tecnologie Web &bull;
+                Università di Padova
+            </p>
+            <p>
+                Sito realizzato in conformità alle linee guida di accessibilità
+                <abbr title="Web Content Accessibility Guidelines">WCAG</abbr> 2.2 AA
+            </p>
         </div>
     </footer>
 

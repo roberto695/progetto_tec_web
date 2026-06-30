@@ -50,10 +50,10 @@ $is_admin = ($utente_loggato && $cf_utente === ADMIN_CF);
                     <li><a href="index.php" aria-current="page" class="active">Home</a></li>
                     <?php if ($utente_loggato): ?>
                         <?php if ($is_admin): ?>
-                            <li><a href="admin/dashboard.php">Dashboard Admin</a></li>
+                            <li><a href="/admin_dashboard.php">Dashboard Admin</a></li>
                         <?php else: ?>
                             <li><a href="dashboard.php">Area Personale</a></li>
-                            <li><a href="prenotazione.php">Prenota</a></li>
+                            <li><a href="prenotazioni.php">Prenota</a></li>
                         <?php endif; ?>
                         <li>
                             <a href="logout.php">
@@ -61,8 +61,8 @@ $is_admin = ($utente_loggato && $cf_utente === ADMIN_CF);
                             </a>
                         </li>
                     <?php else: ?>
-                        <li><a href="login.php">Accedi</a></li>
                         <li><a href="registrazione.php">Registrati</a></li>
+                        <li><a href="login.php">Accedi</a></li>
                     <?php endif; ?>
                 </ul>
             </nav>
@@ -86,7 +86,7 @@ $is_admin = ($utente_loggato && $cf_utente === ADMIN_CF);
             </p>
             <div class="hero__actions">
                 <?php if ($utente_loggato && !$is_admin): ?>
-                    <a href="/prenotazione.php" class="btn btn--primary">
+                    <a href="/prenotazioni.php" class="btn btn--primary">
                         Prenota un esame
                     </a>
                     <a href="/dashboard.php" class="btn btn--secondary">
@@ -184,8 +184,7 @@ $is_admin = ($utente_loggato && $cf_utente === ADMIN_CF);
                     ">03</div>
                     <h3>Presentati al centro</h3>
                     <p>
-                        Vieni a digiuno (minimo 8 ore). Ti aspettiamo in Via Roma 12.
-                        Puoi bere acqua.
+                        Vieni a digiuno (minimo 8 ore), puoi bere acqua. Ti aspettiamo in Via Roma 12 Padova.
                     </p>
                 </li>
 
@@ -199,10 +198,10 @@ $is_admin = ($utente_loggato && $cf_utente === ADMIN_CF);
 
                 <article class="card" aria-labelledby="news-1">
                     <div class="badge badge--warning">Avviso</div>
-                    <h3 id="news-1">Orari durante le festività</h3>
+                    <h3 id="news-1">Apertura durante le festività</h3>
                     <p>
-                        Il centro osserverà variazioni di orario nei prossimi giorni festivi.
-                        Consultare la pagina servizi per gli orari aggiornati.
+                        Il centro potrebbe essere chiuso nei giorni festivi.
+                        Vi invitiamo a chiamare la segreteria per informazioni (049 000 0000).
                     </p>
                 </article>
 
@@ -210,7 +209,7 @@ $is_admin = ($utente_loggato && $cf_utente === ADMIN_CF);
                     <div class="badge badge--success">Novità</div>
                     <h3 id="news-2">Refertazione online attiva</h3>
                     <p>
-                        Da oggi è possibile scaricare i propri referti dall'area personale
+                        È possibile scaricare i propri referti dall'area personale
                         in modo sicuro e conforme alla normativa GDPR.
                     </p>
                 </article>
@@ -240,7 +239,7 @@ $is_admin = ($utente_loggato && $cf_utente === ADMIN_CF);
                     <li>Digiunare per almeno <strong>8 ore</strong> prima del prelievo.</li>
                     <li>È consentito bere <strong>acqua naturale</strong>.</li>
                     <li>Evitare attività fisica intensa nelle 24 ore precedenti.</li>
-                    <li>Portare il documento d'identità e la tessera sanitaria.</li>
+                    <li>Portare la <strong>tessera sanitaria</strong>.</li>
                     <li>In caso di farmaci, consultare il proprio medico prima dell'esame.</li>
                 </ul>
             </div>

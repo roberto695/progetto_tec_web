@@ -141,7 +141,7 @@ function fmt_mese(DateTime $d): string {
         <nav id="nav-principale" aria-label="Navigazione principale">
             <ul>
                 <li><a href="index.php">Home</a></li>
-                <li><a href="prenotazioni.php" aria-current="page" class="active">Prenotazioni</a></li>
+                <li><a href="prenotazioni.php" aria-current="page" class="active">Prenota</a></li>
                 <li><a href="dashboard.php">Area Personale</a></li>
                 <li><a href="logout.php">Esci (<?= htmlspecialchars($nome, ENT_QUOTES, 'UTF-8') ?>)</a></li>
             </ul>
@@ -329,7 +329,8 @@ function fmt_mese(DateTime $d): string {
                         <ul style="list-style:disc;padding-left:var(--space-16);display:flex;flex-direction:column;gap:var(--space-8);">
                             <li class="text-sm">Digiuno da almeno <strong>8 ore</strong></li>
                             <li class="text-sm">Puoi bere <strong>acqua naturale</strong></li>
-                            <li class="text-sm">Porta documento e tessera sanitaria</li>
+                            <li class="text-sm">Porta <strong>tessera sanitaria</strong></li>
+                            
                         </ul>
                     </div>
                 </aside>
@@ -343,8 +344,20 @@ function fmt_mese(DateTime $d): string {
 
     <footer class="site-footer" role="contentinfo">
         <div class="footer-container">
-            <p>&copy; 2026 Centro Prelievi &bull; Corso di Tecnologie Web &bull; Università di Padova</p>
-            <p class="footer-sub">Sito sviluppato in conformità alle linee guida di accessibilità WCAG 2.2 AA</p>
+            <p>
+                <strong>VitalPath</strong> – Centro Prelievi del Sangue<br>
+                Via Roma 12 – Padova &bull; Tel. 049 000 0000 &bull;
+                <a href="mailto:info@vitalpath.it"
+                   style="color: #93c5fd;">info@vitalpath.it</a>
+            </p>
+            <p>
+                &copy; 2026 VitalPath &bull; Corso di Tecnologie Web &bull;
+                Università di Padova
+            </p>
+            <p>
+                Sito realizzato in conformità alle linee guida di accessibilità
+                <abbr title="Web Content Accessibility Guidelines">WCAG</abbr> 2.2 AA
+            </p>
         </div>
     </footer>
 

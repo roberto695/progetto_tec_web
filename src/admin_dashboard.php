@@ -220,7 +220,7 @@ function statoClasse($stato) {
     <section aria-labelledby="ricerca-title">
         <h2 id="ricerca-title" class="section-title">Tutti gli appuntamenti</h2>
 
-        <form method="GET" action="admin.php"
+        <form method="GET" action="admin_dashboard.php"
               role="search" aria-label="Cerca appuntamento"
               class="search-bar">
             <label class="sr-only" for="q">Cerca per nome, cognome o Codice Fiscale</label>
@@ -236,7 +236,7 @@ function statoClasse($stato) {
             >
             <button type="submit" class="btn btn--primary">Cerca</button>
             <?php if ($filtro !== ''): ?>
-                <a href="admin.php" class="btn btn--ghost">Azzera filtro</a>
+                <a href="admin_dashboard.php" class="btn btn--ghost">Azzera filtro</a>
             <?php endif; ?>
         </form>
 
@@ -255,7 +255,7 @@ function statoClasse($stato) {
             <p class="empty-state__text">
                 <?php if ($filtro !== ''): ?>
                     Nessun appuntamento corrisponde a "<?= $filtro_safe ?>".
-                    <a href="admin.php">Azzera il filtro</a>
+                    <a href="admin_dashboard.php">Azzera il filtro</a>
                 <?php else: ?>
                     Non ci sono ancora prenotazioni nel sistema.
                 <?php endif; ?>
@@ -315,7 +315,7 @@ function statoClasse($stato) {
 
                         <td>
                             <?php if ($attiva): ?>
-                            <form method="POST" action="admin.php"
+                            <form method="POST" action="admin_dashboard.php"
                                   class="form-annulla"
                                   data-nome="<?= htmlspecialchars($p['nome'] . ' ' . $p['cognome'], ENT_QUOTES, 'UTF-8') ?>">
                                 <input type="hidden" name="annulla_id" value="<?= (int)$p['id'] ?>">
@@ -344,32 +344,29 @@ function statoClasse($stato) {
 
 </main>
 
-<!-- FOOTER -->
-<footer class="site-footer" role="contentinfo">
-    <div class="footer-container">
-        <p>&copy; 2026 Centro Prelievi &bull; Corso di Tecnologie Web &bull; Università di Padova</p>
-        <p class="footer-sub">Sito sviluppato in conformità alle linee guida di accessibilità WCAG 2.2 AA</p>
-    </div>
-</footer>
+<!-- =====================================================
+         FOOTER
+    ===================================================== -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-container">
+            <p>
+                <strong>VitalPath</strong> – Centro Prelievi del Sangue<br>
+                Via Roma 12 – Padova &bull; Tel. 049 000 0000 &bull;
+                <a href="mailto:info@vitalpath.it"
+                   style="color: #93c5fd;">info@vitalpath.it</a>
+            </p>
+            <p>
+                &copy; 2026 VitalPath &bull; Corso di Tecnologie Web &bull;
+                Università di Padova
+            </p>
+            <p>
+                Sito realizzato in conformità alle linee guida di accessibilità
+                <abbr title="Web Content Accessibility Guidelines">WCAG</abbr> 2.2 AA
+            </p>
+        </div>
+    </footer>
 
-<script>
-// ============================================================
-// admin.js – Funzionalità dashboard admin
-// ============================================================
-document.addEventListener('DOMContentLoaded', function() {
-
-    // Conferma prima di annullare
-    document.querySelectorAll('.form-annulla').forEach(function(form) {
-        form.addEventListener('submit', function(e) {
-            const nome = this.dataset.nome || 'questo appuntamento';
-            if (!confirm('Sei sicuro di voler annullare l\'appuntamento di ' + nome + '?')) {
-                e.preventDefault();
-            }
-        });
-    });
-
-});
-</script>
+<script src="admin_dashboard.js"></script>
 
 </body>
 </html>
