@@ -113,7 +113,7 @@ function formattaDataBreve($data_ora) {
 
     <a href="#main-content" class="skip-link">Salta al contenuto principale</a>
 
-    <header id="intestazione" role="banner">
+    <header id="intestazione">
         <div class="header-container">
             <?php include 'logo.php'; ?>
             
@@ -131,7 +131,7 @@ function formattaDataBreve($data_ora) {
     </header>
 
     <main id="main-content" tabindex="-1">
-        
+        <h1 class="section-title">Area Personale</h1>
         <!-- Benvenuto -->
         <section class="user-welcome-section" aria-labelledby="welcome-title">
             <div class="card welcome-card">
@@ -169,7 +169,7 @@ function formattaDataBreve($data_ora) {
             <?php if (!empty($prenotazioni_attive)): 
                 $attivo = $prenotazioni_attive[0]; // Prendi il primo appuntamento attivo
             ?>
-                <div class="appointment-card" aria-label="Appuntamento prenotato">
+                <div class="appointment-card" role="group" aria-label="Appuntamento prenotato">
                     <div class="appointment-card__header">
                         <div>
                             <div class="appointment-card__date">
@@ -281,7 +281,7 @@ function formattaDataBreve($data_ora) {
 
     </main>
 
-    <footer class="site-footer" role="contentinfo">
+    <footer class="site-footer">
         <div class="footer-container">
             <p>
                 <strong>VitalPath</strong> – Centro Prelievi del Sangue<br>

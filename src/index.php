@@ -40,7 +40,7 @@ $is_admin = ($utente_loggato && $cf_utente === ADMIN_CF);
     <!-- =====================================================
          HEADER
     ===================================================== -->
-    <header id="intestazione" role="banner">
+    <header id="intestazione">
         <div class="header-container">
 
             <?php include 'logo.php'; ?>
@@ -250,7 +250,7 @@ $is_admin = ($utente_loggato && $cf_utente === ADMIN_CF);
     <!-- =====================================================
          FOOTER
     ===================================================== -->
-    <footer class="site-footer" role="contentinfo">
+    <footer class="site-footer">
         <div class="footer-container">
             <p>
                 <strong>VitalPath</strong> – Centro Prelievi del Sangue<br>

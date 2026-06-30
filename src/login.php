@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <a href="#main-content" class="skip-link">Salta al contenuto principale</a>
 
 <!-- HEADER -->
-<header id="intestazione" role="banner">
+<header id="intestazione">
     <?php include 'logo.php'; ?>
         <nav id="nav-principale" aria-label="Navigazione principale">
             <ul>
@@ -89,7 +89,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <li><a href="registrazione.php">Registrati</a></li>
             </ul>
         </nav>
-    </div>
 </header>
 
 <!-- MAIN -->
@@ -141,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="form-group">
                     <label class="form-label" for="cf">
                         Codice Fiscale
-                        <span class="required" aria-label="obbligatorio">*</span>
+                        <span class="required" aria-hidden="true">*</span>
                     </label>
                     <input
                         type="text"
@@ -152,7 +151,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         autocomplete="username"
                         maxlength="16"
                         required
-                        aria-required="true"
                         aria-describedby="<?= isset($errori['cf']) ? 'cf-error' : 'cf-hint' ?>"
                         style="text-transform: uppercase;"
                     >
@@ -172,7 +170,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="label-row">
                         <label class="form-label" for="password">
                             Password
-                            <span class="required" aria-label="obbligatoria">*</span>
+                            <span class="required" aria-hidden="true">*</span>
                         </label>
                     </div>
                     <div class="password-wrapper">
@@ -183,7 +181,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             class="form-input<?= isset($errori['password']) ? ' form-input--error' : '' ?>"
                             autocomplete="current-password"
                             required
-                            aria-required="true"
                             <?php if (isset($errori['password'])): ?>
                             aria-describedby="password-error"
                             <?php endif; ?>
@@ -221,7 +218,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </main>
 
-<footer class="site-footer" role="contentinfo">
+<footer class="site-footer">
         <div class="footer-container">
             <p>
                 <strong>VitalPath</strong> – Centro Prelievi del Sangue<br>

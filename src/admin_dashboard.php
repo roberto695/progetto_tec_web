@@ -137,8 +137,9 @@ function statoClasse($stato) {
 <a href="#main-content" class="skip-link">Salta al contenuto principale</a>
 
 <!-- HEADER -->
-<header id="intestazione" role="banner">
+<header id="intestazione">
     <div class="header-container">
+        
         <?php include 'logo.php'; ?>
         
         <nav id="nav-principale" aria-label="Navigazione principale">
@@ -347,7 +348,7 @@ function statoClasse($stato) {
 <!-- =====================================================
          FOOTER
     ===================================================== -->
-    <footer class="site-footer" role="contentinfo">
+    <footer class="site-footer">
         <div class="footer-container">
             <p>
                 <strong>VitalPath</strong> – Centro Prelievi del Sangue<br>
