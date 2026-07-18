@@ -50,7 +50,7 @@ $is_admin = ($utente_loggato && $cf_utente === ADMIN_CF);
                     <li><a href="index.php" aria-current="page" class="active">Home</a></li>
                     <?php if ($utente_loggato): ?>
                         <?php if ($is_admin): ?>
-                            <li><a href="/admin_dashboard.php">Dashboard Admin</a></li>
+                            <li><a href="admin_dashboard.php">Dashboard Admin</a></li>
                         <?php else: ?>
                             <li><a href="dashboard.php">Area Personale</a></li>
                             <li><a href="prenotazioni.php">Prenota</a></li>
@@ -61,8 +61,9 @@ $is_admin = ($utente_loggato && $cf_utente === ADMIN_CF);
                             </a>
                         </li>
                     <?php else: ?>
-                        <li><a href="registrazione.php">Registrati</a></li>
                         <li><a href="login.php">Accedi</a></li>
+                        <li><a href="registrazione.php">Registrati</a></li>
+                        
                     <?php endif; ?>
                 </ul>
             </nav>
@@ -89,11 +90,11 @@ $is_admin = ($utente_loggato && $cf_utente === ADMIN_CF);
                     <a href="/prenotazioni.php" class="btn btn--primary">
                         Prenota un esame
                     </a>
-                    <a href="/dashboard.php" class="btn btn--secondary">
+                    <a href="dashboard.php" class="btn btn--secondary">
                         Vai alla tua area
                     </a>
                 <?php elseif ($utente_loggato && $is_admin): ?>
-                    <a href="admin/dashboard.php" class="btn btn--primary">
+                    <a href="admin_dashboard.php" class="btn btn--primary">
                         Dashboard Admin
                     </a>
                 <?php else: ?>
