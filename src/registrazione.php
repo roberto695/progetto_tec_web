@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" media="all" href="style.css">
 </head>
 <body>
 
@@ -78,7 +78,7 @@
                            required
                            aria-describedby="cf-hint"
                            style="text-transform:uppercase;">
-                    <span class="form-hint" id="cf-hint">16 caratteri alfanumerici, es. RSSMRA80A01H501X</span>
+                    <span class="form-hint" id="cf-hint">16 caratteri alfanumerici - es. RSSMRA80A01H501X</span>
                 </div>
 
                 <div class="form-group">
@@ -97,7 +97,7 @@
                     <input type="tel" id="telefono" name="telefono"
                            class="form-input" value=""
                            autocomplete="tel" maxlength="20" aria-describedby="telefono-hint">
-                    <span class="form-hint" id="telefono-hint">Es. 333 1234567</span>
+                    <span class="form-hint" id="telefono-hint">es. 3331234567</span>
                 </div>
 
                 <div class="form-group">
@@ -110,7 +110,7 @@
                         <button type="button" class="password-toggle" id="toggle-password"
                                 aria-label="Mostra password" aria-pressed="false">👁</button>
                     </div>
-                    <span class="form-hint" id="password-hint">Minimo 6 caratteri.</span>
+                    <span class="form-hint" id="password-hint">minimo 6 caratteri</span>
                 </div>
 
                 <div class="form-group">

@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" media="all" href="style.css">
 </head>
 <body>
 
@@ -161,7 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </span>
                     <?php else: ?>
                         <span class="form-hint" id="cf-hint">
-                            Es. RSSMRA80A01H501X – 16 caratteri
+                        16 caratteri alfanumerici - es. RSSMRA80A01H501X
                         </span>
                     <?php endif; ?>
                 </div>

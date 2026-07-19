@@ -1289,3 +1289,43 @@ section:last-child {
         padding-right: var(--space-64);
     }
 }
+
+
+/* stile differente per stampa*/
+@media print {
+
+    @page {
+        margin: 2cm !important;
+    }
+
+    /* Nascondi elementi */
+    #intestazione,
+    .site-footer,
+    .skip-link {
+        display: none !important;
+    }
+
+    /* Stili per il corpo */
+    body {
+        background: white !important;
+        color: black !important;
+    }
+
+    /* Rimuovi ombre e effetti */
+    * {
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+    
+    /* Ma per i paragrafi lascia che si spezzino naturalmente */
+    p, li, td {
+        page-break-inside: auto !important;
+        break-inside: auto !important;
+    }
+
+    /* Mantieni il contenuto insieme */
+    .auth-card {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+    }
+}

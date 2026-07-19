@@ -3,7 +3,7 @@
 // logo.php – Logo del sito (da includere in tutte le pagine)
 // ============================================================
 ?>
-<a href="index.php" class="logo-area" aria-label="VitalPath – torna alla home">
+<a href="index.php" class="logo-area" aria-label="Home - VitalPath">
                 <svg width="36" height="36" viewBox="0 0 36 36" fill="none"
                      xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
                     <rect width="36" height="36" rx="8" fill="#0066cc"/>
