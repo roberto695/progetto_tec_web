@@ -76,8 +76,7 @@
                            class="form-input"
                            value="" autocomplete="off" maxlength="16"
                            required
-                           aria-describedby="cf-hint"
-                           style="text-transform:uppercase;">
+                           aria-describedby="cf-hint">
                     <span class="form-hint" id="cf-hint">16 caratteri alfanumerici - es. RSSMRA80A01H501X</span>
                 </div>
 
@@ -106,11 +105,12 @@
                         <input type="password" id="password" name="password"
                                class="form-input"
                                autocomplete="new-password" required
+                               minlength="4"
                                aria-describedby="password-hint">
                         <button type="button" class="password-toggle" id="toggle-password"
                                 aria-label="Mostra password" aria-pressed="false">👁</button>
                     </div>
-                    <span class="form-hint" id="password-hint">minimo 6 caratteri</span>
+                    <span class="form-hint" id="password-hint">minimo 4 caratteri</span>
                 </div>
 
                 <div class="form-group">

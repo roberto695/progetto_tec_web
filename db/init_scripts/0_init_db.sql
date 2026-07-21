@@ -2,7 +2,7 @@
 --CREATE DATABASE IF NOT EXISTS prelievi_db
 --     CHARACTER SET utf8mb4
 --     COLLATE utf8mb4_unicode_ci;
--- USE prelievi_db;
+USE prelievi_db;
 
 -- ============================================================
 -- TABELLA: persona
@@ -10,7 +10,7 @@
 -- Il login avviene con cf + password (in chiaro).
 -- ============================================================
 CREATE TABLE IF NOT EXISTS persona (
-    cf          CHAR(16)  NOT NULL,
+    cf          VARCHAR(16)  NOT NULL,
     nome        VARCHAR(50)  NOT NULL,
     cognome     VARCHAR(50)  NOT NULL,
     telefono    CHAR(10)  DEFAULT NULL,
@@ -45,9 +45,10 @@ CREATE TABLE IF NOT EXISTS prenotazione (
 --        cf=BNCANN85B45F205Y  password=user
 -- ============================================================
 INSERT INTO persona (cf, nome, cognome, telefono, email, password) VALUES
-('ADMINVTLPTH00A00', 'Admin',  'VitalPath', NULL,           'admin@vitalpath.it', 'admin1234'),
-('RSSMRA80A01H501X', 'Mario',  'Rossi',     '3331234567',  'mario.rossi@example.it',  'user1234'),
-('BNCANN85B45F205Y', 'Anna',   'Bianchi',   '3337654321',  'anna.bianchi@example.it',  'user1234');
+('admin', 'admin',  'VitalPath', NULL,           'admin@vitalpath.it', 'admin'),
+('user', 'User',  'User',     '3333333333',  'user@gmail.com',  'user'),
+('RSSMRA80A01H501X', 'Mario',  'Rossi',     '3331234567',  'mario.rossi@gmail.com',  'user'),
+('BNCANN85B45F205Y', 'Anna',   'Bianchi',   '3337654321',  'anna.bianchi@gmail.com',  'user');
 
 -- Prenotazioni di esempio
 INSERT INTO prenotazione (persona_id, data_ora, stato) VALUES

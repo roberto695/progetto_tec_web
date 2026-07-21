@@ -19,16 +19,6 @@
         });
     }
 
-    // --- CF in maiuscolo mentre si digita ---
-    const cfInput = document.getElementById('cf');
-    if (cfInput) {
-        cfInput.addEventListener('input', function () {
-            const pos = this.selectionStart;
-            this.value = this.value.toUpperCase();
-            this.setSelectionRange(pos, pos);
-        });
-    }
-
     // --- Validazione al submit ---
     const form = document.getElementById('form-registrazione');
     if (!form) return;
@@ -55,8 +45,6 @@
         const cfVal = cf.value.trim().toUpperCase();
         if (cfVal === '') {
             errori.push({ field: cf, msg: 'Il Codice Fiscale è obbligatorio.' });
-        } else if (!/^[A-Z0-9]{16}$/.test(cfVal)) {
-            errori.push({ field: cf, msg: 'Il Codice Fiscale deve essere di 16 caratteri alfanumerici.' });
         }
 
         if (email.value.trim() === '') {
@@ -67,7 +55,7 @@
 
         if (password.value === '') {
             errori.push({ field: password, msg: 'La password è obbligatoria.' });
-        } else if (password.value.length < 6) {
+        } else if (password.value.length < 4) {
             errori.push({ field: password, msg: 'La password deve contenere almeno 6 caratteri.' });
         }
 

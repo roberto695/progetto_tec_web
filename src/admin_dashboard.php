@@ -10,7 +10,7 @@ require_once __DIR__ . '/db.php';
 // ============================================================
 // CONTROLLO ADMIN: solo il CF specificato può accedere
 // ============================================================
-define('ADMIN_CF', 'ADMINVTLPTH00A00'); // CF dell'admin
+define('ADMIN_CF', 'admin'); // CF dell'admin
 // Se l'utente non è loggato, reindirizzalo al login
 if (!isset($_SESSION['cf'])) {
     header('Location: login.php');

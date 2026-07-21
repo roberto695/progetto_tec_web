@@ -4,7 +4,7 @@
 // ============================================================
 session_start();
 
-define('ADMIN_CF', 'ADMINVTLPTH00A00');
+define('ADMIN_CF', 'admin');
 
 $utente_loggato = isset($_SESSION['cf']);
 $nome_utente    = $_SESSION['nome']  ?? null;

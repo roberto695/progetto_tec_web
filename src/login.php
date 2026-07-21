@@ -22,8 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // --- Validazione server ---
     if ($cf === '') {
         $errori['cf'] = 'Il Codice Fiscale è obbligatorio.';
-    } elseif (!preg_match('/^[A-Z0-9]{16}$/i', $cf)) {
-        $errori['cf'] = 'Il Codice Fiscale deve essere di 16 caratteri alfanumerici.';
     }
 
     if ($password === '') {
@@ -36,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'SELECT cf, nome, cognome, telefono, email, password 
         FROM persona WHERE cf = ?'
         );
-        $stmt->execute([strtoupper($cf)]);
+        $stmt->execute([$cf]);
         $utente = $stmt->fetch();
 
         if (!$utente || $utente['password'] !== $password) {
@@ -51,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['email']    = $utente['email'];
             
             
-        if ($utente['cf'] === 'ADMINVTLPTH00A00') {
+        if ($utente['cf'] === 'admin') { // Controllo se l'utente è l'admin
             header('Location: admin_dashboard.php');
         } else {
             header('Location: dashboard.php');
@@ -153,7 +151,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         maxlength="16"
                         required
                         aria-describedby="<?= isset($errori['cf']) ? 'cf-error' : 'cf-hint' ?>"
-                        style="text-transform: uppercase;"
                     >
                     <?php if (isset($errori['cf'])): ?>
                         <span class="form-error" id="cf-error" role="alert">

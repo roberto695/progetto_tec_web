@@ -36,8 +36,6 @@
         const cfVal = cf.value.trim().toUpperCase();
         if (cfVal === '') {
             errori.push({ field: cf, msg: 'Il Codice Fiscale è obbligatorio.' });
-        } else if (!/^[A-Z0-9]{16}$/.test(cfVal)) {
-            errori.push({ field: cf, msg: 'Il Codice Fiscale deve essere di 16 caratteri alfanumerici.' });
         }
 
         // Valida password
@@ -52,16 +50,6 @@
             errori[0].field.focus();
         }
     });
-
-    // Converti CF in maiuscolo mentre si digita
-    const cfInput = document.getElementById('cf');
-    if (cfInput) {
-        cfInput.addEventListener('input', function () {
-            const pos = this.selectionStart;
-            this.value = this.value.toUpperCase();
-            this.setSelectionRange(pos, pos);
-        });
-    }
 
     function showErrors(errori) {
         // Crea o aggiorna il riepilogo in cima
