@@ -116,14 +116,13 @@ function formattaDataBreve($data_ora) {
     <header id="intestazione">
         <div class="header-container">
             <?php include 'logo.php'; ?>
-            
             <nav id="nav-principale" aria-label="Navigazione principale">
                 <ul>
-                    <li><a href="index.php">Home</a></li>
+                    <li><a href="index.php"><span lang="en">Home</span></a></li>
                     <?php if (empty($prenotazioni_attive)): ?>
                     <li><a href="prenotazioni.php">Prenota</a></li>
                     <?php endif; ?>
-                    <li><a href="dashboard.php" aria-current="page" class="active">Area Personale</a></li>
+                    <li><span class="nav-current" aria-current="page">Area Personale</span></li>
                     <li><a href="logout.php">Esci (<?= htmlspecialchars($nome, ENT_QUOTES, 'UTF-8') ?>)</a></li>
                 </ul>
             </nav>

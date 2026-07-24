@@ -29,9 +29,9 @@
         </a>
         <nav id="nav-principale" aria-label="Navigazione principale">
             <ul>
-                <li><a href="index.php">Home</a></li>
+                <li><a href="index.php"><span lang="en">Home</span></a></li>
                 <li><a href="login.php">Accedi</a></li>
-                <li><a href="registrazione.php" aria-current="page" class="active">Registrati</a></li>
+                <li><span class="nav-current" aria-current="page">Registrati</span></li>
             </ul>
         </nav>
     </div>
@@ -116,7 +116,7 @@
                 <div class="form-group">
                     <label class="form-check">
                         <input type="checkbox" name="privacy" id="privacy" required>
-                        <span>Ho letto e accetto la <a href="#">Privacy Policy</a> e il trattamento dei dati personali ai sensi del GDPR.
+                        <span>Ho letto e accetto la <a href="#" class="link-privacy">Privacy Policy</a> e il trattamento dei dati personali ai sensi del GDPR.
                         <span class="required" aria-hidden="true">*</span></span>
                     </label>
                 </div>

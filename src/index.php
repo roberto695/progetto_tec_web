@@ -47,10 +47,10 @@ $is_admin = ($utente_loggato && $cf_utente === ADMIN_CF);
 
             <nav id="nav-principale" aria-label="Navigazione principale">
                 <ul>
-                    <li><a href="index.php" aria-current="page" class="active">Home</a></li>
+                    <li><span class="nav-current" aria-current="page"><span lang="en">Home</span></span></li>
                     <?php if ($utente_loggato): ?>
                         <?php if ($is_admin): ?>
-                            <li><a href="admin_dashboard.php">Dashboard Admin</a></li>
+                            <li><a href="admin_dashboard.php"><span lang="en">Dashboard Admin</span></a></li>
                         <?php else: ?>
                             <li><a href="dashboard.php">Area Personale</a></li>
                             <li><a href="prenotazioni.php">Prenota</a></li>
@@ -67,7 +67,6 @@ $is_admin = ($utente_loggato && $cf_utente === ADMIN_CF);
                     <?php endif; ?>
                 </ul>
             </nav>
-
         </div>
     </header>
 

@@ -139,13 +139,11 @@ function statoClasse($stato) {
 <!-- HEADER -->
 <header id="intestazione">
     <div class="header-container">
-        
         <?php include 'logo.php'; ?>
-        
         <nav id="nav-principale" aria-label="Navigazione principale">
             <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="admin_dashboard.php" aria-current="page" class="active">Dashboard Admin</a></li>
+                <li><a href="index.php"><span lang="en">Home</span></a></li>
+                <li><span class="nav-current" aria-current="page"><span lang="en">Dashboard Admin</span></span></li>
                 <li><a href="logout.php">Esci (<?= htmlspecialchars($nome_admin, ENT_QUOTES, 'UTF-8') ?>)</a></li>
             </ul>
         </nav>

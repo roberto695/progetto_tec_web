@@ -83,11 +83,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php include 'logo.php'; ?>
             <nav id="nav-principale" aria-label="Navigazione principale">
             <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="login.php" aria-current="page" class="active">Accedi</a></li>
+                <li><a href="index.php"><span lang="en">Home</span></a></li>
+                <li><span class="nav-current" aria-current="page">Accedi</span></li>
                 <li><a href="registrazione.php">Registrati</a></li>
             </ul>
         </nav>
+    </div>
 </header>
 
 <!-- MAIN -->

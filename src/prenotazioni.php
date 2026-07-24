@@ -137,15 +137,17 @@ function fmt_mese(DateTime $d): string {
     <a href="#main-content" class="skip-link">Salta al contenuto principale</a>
 
     <header id="intestazione">
-        <?php include 'logo.php'; ?>
-        <nav id="nav-principale" aria-label="Navigazione principale">
+        <div class="header-container">
+         <?php include 'logo.php'; ?>
+          <nav id="nav-principale" aria-label="Navigazione principale">
             <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="prenotazioni.php" aria-current="page" class="active">Prenota</a></li>
+                <li><a href="index.php"><span lang="en">Home</span></a></li>
+                <li><span class="nav-current" aria-current="page">Prenota</span></li>
                 <li><a href="dashboard.php">Area Personale</a></li>
                 <li><a href="logout.php">Esci (<?= htmlspecialchars($nome, ENT_QUOTES, 'UTF-8') ?>)</a></li>
             </ul>
         </nav>
+        </div>
     </header>
 
     <main id="main-content" tabindex="-1">
@@ -220,7 +222,7 @@ function fmt_mese(DateTime $d): string {
                                            value="<?= $val_data ?>"
                                            <?= $checked ?>
                                            aria-label="<?= fmt_dow($giorno) . ' ' . $giorno->format('j') . ' ' . fmt_mese($giorno) ?>">
-                                    <label for="<?= $id_radio ?>" class="day-label">
+                                    <label for="<?= $id_radio ?>" class="day-label" tabindex="0">
                                         <span class="day-label__dow"><?= fmt_dow($giorno) ?></span>
                                         <span class="day-label__num"><?= $giorno->format('j') ?></span>
                                         <span class="day-label__month"><?= fmt_mese($giorno) ?></span>
@@ -267,7 +269,7 @@ function fmt_mese(DateTime $d): string {
                                            <?= $checked ?>
                                            <?= $disabled ?>
                                            aria-label="<?= $aria_label ?>">
-                                    <label for="<?= $id_ora ?>">
+                                    <label for="<?= $id_ora ?>" tabindex="0">
                                         <?= $ora ?>
                                         <?php if ($occupato): ?>
                                             <span class="sr-only"> – non disponibile</span>
@@ -361,132 +363,7 @@ function fmt_mese(DateTime $d): string {
         </div>
     </footer>
 
-    <script>
-    // ============================================================
-    // prenotazioni.js – Aggiorna il riepilogo e gestisce gli slot
-    // ============================================================
-    document.addEventListener('DOMContentLoaded', function() {
-
-        // Riferimenti agli elementi
-        const giorniRadios = document.querySelectorAll('input[name="data_esame"]');
-        const orariContainer = document.getElementById('griglia-orari');
-        const orariRadios = document.querySelectorAll('input[name="ora_esame"]');
-        const riepilogoData = document.getElementById('riepilogo-data');
-        const riepilogoOra = document.getElementById('riepilogo-ora');
-
-        // Mappa dei giorni con i loro nomi
-        const giorniMap = {};
-        document.querySelectorAll('.day-option').forEach(function(opt) {
-            const radio = opt.querySelector('input[type="radio"]');
-            const label = opt.querySelector('.day-label');
-            if (radio && label) {
-                const dow = label.querySelector('.day-label__dow')?.textContent || '';
-                const num = label.querySelector('.day-label__num')?.textContent || '';
-                const month = label.querySelector('.day-label__month')?.textContent || '';
-                giorniMap[radio.value] = dow + ' ' + num + ' ' + month;
-            }
-        });
-
-        // Carica gli slot occupati dal data-occupati
-        const occupatiJson = orariContainer.dataset.occupati || '{}';
-        let occupati = {};
-        try {
-            occupati = JSON.parse(occupatiJson);
-        } catch (e) {
-            occupati = {};
-        }
-
-        // Aggiorna il riepilogo data
-        giorniRadios.forEach(function(radio) {
-            radio.addEventListener('change', function() {
-                const dataVal = this.value;
-                riepilogoData.textContent = giorniMap[dataVal] || dataVal;
-                aggiornaOrari(dataVal);
-            });
-        });
-
-        // Aggiorna il riepilogo orario
-        orariRadios.forEach(function(radio) {
-            radio.addEventListener('change', function() {
-                if (this.checked && !this.disabled) {
-                    riepilogoOra.textContent = this.value;
-                }
-            });
-        });
-
-        // Seleziona il primo orario disponibile
-        function selezionaPrimoOrario() {
-            let primo = null;
-            orariRadios.forEach(function(radio) {
-                if (!radio.disabled && !primo) {
-                    primo = radio;
-                }
-            });
-            if (primo) {
-                primo.checked = true;
-                riepilogoOra.textContent = primo.value;
-            }
-        }
-
-        // Aggiorna gli orari in base al giorno selezionato
-        function aggiornaOrari(dataVal) {
-            const occupatiGiorno = occupati[dataVal] || [];
-            const orari = document.querySelectorAll('.time-option');
-
-            orari.forEach(function(container) {
-                const radio = container.querySelector('input[type="radio"]');
-                const ora = radio.value;
-                const oraDb = ora + ':00';
-                const occupato = occupatiGiorno.includes(oraDb);
-
-                if (occupato) {
-                    radio.disabled = true;
-                    radio.checked = false;
-                    container.classList.add('time-option--disabled');
-                    radio.setAttribute('aria-label', ora + ' – non disponibile');
-                } else {
-                    radio.disabled = false;
-                    container.classList.remove('time-option--disabled');
-                    radio.setAttribute('aria-label', ora);
-                }
-            });
-
-            // Seleziona il primo orario disponibile
-            selezionaPrimoOrario();
-        }
-
-        // Inizializza: seleziona il primo orario disponibile
-        selezionaPrimoOrario();
-
-        // Validazione client-side
-        const form = document.getElementById('form-prenotazione');
-        if (form) {
-            form.addEventListener('submit', function(e) {
-                const dataSelezionata = document.querySelector('input[name="data_esame"]:checked');
-                const oraSelezionata = document.querySelector('input[name="ora_esame"]:checked');
-
-                if (!dataSelezionata) {
-                    e.preventDefault();
-                    alert('Seleziona un giorno per l\'esame.');
-                    return;
-                }
-
-                if (!oraSelezionata) {
-                    e.preventDefault();
-                    alert('Seleziona un orario per l\'esame.');
-                    return;
-                }
-
-                if (oraSelezionata.disabled) {
-                    e.preventDefault();
-                    alert('L\'orario selezionato non è disponibile. Scegli un altro orario.');
-                    return;
-                }
-            });
-        }
-
-    });
-    </script>
+    <script src="prenotazioni.js"></script>
 
 </body>
 </html>

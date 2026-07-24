@@ -315,16 +315,23 @@ section:last-child {
     transition:      background-color 0.15s, color 0.15s;
 }
 
+.nav-current {
+    display: flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: var(--space-8) var(--space-12);
+    color: #ffffff;
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    border-radius: var(--border-radius);
+    border: 0.125rem solid transparent;
+    cursor: default;
+    background-color: var(--color-primary);
+}
+
 #nav-principale a:hover {
     background-color: var(--color-primary-light);
     color:            var(--color-primary);
-}
-
-#nav-principale a[aria-current="page"],
-#nav-principale a.active {
-    background-color: var(--color-primary);
-    color:            #ffffff;
-    border-color:     var(--color-primary);
 }
 
 /* Nav logout/azioni utente */
@@ -488,7 +495,6 @@ section:last-child {
     cursor:     not-allowed;
     box-shadow: none;
 }
-
 
 /* ============================================================
    11. FORM
@@ -1192,9 +1198,24 @@ resize:     vertical;
     margin: var(--space-24) 0;
 }
 
-
 /* ============================================================
-   21. MEDIA QUERIES (tablet e desktop)
+   21. LINK PRIVACY
+   ============================================================ */
+.link-privacy {
+    text-decoration: underline;
+    color: var(--color-primary);
+}
+
+.link-privacy:hover {
+    color: var(--color-primary-dark);
+}
+
+.link-privacy:visited {
+    color: #9B59B6;  /* Viola chiaro */
+    text-decoration: underline;
+}
+/* ============================================================
+   22. MEDIA QUERIES (tablet e desktop)
    ============================================================ */
 
 /* Tablet – 640px */
@@ -1232,6 +1253,10 @@ resize:     vertical;
     }
 
     #nav-principale a {
+        font-size: var(--font-size-base);
+    }
+
+    .nav-current {
         font-size: var(--font-size-base);
     }
 
