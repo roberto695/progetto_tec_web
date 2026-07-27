@@ -131,10 +131,10 @@ function formattaDataBreve($data_ora) {
 
     <main id="main-content" tabindex="-1">
         <h1 class="section-title">Area Personale</h1>
-        <!-- Benvenuto -->
+        <!-- Ciao -->
         <section class="user-welcome-section" aria-labelledby="welcome-title">
             <div class="card welcome-card">
-                <h2 id="welcome-title">Bentornato, <?php echo htmlspecialchars($nome . ' ' . $cognome); ?></h2>
+                <h2 id="welcome-title">Ciao, <?php echo htmlspecialchars($nome . ' ' . $cognome); ?></h2>
                 <p>In questa schermata puoi gestire i tuoi appuntamenti prenotati, controllare lo stato degli esami e consultare lo storico delle tue visite in totale sicurezza.</p>
                 <div class="user-meta">
                     <p><strong>Codice Fiscale:</strong> <?php echo htmlspecialchars($_SESSION['cf']); ?></p>
@@ -224,7 +224,11 @@ function formattaDataBreve($data_ora) {
                 </div>
             <?php else: ?>
                 <div class="table-responsive">
-                    <table class="table">
+                    <p id="storico-desc" class="sr-only">
+                        Tabella che mostra lo storico delle prenotazioni passate dell'utente.
+                        Ogni riga contiene: Data e ora, Stato della prenotazione.
+                    </p>
+                    <table class="table" id="tabella-storico" aria-describedby="storico-desc">
                         <caption>Storico delle prenotazioni passate</caption>
                         <thead>
                             <tr>
@@ -294,7 +298,7 @@ function formattaDataBreve($data_ora) {
             </p>
             <p>
                 Sito realizzato in conformità alle linee guida di accessibilità
-                <abbr title="Web Content Accessibility Guidelines">WCAG</abbr> 2.2 AA
+                <abbr title="Web Content Accessibility Guidelines">WCAG</abbr> 2.1 AA
             </p>
         </div>
     </footer>

@@ -231,7 +231,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </p>
             <p>
                 Sito realizzato in conformità alle linee guida di accessibilità
-                <abbr title="Web Content Accessibility Guidelines">WCAG</abbr> 2.2 AA
+                <abbr title="Web Content Accessibility Guidelines">WCAG</abbr> 2.1 AA
             </p>
         </div>
     </footer>

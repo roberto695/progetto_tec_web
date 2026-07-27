@@ -263,7 +263,12 @@ function statoClasse($stato) {
 
         <?php else: ?>
         <div class="table-wrapper">
-            <table class="table" id="tabella-prenotazioni">
+            <p id="tabella-desc" class="sr-only">
+                Tabella che mostra l'elenco di tutti gli appuntamenti registrati nel sistema.
+                Ogni riga contiene: ID, Paziente, Codice Fiscale, Data e ora, Stato, Azione.
+            </p>
+
+            <table class="table" id="tabella-prenotazioni" aria-describedby="tabella-desc">
                 <caption>Elenco di tutti gli appuntamenti registrati nel sistema</caption>
                 <thead>
                     <tr>
@@ -282,9 +287,9 @@ function statoClasse($stato) {
                     <tr data-id="<?= (int)$p['id'] ?>"
                         data-stato="<?= htmlspecialchars($p['stato'], ENT_QUOTES, 'UTF-8') ?>">
 
-                        <td><?= (int)$p['id'] ?></td>
+                        <td data-label="ID"><?= (int)$p['id'] ?></td>
 
-                        <td>
+                        <td data-label="Paziente">
                             <div style="font-weight:700;">
                                 <?= htmlspecialchars($p['nome'] . ' ' . $p['cognome'], ENT_QUOTES, 'UTF-8') ?>
                             </div>
@@ -295,24 +300,24 @@ function statoClasse($stato) {
                             <?php endif; ?>
                         </td>
 
-                        <td>
+                        <td data-label="Codice Fiscale">
                             <code style="font-size:var(--font-size-sm);background:#f1f5f9;
                                          padding:2px 6px;border-radius:4px;">
                                 <?= htmlspecialchars($p['cf'], ENT_QUOTES, 'UTF-8') ?>
                             </code>
                         </td>
 
-                        <td style="white-space:nowrap;">
+                        <td data-label="Data e ora" style="white-space:nowrap;">
                             <?= htmlspecialchars(fmt_data_admin($p['data_ora']), ENT_QUOTES, 'UTF-8') ?>
                         </td>
 
-                        <td>
+                        <td data-label="Stato">
                             <span class="status-badge <?= statoClasse($p['stato']) ?>">
                                 <?= etichetta_stato($p['stato']) ?>
                             </span>
                             </td>
 
-                        <td>
+                        <td data-label="Azioni">
                             <?php if ($attiva): ?>
                             <form method="POST" action="admin_dashboard.php"
                                   class="form-annulla"
@@ -360,7 +365,7 @@ function statoClasse($stato) {
             </p>
             <p>
                 Sito realizzato in conformità alle linee guida di accessibilità
-                <abbr title="Web Content Accessibility Guidelines">WCAG</abbr> 2.2 AA
+                <abbr title="Web Content Accessibility Guidelines">WCAG</abbr> 2.1 AA
             </p>
         </div>
     </footer>

@@ -3,6 +3,7 @@
 // index.php – Homepage VitalPath
 // ============================================================
 session_start();
+require_once __DIR__ . '/db.php';
 
 define('ADMIN_CF', 'admin');
 
@@ -11,6 +12,22 @@ $nome_utente    = $_SESSION['nome']  ?? null;
 $cf_utente      = $_SESSION['cf']    ?? null;
 
 $is_admin = ($utente_loggato && $cf_utente === ADMIN_CF);
+
+$appuntamento_attivo = false;
+if ($utente_loggato) {
+    try {
+        $stmt = $pdo->prepare("
+            SELECT id FROM prenotazione 
+            WHERE persona_id = :cf AND stato = 'prenotato'
+            LIMIT 1
+        ");
+        $stmt->execute([':cf' => $cf_utente]);
+        $appuntamento_attivo = $stmt->fetch() ? true : false;
+    } catch (PDOException $e) {
+        // Se c'è un errore, consideriamo che non ha appuntamenti
+        $appuntamento_attivo = false;
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -53,7 +70,9 @@ $is_admin = ($utente_loggato && $cf_utente === ADMIN_CF);
                             <li><a href="admin_dashboard.php"><span lang="en">Dashboard Admin</span></a></li>
                         <?php else: ?>
                             <li><a href="dashboard.php">Area Personale</a></li>
-                            <li><a href="prenotazioni.php">Prenota</a></li>
+                            <?php if (empty($appuntamento_attivo)): ?>
+                                <li><a href="prenotazioni.php">Prenota</a></li>
+                            <?php endif; ?>
                         <?php endif; ?>
                         <li>
                             <a href="logout.php">
@@ -85,11 +104,15 @@ $is_admin = ($utente_loggato && $cf_utente === ADMIN_CF);
                 Servizio rapido, accessibile e guidato da personale specializzato.
             </p>
             <div class="hero__actions">
-                <?php if ($utente_loggato && !$is_admin): ?>
-                    <a href="/prenotazioni.php" class="btn btn--primary">
+                <?php if ($utente_loggato && !$is_admin && !$appuntamento_attivo): ?>
+                    <a href="prenotazioni.php" class="btn btn--primary">
                         Prenota un esame
                     </a>
                     <a href="dashboard.php" class="btn btn--secondary">
+                        Vai alla tua area
+                    </a>
+                <?php elseif ($utente_loggato && !$is_admin && $appuntamento_attivo): ?>
+                    <a href="dashboard.php" class="btn btn--primary">
                         Vai alla tua area
                     </a>
                 <?php elseif ($utente_loggato && $is_admin): ?>
@@ -264,7 +287,7 @@ $is_admin = ($utente_loggato && $cf_utente === ADMIN_CF);
             </p>
             <p>
                 Sito realizzato in conformità alle linee guida di accessibilità
-                <abbr title="Web Content Accessibility Guidelines">WCAG</abbr> 2.2 AA
+                <abbr title="Web Content Accessibility Guidelines">WCAG</abbr> 2.1 AA
             </p>
         </div>
     </footer>

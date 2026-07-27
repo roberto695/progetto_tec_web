@@ -42,12 +42,12 @@ CREATE TABLE IF NOT EXISTS prenotazione (
 -- DATI DI DEFAULT
 -- Admin: cf=admin  password=admin
 -- User:  cf=user  password=user
--- User:  cf=BNCANN85B45F205Y  password=user
 -- User:  cf=RSSMRA80A01H501X  password=user
+-- User:  cf=BNCANN85B45F205Y  password=user
 -- ============================================================
 INSERT INTO persona (cf, nome, cognome, telefono, email, password) VALUES
-('admin', 'admin',  'VitalPath', NULL,           'admin@vitalpath.it', 'admin'),
-('user', 'User',  'User',     '3333333333',  'user@gmail.com',  'user'),
+('admin',            'admin',  'VitalPath', NULL,          'admin@vitalpath.it', 'admin'),
+('user',             'User',   'User',      '3333333333',  'user@gmail.com',     'user'),
 ('RSSMRA80A01H501X', 'Mario',  'Rossi',     '3331234567',  'mario.rossi@gmail.com',  'user'),
 ('BNCANN85B45F205Y', 'Anna',   'Bianchi',   '3337654321',  'anna.bianchi@gmail.com',  'user');
 

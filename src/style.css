@@ -1,7 +1,7 @@
 /* ============================================================
    VitalPath – Design System CSS
    Corso di Tecnologie Web – Università di Padova
-   Mobile-first, WCAG 2.2 AA, puro CSS (no framework)
+   Mobile-first, WCAG 2.1 AA, puro CSS (no framework)
    ============================================================ */
 
 
@@ -27,6 +27,7 @@
     /* --- Bordi --- */
     --color-border:         #d1d5db;
     --color-border-focus:   #0066cc;
+    --color-border-textbox:  #4b5563;
 
     /* --- Stati --- */
     --color-error:          #d32f2f;   /* Errore: sempre accompagnato da icona/testo */
@@ -46,7 +47,7 @@
     --status-cancelled-text:#b91c1c;
     --status-cancelled-bg:  #fee2e2;
 
-    /* --- Focus ring (doppio bordo WCAG 2.2) --- */
+    /* --- Focus ring (doppio bordo) --- */
     --focus-inner:          #ffffff;
     --focus-outer:          #0066cc;
 
@@ -140,7 +141,7 @@ a:hover {
 
 
 /* ============================================================
-   3. FOCUS (WCAG 2.2 – doppio anello)
+   3. FOCUS (doppio anello)
    ============================================================ */
 :focus-visible {
     outline:        0.1875rem solid var(--focus-outer);
@@ -529,7 +530,7 @@ section:last-child {
     line-height:      var(--line-height);
     color:            var(--color-text);
     background-color: var(--color-bg);
-    border:           0.125rem solid var(--color-border);
+    border:           0.125rem solid var(--color-border-textbox);
     border-radius:    var(--border-radius);
     transition:       border-color 0.15s;
     appearance:       none;
@@ -832,10 +833,6 @@ resize:     vertical;
 
 .table tbody tr:hover {
     background-color: #f8fafc;
-}
-
-.table tbody tr:last-child td {
-    border-bottom: none;
 }
 
 /* Ricerca/filtro */
@@ -1234,6 +1231,65 @@ resize:     vertical;
 
     .grid--4 {
         grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ============================================================
+   TABELLA - Aaron Gustafson (mobile)
+   ============================================================ */
+@media (max-width: 60em) {
+    .table-wrapper {
+        overflow-x: visible;
+        border: none;
+        background: transparent;
+        padding: 0;
+    }
+
+    .table {
+        min-width: unset;
+        width: 100%;
+    }
+
+    .table thead {
+        display: none;
+    }
+
+    .table tbody tr {
+        display: block;
+        margin-bottom: var(--space-16);
+        border: 0.0625rem solid var(--color-border);
+        border-radius: var(--border-radius);
+        padding: var(--space-12);
+        background-color: var(--color-bg);
+    }
+
+    .table tbody tr:hover {
+        background-color: var(--color-bg);
+    }
+
+    .table tbody td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--space-4) var(--space-8);
+        border-bottom: 0.0625rem solid var(--color-border);
+        text-align: left;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+    .table tbody td::before {
+        content: attr(data-label);
+        font-weight: 700;
+        color: var(--color-text-secondary);
+        text-align: left;
+        margin-right: var(--space-16);
+        flex-shrink: 0;
+    }
+
+    .table tbody td .btn {
+        width: 100%;
+        justify-content: center;
     }
 }
 
