@@ -210,7 +210,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <p class="auth-card__footer">
                 Non hai ancora un account?
-                <a href="registrazione.php">Registrati</a>
+                <a href="registrazione.php" class="link-privacy">Registrati</a>
             </p>
 
         </div>

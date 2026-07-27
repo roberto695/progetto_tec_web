@@ -130,7 +130,7 @@
             </form>
 
             <hr class="divider">
-            <p class="auth-card__footer">Hai già un account? <a href="login.php">Accedi</a></p>
+            <p class="auth-card__footer">Hai già un account? <a href="login.php" class="link-privacy">Accedi</a></p>
 
         </div>
     </div>

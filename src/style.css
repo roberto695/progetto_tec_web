@@ -27,7 +27,7 @@
     /* --- Bordi --- */
     --color-border:         #d1d5db;
     --color-border-focus:   #0066cc;
-    --color-border-textbox:  #4b5563;
+    --color-border-textbox: #4b5563;
 
     /* --- Stati --- */
     --color-error:          #d32f2f;   /* Errore: sempre accompagnato da icona/testo */
@@ -626,7 +626,7 @@ resize:     vertical;
 }
 
 .error-summary h2 {
-    color:         var(--color-error);
+    color:         var(--color-text);
     font-size:     var(--font-size-base);
     margin-bottom: var(--space-8);
     display:       flex;
@@ -637,7 +637,7 @@ resize:     vertical;
 .error-summary ul {
     list-style:  disc;
     padding-left: var(--space-24);
-    color:       var(--color-error);
+    color:       var(--color-text);
     font-size:   var(--font-size-sm);
 }
 
