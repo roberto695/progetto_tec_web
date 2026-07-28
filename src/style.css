@@ -1216,7 +1216,7 @@ resize:     vertical;
    ============================================================ */
 
 /* Tablet – 640px */
-@media (min-width: 40em) {
+@media (min-width: 640px) {
     .form-row {
         grid-template-columns: 1fr 1fr;
     }
@@ -1237,7 +1237,7 @@ resize:     vertical;
 /* ============================================================
    TABELLA - Aaron Gustafson (mobile)
    ============================================================ */
-@media (max-width: 60em) {
+@media (max-width: 960px) {
     .table-wrapper {
         overflow-x: visible;
         border: none;
@@ -1294,7 +1294,7 @@ resize:     vertical;
 }
 
 /* Desktop – 768px */
-@media (min-width: 48em) {
+@media (min-width: 768px) {
     h1 { font-size: var(--font-size-2xl); }
     h2 { font-size: var(--font-size-xl); }
 
@@ -1363,7 +1363,7 @@ resize:     vertical;
 }
 
 /* Large desktop – 1024px */
-@media (min-width: 64em) {
+@media (min-width: 1024px) {
     .container,
     main {
         padding-left:  var(--space-64);
