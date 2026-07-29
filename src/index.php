@@ -100,7 +100,7 @@ if ($utente_loggato) {
                 La tua salute, con serenità e precisione
             </h1>
             <p class="hero__subtitle">
-                Benvenuto in VitalPath, il portale per prenotare i tuoi esami del sangue online.
+                Ti diamo il benvenuto in VitalPath, il portale per prenotare i tuoi esami del sangue online.
                 Servizio rapido, accessibile e guidato da personale specializzato.
             </p>
             <div class="hero__actions">
