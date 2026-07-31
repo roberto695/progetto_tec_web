@@ -18,7 +18,7 @@
             toggleBtn.textContent = isPassword ? '🔒' : '👁';
         });
     }
-
+    
     // --- Validazione client-side al submit ---
     const form = document.getElementById('form-login');
     if (!form) return;
@@ -34,8 +34,11 @@
 
         // Valida CF
         const cfVal = cf.value.trim().toUpperCase();
+        const reservedCF = ['admin', 'user'];
         if (cfVal === '') {
             errori.push({ field: cf, msg: 'Il Codice Fiscale è obbligatorio.' });
+        } else if (!reservedCF.includes(cfVal.toLowerCase()) && !/^[A-Z]{6}\d{2}[A-Z]\d{2}[A-Z]\d{3}[A-Z]$/.test(cfVal)) {
+            errori.push({ field: cf, msg: 'Il Codice Fiscale non è valido.' });
         }
 
         // Valida password
