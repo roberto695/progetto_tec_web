@@ -119,10 +119,10 @@ function formattaDataBreve($data_ora) {
             <nav id="nav-principale" aria-label="Navigazione principale">
                 <ul>
                     <li><a href="index.php"><span lang="en">Home</span></a></li>
+                    <li><span class="nav-current" aria-current="page">Area Personale</span></li>
                     <?php if (empty($prenotazioni_attive)): ?>
                     <li><a href="prenotazioni.php">Prenota</a></li>
                     <?php endif; ?>
-                    <li><span class="nav-current" aria-current="page">Area Personale</span></li>
                     <li><a href="logout.php">Esci (<?= htmlspecialchars($nome, ENT_QUOTES, 'UTF-8') ?>)</a></li>
                 </ul>
             </nav>
@@ -130,7 +130,7 @@ function formattaDataBreve($data_ora) {
     </header>
 
     <main id="main-content" tabindex="-1">
-        <h1 class="section-title">Area Personale</h1>
+        <h1 class="hero__title">Area Personale</h1>
         <!-- Ciao -->
         <section class="user-welcome-section" aria-labelledby="welcome-title">
             <div class="card welcome-card">
@@ -138,7 +138,7 @@ function formattaDataBreve($data_ora) {
                 <p>In questa schermata puoi gestire i tuoi appuntamenti prenotati, controllare lo stato degli esami e consultare lo storico delle tue visite in totale sicurezza.</p>
                 <div class="user-meta">
                     <p><strong>Codice Fiscale:</strong> <?php echo htmlspecialchars($_SESSION['cf']); ?></p>
-                    <p><strong>Telefono:</strong> <?php echo htmlspecialchars($telefono); ?></p>
+                    <p><strong>Telefono:</strong> <?php echo htmlspecialchars($telefono ?: 'Non disponibile'); ?></p>
                     <p><strong>Email:</strong> <?php echo htmlspecialchars($email); ?></p>
                 </div>
             </div>
@@ -223,7 +223,7 @@ function formattaDataBreve($data_ora) {
                     <p class="empty-state__text">Qui appariranno i tuoi appuntamenti passati.</p>
                 </div>
             <?php else: ?>
-                <div class="table-responsive">
+                <div class="table-wrapper">
                     <p id="storico-desc" class="sr-only">
                         Tabella che mostra lo storico delle prenotazioni passate dell'utente.
                         Ogni riga contiene: Data e ora, Stato della prenotazione.
@@ -287,7 +287,7 @@ function formattaDataBreve($data_ora) {
     <footer class="site-footer">
         <div class="footer-container">
             <p>
-                <strong>VitalPath</strong> – Centro Prelievi del Sangue<br>
+                <strong>VitalPath</strong> – Centro Prelievi del Sangue
                 Via Roma 12 – Padova &bull; Tel. 049 000 0000 &bull;
                 <a href="mailto:info@vitalpath.it"
                    style="color: #93c5fd;">info@vitalpath.it</a>

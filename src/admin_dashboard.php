@@ -156,11 +156,11 @@ function statoClasse($stato) {
     <!-- Titolo pagina -->
     <div class="flex items-center justify-between flex-wrap gap-16 mb-32">
         <div>
-            <h1>Dashboard Amministratore</h1>
-            <p class="text-muted mt-8">Gestione appuntamenti &bull; Centro Prelievi</p>
+            <h1 class="hero__title">Dashboard Amministratore</h1>
+            <p class="text-muted mt-8">Gestione appuntamenti - Centro Prelievi</p>
         </div>
         <span class="badge badge--info" style="font-size:var(--font-size-sm);padding:var(--space-8) var(--space-16);">
-            Admin: <?= htmlspecialchars($nome_admin, ENT_QUOTES, 'UTF-8') ?>
+            <span lang="en">Admin</span>: <?= htmlspecialchars($nome_admin, ENT_QUOTES, 'UTF-8') ?>
         </span>
     </div>
 
@@ -265,7 +265,7 @@ function statoClasse($stato) {
         <div class="table-wrapper">
             <p id="tabella-desc" class="sr-only">
                 Tabella che mostra l'elenco di tutti gli appuntamenti registrati nel sistema.
-                Ogni riga contiene: ID, Paziente, Codice Fiscale, Data e ora, Stato, Azione.
+                Ogni riga contiene: <abbr title="Identification">ID</abbr>, Paziente, Codice Fiscale, Data e ora, Stato, Azione.
             </p>
 
             <table class="table" id="tabella-prenotazioni" aria-describedby="tabella-desc">
@@ -354,7 +354,7 @@ function statoClasse($stato) {
     <footer class="site-footer">
         <div class="footer-container">
             <p>
-                <strong>VitalPath</strong> – Centro Prelievi del Sangue<br>
+                <strong>VitalPath</strong> – Centro Prelievi del Sangue
                 Via Roma 12 – Padova &bull; Tel. 049 000 0000 &bull;
                 <a href="mailto:info@vitalpath.it"
                    style="color: #93c5fd;">info@vitalpath.it</a>

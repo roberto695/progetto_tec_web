@@ -512,7 +512,9 @@ section:last-child {
     margin-bottom: var(--space-8);
 }
 
-.form-label .required {
+.form-label .required,
+.form-check .required,
+.text-muted .required {
     color:       var(--color-error);
     margin-left: var(--space-4);
     font-weight: 700;
@@ -1075,6 +1077,9 @@ resize:     vertical;
 }
 
 .auth-card__logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align:    center;
     margin-bottom: var(--space-32);
 }
@@ -1115,6 +1120,10 @@ resize:     vertical;
     font-weight: 600;
 }
 
+.logo-no-link {
+    pointer-events: none;  /* Disabilita il click */
+    cursor: default;        /* Cursore normale, non mano */
+}
 
 /* ============================================================
    19. MESSAGGI FEEDBACK (alert)
@@ -1237,62 +1246,6 @@ resize:     vertical;
 /* ============================================================
    TABELLA - Aaron Gustafson (mobile)
    ============================================================ */
-@media (max-width: 960px) {
-    .table-wrapper {
-        overflow-x: visible;
-        border: none;
-        background: transparent;
-        padding: 0;
-    }
-
-    .table {
-        min-width: unset;
-        width: 100%;
-    }
-
-    .table thead {
-        display: none;
-    }
-
-    .table tbody tr {
-        display: block;
-        margin-bottom: var(--space-16);
-        border: 0.0625rem solid var(--color-border);
-        border-radius: var(--border-radius);
-        padding: var(--space-12);
-        background-color: var(--color-bg);
-    }
-
-    .table tbody tr:hover {
-        background-color: var(--color-bg);
-    }
-
-    .table tbody td {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: var(--space-4) var(--space-8);
-        border-bottom: 0.0625rem solid var(--color-border);
-        text-align: left;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-    }
-
-    .table tbody td::before {
-        content: attr(data-label);
-        font-weight: 700;
-        color: var(--color-text-secondary);
-        text-align: left;
-        margin-right: var(--space-16);
-        flex-shrink: 0;
-    }
-
-    .table tbody td .btn {
-        width: 100%;
-        justify-content: center;
-    }
-}
-
 /* Desktop – 768px */
 @media (min-width: 768px) {
     h1 { font-size: var(--font-size-2xl); }
@@ -1359,6 +1312,62 @@ resize:     vertical;
 
     .time-booking-grid {
         grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+   @media (max-width: 960px) {
+    .table-wrapper {
+        overflow-x: visible;
+        border: none;
+        background: transparent;
+        padding: 0;
+    }
+
+    .table {
+        min-width: unset;
+        width: 100%;
+    }
+
+    .table thead {
+        display: none;
+    }
+
+    .table tbody tr {
+        display: block;
+        margin-bottom: var(--space-16);
+        border: 0.0625rem solid var(--color-border);
+        border-radius: var(--border-radius);
+        padding: var(--space-12);
+        background-color: var(--color-bg);
+    }
+
+    .table tbody tr:hover {
+        background-color: var(--color-bg);
+    }
+
+    .table tbody td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--space-4) var(--space-8);
+        border-bottom: 0.0625rem solid var(--color-border);
+        text-align: left;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+    .table tbody td::before {
+        content: attr(data-label);
+        font-weight: 700;
+        color: var(--color-text-secondary);
+        text-align: left;
+        margin-right: var(--space-16);
+        flex-shrink: 0;
+    }
+
+    .table tbody td .btn {
+        width: 100%;
+        justify-content: center;
     }
 }
 

@@ -59,7 +59,7 @@
         if (password.value === '') {
             errori.push({ field: password, msg: 'La password è obbligatoria.' });
         } else if (password.value.length < 4) {
-            errori.push({ field: password, msg: 'La password deve contenere almeno 6 caratteri.' });
+            errori.push({ field: password, msg: 'La password deve contenere almeno 4 caratteri.' });
         }
 
         if (!privacy.checked) {

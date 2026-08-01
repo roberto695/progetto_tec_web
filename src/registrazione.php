@@ -17,17 +17,8 @@
 
 <header id="intestazione">
     <div class="header-container">
-        <a href="index.php" class="logo-area" aria-label="VitalPath – torna alla home">
-            <svg width="36" height="36" viewBox="0 0 36 36" fill="none"
-                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-                <rect width="36" height="36" rx="8" fill="#0066cc"/>
-                <path d="M8 18h4l3-8 4 16 3-10 2 4h4"
-                      stroke="white" stroke-width="2.5"
-                      stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <span class="logo-text">Vital<span>Path</span></span>
-        </a>
-        <nav id="nav-principale" aria-label="Navigazione principale">
+        <?php include 'logo.php'; ?>
+            <nav id="nav-principale" aria-label="Navigazione principale">
             <ul>
                 <li><a href="index.php"><span lang="en">Home</span></a></li>
                 <li><a href="login.php">Accedi</a></li>
@@ -38,18 +29,15 @@
 </header>
 
 <main id="main-content" tabindex="-1">
-    <div class="auth-page" style="align-items:flex-start;padding-top:var(--space-32);">
+    <div class="auth-page">
         <div class="auth-card" style="max-width:560px;">
 
             <div class="auth-card__logo" aria-hidden="true">
-                <svg width="48" height="48" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="36" height="36" rx="8" fill="#0066cc"/>
-                    <path d="M8 18h4l3-8 4 16 3-10 2 4h4" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+                <?php $logo_class = 'logo-no-link'; include 'logo.php'; ?>
             </div>
 
-            <h1 class="auth-card__title">Crea il tuo account</h1>
-            <p class="auth-card__subtitle">Registrati per prenotare i tuoi esami del sangue online.</p>
+            <h1 class="auth-card__title">Crea il tuo <span lang="en">account</span></h1>
+            <p class="auth-card__subtitle">Registrati per prenotare i tuoi esami del sangue <span lang="en">online</span>.</p>
 
             <form id="form-registrazione" method="POST" action="registrazione.php" novalidate aria-label="Modulo di registrazione">
 
@@ -116,12 +104,12 @@
                 <div class="form-group">
                     <label class="form-check">
                         <input type="checkbox" name="privacy" id="privacy" required>
-                        <span>Ho letto e accetto la <a href="#" class="link-privacy">Privacy Policy</a> e il trattamento dei dati personali ai sensi del GDPR.
+                        <span>Ho letto e accetto la <a href="#" class="link-privacy"><span lang="en">Privacy Policy</span></a> e il trattamento dei dati personali ai sensi del <abbr title="General Data Protection Regulation">GDPR</abbr>.
                         <span class="required" aria-hidden="true">*</span></span>
                     </label>
                 </div>
 
-                <button type="submit" class="btn btn--primary btn--full">Crea account</button>
+                <button type="submit" class="btn btn--primary btn--full">Crea <span lang="en">account</span></button>
 
                 <p class="text-sm text-muted text-center mt-16">
                     I campi con <span class="required" aria-hidden="true">*</span> sono obbligatori.
@@ -130,7 +118,7 @@
             </form>
 
             <hr class="divider">
-            <p class="auth-card__footer">Hai già un account? <a href="login.php" class="link-privacy">Accedi</a></p>
+            <p class="auth-card__footer">Hai già un <span lang="en">account</span>? <a href="login.php" class="link-privacy">Accedi</a></p>
 
         </div>
     </div>
@@ -139,7 +127,7 @@
 <footer class="site-footer">
     <div class="footer-container">
         <p>
-            <strong>VitalPath</strong> – Centro Prelievi del Sangue<br>
+            <strong>VitalPath</strong> – Centro Prelievi del Sangue
             Via Roma 12 – Padova &bull; Tel. 049 000 0000 &bull;
             <a href="mailto:info@vitalpath.it"
                style="color: #93c5fd;">info@vitalpath.it</a>

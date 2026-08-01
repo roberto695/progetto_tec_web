@@ -38,13 +38,15 @@
         if (cfVal === '') {
             errori.push({ field: cf, msg: 'Il Codice Fiscale è obbligatorio.' });
         } else if (!reservedCF.includes(cfVal.toLowerCase()) && !/^[A-Z]{6}\d{2}[A-Z]\d{2}[A-Z]\d{3}[A-Z]$/.test(cfVal)) {
-            errori.push({ field: cf, msg: 'Il Codice Fiscale non è valido.' });
+            errori.push({ field: cf, msg: 'Codice Fiscale o password non corretti.' });
         }
 
         // Valida password
         const pwdVal = pwd.value;
         if (pwdVal === '') {
             errori.push({ field: pwd, msg: 'La password è obbligatoria.' });
+        } else if (pwdVal.length < 4) {
+            errori.push({ field: pwd, msg: 'La password deve contenere almeno 4 caratteri.' });
         }
 
         if (errori.length > 0) {

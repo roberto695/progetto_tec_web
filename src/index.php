@@ -105,11 +105,11 @@ if ($utente_loggato) {
             </p>
             <div class="hero__actions">
                 <?php if ($utente_loggato && !$is_admin && !$appuntamento_attivo): ?>
-                    <a href="prenotazioni.php" class="btn btn--primary">
-                        Prenota un esame
-                    </a>
-                    <a href="dashboard.php" class="btn btn--secondary">
+                    <a href="dashboard.php" class="btn btn--primary">
                         Vai alla tua area
+                    </a>
+                    <a href="prenotazioni.php" class="btn btn--secondary">
+                        Prenota un esame
                     </a>
                 <?php elseif ($utente_loggato && !$is_admin && $appuntamento_attivo): ?>
                     <a href="dashboard.php" class="btn btn--primary">
@@ -120,11 +120,11 @@ if ($utente_loggato) {
                         Dashboard Admin
                     </a>
                 <?php else: ?>
-                    <a href="registrazione.php" class="btn btn--primary">
-                        Registrati
+                    <a href="login.php" class="btn btn--primary">
+                        Accedi al tuo <span lang="en">account</span>
                     </a>
-                    <a href="login.php" class="btn btn--secondary">
-                        Accedi al tuo account
+                    <a href="registrazione.php" class="btn btn--secondary">
+                        Registrati
                     </a>
                 <?php endif; ?>
             </div>
@@ -149,7 +149,7 @@ if ($utente_loggato) {
                     <h3 id="serv-2">Referti digitali</h3>
                     <p>
                         Consulta i tuoi referti direttamente nell'area personale,
-                        in modo sicuro e conforme alle normative sulla privacy.
+                        in modo sicuro e conforme alle normative sulla <span lang="en">privacy</span>.
                     </p>
                 </article>
 
@@ -179,7 +179,7 @@ if ($utente_loggato) {
                     ">01</div>
                     <h3>Registrati</h3>
                     <p>
-                        Crea il tuo account con nome, cognome, Codice Fiscale ed email.
+                        Crea il tuo <span lang="en">account</span> con nome, cognome, Codice Fiscale ed email.
                         Basta un minuto.
                     </p>
                 </li>
@@ -193,7 +193,7 @@ if ($utente_loggato) {
                     ">02</div>
                     <h3>Scegli data e ora</h3>
                     <p>
-                        Seleziona il giorno e l'orario più comodo tra gli slot disponibili,
+                        Seleziona il giorno e l'orario più comodo tra gli <span lang="en">slot</span> disponibili,
                         dal lunedì al sabato.
                     </p>
                 </li>
@@ -233,7 +233,7 @@ if ($utente_loggato) {
                     <h3 id="news-2">Refertazione online attiva</h3>
                     <p>
                         È possibile scaricare i propri referti dall'area personale
-                        in modo sicuro e conforme alla normativa GDPR.
+                        in modo sicuro e conforme alla normativa <abbr title="General Data Protection Regulation">GDPR</abbr>.
                     </p>
                 </article>
 
@@ -276,7 +276,7 @@ if ($utente_loggato) {
     <footer class="site-footer">
         <div class="footer-container">
             <p>
-                <strong>VitalPath</strong> – Centro Prelievi del Sangue<br>
+                <strong>VitalPath</strong> – Centro Prelievi del Sangue
                 Via Roma 12 – Padova &bull; Tel. 049 000 0000 &bull;
                 <a href="mailto:info@vitalpath.it"
                    style="color: #93c5fd;">info@vitalpath.it</a>

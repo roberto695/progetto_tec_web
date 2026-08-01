@@ -142,8 +142,8 @@ function fmt_mese(DateTime $d): string {
           <nav id="nav-principale" aria-label="Navigazione principale">
             <ul>
                 <li><a href="index.php"><span lang="en">Home</span></a></li>
-                <li><span class="nav-current" aria-current="page">Prenota</span></li>
                 <li><a href="dashboard.php">Area Personale</a></li>
+                <li><span class="nav-current" aria-current="page">Prenota</span></li>
                 <li><a href="logout.php">Esci (<?= htmlspecialchars($nome, ENT_QUOTES, 'UTF-8') ?>)</a></li>
             </ul>
         </nav>
@@ -152,7 +152,7 @@ function fmt_mese(DateTime $d): string {
 
     <main id="main-content" tabindex="-1">
 
-        <h1 class="sr-only">Prenota un esame del sangue</h1>
+        <h1 class="section-title">Prenota un esame del sangue</h1>
 
         <!-- CONFERMA SUCCESSO -->
         <?php if ($success): ?>
@@ -163,7 +163,7 @@ function fmt_mese(DateTime $d): string {
                     Prenotazione confermata!
                 </h2>
                 <p style="font-size:var(--font-size-lg);margin-bottom:var(--space-8);">
-                    Il tuo appuntamento è fissato per:<br>
+                    Il tuo appuntamento è fissato per: 
                     <strong><?= htmlspecialchars(
                         (new DateTime($booking['data_ora']))->format('d/m/Y') . ' alle ' .
                         (new DateTime($booking['data_ora']))->format('H:i'),
@@ -310,7 +310,7 @@ function fmt_mese(DateTime $d): string {
                             <div class="summary-item">
                                 <dt class="summary-label">Luogo</dt>
                                 <dd style="font-size:var(--font-size-base);color:var(--color-text-secondary);">
-                                    Centro Prelievi<br>Via Roma 12, Padova
+                                    Centro Prelievi - Via Roma 12, Padova
                                 </dd>
                             </div>
                         </dl>
@@ -347,7 +347,7 @@ function fmt_mese(DateTime $d): string {
     <footer class="site-footer">
         <div class="footer-container">
             <p>
-                <strong>VitalPath</strong> – Centro Prelievi del Sangue<br>
+                <strong>VitalPath</strong> – Centro Prelievi del Sangue
                 Via Roma 12 – Padova &bull; Tel. 049 000 0000 &bull;
                 <a href="mailto:info@vitalpath.it"
                    style="color: #93c5fd;">info@vitalpath.it</a>

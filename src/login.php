@@ -98,13 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <!-- Logo centrato -->
             <div class="auth-card__logo" aria-hidden="true">
-                <svg width="48" height="48" viewBox="0 0 36 36" fill="none"
-                     xmlns="http://www.w3.org/2000/svg">
-                    <rect width="36" height="36" rx="8" fill="#0066cc"/>
-                    <path d="M8 18h4l3-8 4 16 3-10 2 4h4"
-                          stroke="white" stroke-width="2.5"
-                          stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+                <?php $logo_class = 'logo-no-link'; include 'logo.php'; ?>
             </div>
 
             <h1 class="auth-card__title">Accedi a VitalPath</h1>
@@ -153,13 +147,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         required
                         aria-describedby="<?= isset($errori['cf']) ? 'cf-error' : 'cf-hint' ?>"
                     >
+                    <span class="form-hint" id="cf-hint">
+                        16 caratteri alfanumerici - es. RSSMRA80A01H501X
+                    </span>
+    
                     <?php if (isset($errori['cf'])): ?>
                         <span class="form-error" id="cf-error" role="alert">
                             <?= htmlspecialchars($errori['cf'], ENT_QUOTES, 'UTF-8') ?>
-                        </span>
-                    <?php else: ?>
-                        <span class="form-hint" id="cf-hint">
-                        16 caratteri alfanumerici - es. RSSMRA80A01H501X
                         </span>
                     <?php endif; ?>
                 </div>
@@ -192,11 +186,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             aria-pressed="false"
                         >👁</button>
                     </div>
+                                       
                     <?php if (isset($errori['password'])): ?>
                         <span class="form-error" id="password-error" role="alert">
                             <?= htmlspecialchars($errori['password'], ENT_QUOTES, 'UTF-8') ?>
                         </span>
                     <?php endif; ?>
+                    <span class="form-hint" id="password-hint">minimo 4 caratteri</span>
                 </div>
 
                 <!-- Submit -->
@@ -209,7 +205,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <hr class="divider">
 
             <p class="auth-card__footer">
-                Non hai ancora un account?
+                Non hai ancora un <span lang="en">account</span>?
                 <a href="registrazione.php" class="link-privacy">Registrati</a>
             </p>
 
@@ -220,7 +216,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <footer class="site-footer">
         <div class="footer-container">
             <p>
-                <strong>VitalPath</strong> – Centro Prelievi del Sangue<br>
+                <strong>VitalPath</strong> – Centro Prelievi del Sangue
                 Via Roma 12 – Padova &bull; Tel. 049 000 0000 &bull;
                 <a href="mailto:info@vitalpath.it"
                    style="color: #93c5fd;">info@vitalpath.it</a>
