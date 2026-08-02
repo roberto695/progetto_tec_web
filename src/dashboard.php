@@ -104,6 +104,7 @@ function formattaDataBreve($data_ora) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Area Personale - Centro Prelievi Sanitario</title>
     <meta name="description" content="Gestisci i tuoi appuntamenti e visualizza lo storico delle prenotazioni.">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -131,17 +132,66 @@ function formattaDataBreve($data_ora) {
 
     <main id="main-content" tabindex="-1">
         <h1 class="hero__title">Area Personale</h1>
+        <h2 class="section-title">Gestisci i tuoi dati personali, i tuoi appuntamenti e visualizza lo storico delle prenotazioni.</h2>
         <!-- Ciao -->
         <section class="user-welcome-section" aria-labelledby="welcome-title">
             <div class="card welcome-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-16); margin-bottom: var(--space-16);">
                 <h2 id="welcome-title">Ciao, <?php echo htmlspecialchars($nome . ' ' . $cognome); ?></h2>
-                <p>In questa schermata puoi gestire i tuoi appuntamenti prenotati, controllare lo stato degli esami e consultare lo storico delle tue visite in totale sicurezza.</p>
-                <div class="user-meta">
-                    <p><strong>Codice Fiscale:</strong> <?php echo htmlspecialchars($_SESSION['cf']); ?></p>
-                    <p><strong>Telefono:</strong> <?php echo htmlspecialchars($telefono ?: 'Non disponibile'); ?></p>
-                    <p><strong>Email:</strong> <?php echo htmlspecialchars($email); ?></p>
-                </div>
+                <p id="section-description">In questa sezione puoi visualizzare e gestire i tuoi dati personali.</p>
+                <button id="toggle-modifica" class="btn btn--secondary btn--sm">
+                    Modifica dati
+                </button>
+                
+                
+            <?php if (!empty($messaggio)): ?>
+            <div class="alert alert--success" role="status" aria-live="polite">
+                <span class="alert__icon" aria-hidden="true">✓</span>
+                <span><?= htmlspecialchars($messaggio, ENT_QUOTES, 'UTF-8') ?></span>
             </div>
+        <?php endif; ?>
+
+        <?php if (!empty($errore_modifica)): ?>
+            <div class="alert alert--error" role="alert" aria-live="assertive">
+                <span class="alert__icon" aria-hidden="true">⚠</span>
+                <span><?= htmlspecialchars($errore_modifica, ENT_QUOTES, 'UTF-8') ?></span>
+            </div>
+        <?php endif; ?>
+
+                <div id="dati-visualizzazione" class="user-meta">
+                    <p><strong>Codice Fiscale:</strong> <?php echo htmlspecialchars($_SESSION['cf'], ENT_QUOTES, 'UTF-8'); ?></p>
+                    <p><strong>Nome:</strong> <span id="vis-nome"><?= htmlspecialchars($nome, ENT_QUOTES, 'UTF-8') ?></span></p>
+                    <p><strong>Cognome:</strong> <span id="vis-cognome"><?= htmlspecialchars($cognome, ENT_QUOTES, 'UTF-8') ?></span></p>
+                    <p><strong>Telefono:</strong> <span id="vis-telefono"><?= htmlspecialchars($telefono ?: 'Non disponibile', ENT_QUOTES, 'UTF-8') ?></span></p>
+                    <p><strong>Email:</strong> <span id="vis-email"><?= htmlspecialchars($email, ENT_QUOTES, 'UTF-8') ?></span></p>
+                </div>
+                <div id="form-modifica" style="display: none; margin-top: var(--space-24);">
+            <form method="POST" action="dashboard.php" novalidate>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="edit-nome">Nome *</label>
+                        <input type="text" id="edit-nome" name="nome" required autocomplete="given-name" class="form-input" value="<?= htmlspecialchars($nome, ENT_QUOTES, 'UTF-8') ?>" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="edit-cognome">Cognome *</label>
+                        <input type="text" id="edit-cognome" name="cognome" required autocomplete="family-name" class="form-input" value="<?= htmlspecialchars($cognome, ENT_QUOTES, 'UTF-8') ?>" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="edit-telefono">Telefono</label>
+                    <input type="tel" id="edit-telefono" name="telefono" autocomplete="tel" class="form-input" value="<?= htmlspecialchars($telefono !== 'Non disponibile' ? $telefono : '', ENT_QUOTES, 'UTF-8') ?>" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="edit-email">Email *</label>
+                    <input type="email" id="edit-email" name="email" required autocomplete="email" class="form-input" value="<?= htmlspecialchars($email, ENT_QUOTES, 'UTF-8') ?>" required />
+                </div>
+                <div style="display: flex; gap: var(--space-12); flex-wrap: wrap;">
+                    <button type="submit" name="aggiorna_dati" class="btn btn--primary">Salva modifiche</button>
+                    <button type="button" id="annulla-modifica" class="btn btn--ghost">Annulla</button>
+                </div>
+            </form>
+        </div>
+        </div>
         </section>
         <?php if (!empty($warning)): ?>
         <div class="alert alert--warning" role="alert" aria-live="polite">
@@ -265,7 +315,8 @@ function formattaDataBreve($data_ora) {
                     Per garantire la correttezza dei risultati è importante seguire
                     queste indicazioni prima di presentarsi al centro:
                 </p>
-                <ul style="
+                <ul aria-labelledby="prep-title"
+                    style="
                     list-style: disc;
                     padding-left: var(--space-24);
                     margin-top: var(--space-16);
@@ -303,5 +354,6 @@ function formattaDataBreve($data_ora) {
         </div>
     </footer>
 
+<script src="dashboard.js"></script>
 </body>
 </html>

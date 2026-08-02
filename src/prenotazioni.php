@@ -127,6 +127,7 @@ function fmt_mese(DateTime $d): string {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prenotazione - Centro Prelievi Sanitario</title>
     <meta name="description" content="Scegli data e ora per il tuo prelievo del sangue presso il Centro Prelievi.">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -325,10 +326,11 @@ function fmt_mese(DateTime $d): string {
 
                     <!-- Promemoria preparazione -->
                     <div class="card card--warning mt-24">
-                        <h3 style="font-size:var(--font-size-base);margin-bottom:var(--space-8);">
+                        <h3 id="prep-title" style="font-size:var(--font-size-base);margin-bottom:var(--space-8);">
                             ⚠ Preparazione all'esame
                         </h3>
-                        <ul style="list-style:disc;padding-left:var(--space-16);display:flex;flex-direction:column;gap:var(--space-8);">
+                        <ul aria-labelledby="prep-title"
+                            style="list-style:disc;padding-left:var(--space-16);display:flex;flex-direction:column;gap:var(--space-8);">
                             <li class="text-sm">Digiuno da almeno <strong>8 ore</strong></li>
                             <li class="text-sm">Puoi bere <strong>acqua naturale</strong></li>
                             <li class="text-sm">Porta <strong>tessera sanitaria</strong></li>

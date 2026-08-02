@@ -53,6 +53,6 @@ INSERT INTO persona (cf, nome, cognome, telefono, email, password) VALUES
 
 -- Prenotazioni di esempio
 INSERT INTO prenotazione (persona_id, data_ora, stato) VALUES
-('RSSMRA80A01H501X', '2026-07-15 09:00:00', 'prenotato'),
+('RSSMRA80A01H501X', '2026-09-15 09:00:00', 'prenotato'),
 ('RSSMRA80A01H501X', '2026-06-10 08:30:00', 'effettuato'),
 ('BNCANN85B45F205Y', '2026-05-20 11:00:00', 'cancellato');

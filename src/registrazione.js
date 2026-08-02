@@ -86,10 +86,11 @@
             form.insertAdjacentElement('afterbegin', summary);
         }
 
+        
         const n = errori.length;
         summary.innerHTML = `
             <h2><span aria-hidden="true">⚠</span> Si ${n === 1 ? 'è verificato 1 errore' : 'sono verificati ' + n + ' errori'}</h2>
-            <ul>${errori.map(e => `<li>${e.msg}</li>`).join('')}</ul>
+            <ul aria-label="Elenco degli errori">${errori.map(e => `<li>${e.msg}</li>`).join('')}</ul>
         `;
 
         errori.forEach(function ({ field, msg }) {

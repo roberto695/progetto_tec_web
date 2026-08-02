@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accedi – VitalPath</title>
     <meta name="description" content="Accedi al tuo account VitalPath per gestire i tuoi appuntamenti.">
-
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -109,11 +109,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <!-- Riepilogo errori (accessibile con aria-live) -->
             <?php if (!empty($errori)): ?>
             <div class="error-summary" role="alert" aria-live="assertive">
-                <h2>
+                <h2 id="prep-title">
                     <span aria-hidden="true">⚠</span>
                     Si sono verificati <?= count($errori) ?> errori
                 </h2>
-                <ul>
+                <ul aria-labelledby="prep-title">
                     <?php foreach ($errori as $e): ?>
                         <li><?= htmlspecialchars($e, ENT_QUOTES, 'UTF-8') ?></li>
                     <?php endforeach; ?>

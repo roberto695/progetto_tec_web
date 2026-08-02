@@ -43,6 +43,7 @@ if ($utente_loggato) {
           content="prenotazione analisi del sangue, centro prelievi, esami del sangue, referti online, prenotazione online esami">
 
     <!-- Font Google -->
+     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -168,7 +169,7 @@ if ($utente_loggato) {
         <!-- COME FUNZIONA -->
         <section aria-labelledby="come-title">
             <h2 id="come-title" class="section-title">Come funziona</h2>
-            <ol class="grid grid--3" style="list-style: none;">
+            <ol aria-labelledby="prep-title" class="grid grid--3" style="list-style: none;">
 
                 <li class="card card--accent">
                     <div aria-hidden="true" style="
@@ -251,7 +252,8 @@ if ($utente_loggato) {
                     Per garantire la correttezza dei risultati è importante seguire
                     queste indicazioni prima di presentarsi al centro:
                 </p>
-                <ul style="
+                <ul aria-labelledby="prep-title"
+                    style="
                     list-style: disc;
                     padding-left: var(--space-24);
                     margin-top: var(--space-16);
