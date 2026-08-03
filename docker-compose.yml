@@ -13,7 +13,7 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: A7l1ks18BATaaUmOqKEktvr4j7xFkaGYlXtM7EQc7rDAWH6nvG
-      MYSQL_DATABASE: prelievi_db
+      MYSQL_DATABASE: localhost
       MYSQL_USER: user_web
       MYSQL_PASSWORD: 8A2cU25SoU9zmUrewcib2FgGsY9juEyPrSnFdXBJypa6xfhOmC
     ports:

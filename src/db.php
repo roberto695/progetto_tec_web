@@ -5,7 +5,7 @@
 
 // Credenziali CORRETTE dal tuo progetto
 define('DB_HOST', 'database');
-define('DB_NAME', 'prelievi_db');      // ← CORRETTO: 'prelievi_db'
+define('DB_NAME', 'localhost');
 define('DB_USER', 'user_web');
 define('DB_PASS', '8A2cU25SoU9zmUrewcib2FgGsY9juEyPrSnFdXBJypa6xfhOmC');  // ← CORRETTO
 define('DB_CHARSET', 'utf8mb4');

@@ -1,8 +1,8 @@
---DROP DATABASE IF EXISTS prelievi_db;
---CREATE DATABASE IF NOT EXISTS prelievi_db
+--DROP DATABASE IF EXISTS localhost;
+--CREATE DATABASE IF NOT EXISTS localhost
 --     CHARACTER SET utf8mb4
 --     COLLATE utf8mb4_unicode_ci;
-USE prelievi_db;
+USE localhost;
 
 -- ============================================================
 -- TABELLA: persona

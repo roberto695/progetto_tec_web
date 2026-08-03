@@ -1,1 +1,1 @@
-GRANT ALL PRIVILEGES ON prelievi_db.* TO 'user_web'@'%';
+GRANT ALL PRIVILEGES ON localhost.* TO 'user_web'@'%';
