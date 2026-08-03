@@ -1,6 +1,6 @@
 <?php
 // ============================================================
-// admin.php – Dashboard amministratore
+// admin_dashboard.php – Dashboard amministratore
 // ============================================================
 session_start();
 
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['annulla_id'])) {
         $stmt = $pdo->prepare(
             "UPDATE prenotazione
              SET stato = 'cancellato'
-             WHERE id = ? AND stato IN ('prenotato',)"
+             WHERE id = ? AND stato IN ('prenotato')"
         );
         $stmt->execute([$annulla_id]);
         if ($stmt->rowCount() > 0) {
@@ -126,7 +126,7 @@ function statoClasse($stato) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Admin – Centro Prelievi</title>
-    <meta name="description" content="Pannello di controllo amministratore Centro Prelievi.">
+    <meta name="robots" content="noindex, nofollow">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -160,7 +160,7 @@ function statoClasse($stato) {
             <h1 class="hero__title">Dashboard Amministratore</h1>
             <p class="text-muted mt-8">Gestione appuntamenti - Centro Prelievi</p>
         </div>
-        <span class="badge badge--info" style="font-size:var(--font-size-sm);padding:var(--space-8) var(--space-16);">
+        <span class="badge badge--info badge-admin">
             <span lang="en">Admin</span>: <?= htmlspecialchars($nome_admin, ENT_QUOTES, 'UTF-8') ?>
         </span>
     </div>
@@ -186,28 +186,28 @@ function statoClasse($stato) {
         <div class="grid grid--4 mb-32">
 
             <div class="card text-center">
-                <div style="font-size:2rem;font-weight:800;color:var(--color-primary);">
+                <div class="stat-number">
                     <?= (int)$stats['totale'] ?>
                 </div>
                 <div class="text-sm text-muted mt-8">Totale prenotazioni</div>
             </div>
 
             <div class="card text-center">
-                <div style="font-size:2rem;font-weight:800;color:var(--status-booked-text);">
+                <div class="stat-number">
                     <?= (int)$stats['attive'] ?>
                 </div>
                 <div class="text-sm text-muted mt-8">Attive</div>
             </div>
 
             <div class="card text-center">
-                <div style="font-size:2rem;font-weight:800;color:var(--status-confirmed-text);">
+                <div class="stat-number">
                     <?= (int)$stats['effettuate'] ?>
                 </div>
                 <div class="text-sm text-muted mt-8">Effettuate</div>
             </div>
 
             <div class="card text-center">
-                <div style="font-size:2rem;font-weight:800;color:var(--status-cancelled-text);">
+                <div class="stat-number">
                     <?= (int)$stats['cancellate'] ?>
                 </div>
                 <div class="text-sm text-muted mt-8">Cancellate</div>
@@ -291,7 +291,7 @@ function statoClasse($stato) {
                         <td data-label="ID"><?= (int)$p['id'] ?></td>
 
                         <td data-label="Paziente">
-                            <div style="font-weight:700;">
+                            <div class="font-bold">
                                 <?= htmlspecialchars($p['nome'] . ' ' . $p['cognome'], ENT_QUOTES, 'UTF-8') ?>
                             </div>
                             <?php if ($p['email']): ?>
@@ -302,13 +302,12 @@ function statoClasse($stato) {
                         </td>
 
                         <td data-label="Codice Fiscale">
-                            <code style="font-size:var(--font-size-sm);background:#f1f5f9;
-                                         padding:2px 6px;border-radius:4px;">
+                            <code class="code-cf">
                                 <?= htmlspecialchars($p['cf'], ENT_QUOTES, 'UTF-8') ?>
                             </code>
                         </td>
 
-                        <td data-label="Data e ora" style="white-space:nowrap;">
+                        <td data-label="Data e ora" class="table-cell-nowrap">
                             <?= htmlspecialchars(fmt_data_admin($p['data_ora']), ENT_QUOTES, 'UTF-8') ?>
                         </td>
 
@@ -358,7 +357,7 @@ function statoClasse($stato) {
                 <strong>VitalPath</strong> – Centro Prelievi del Sangue
                 Via Roma 12 – Padova &bull; Tel. 049 000 0000 &bull;
                 <a href="mailto:info@vitalpath.it"
-                   style="color: #93c5fd;">info@vitalpath.it</a>
+                   class="link-mail">info@vitalpath.it</a>
             </p>
             <p>
                 &copy; 2026 VitalPath &bull; Corso di Tecnologie Web &bull;

@@ -51,7 +51,7 @@
                 if (!emptyMsg) {
                     emptyMsg = document.createElement('tr');
                     emptyMsg.id = 'no-results-live';
-                    emptyMsg.innerHTML = '<td colspan="7" class="text-center text-muted" style="padding:var(--space-32);">Nessun risultato per "' + escapeHtml(query) + '"</td>';
+                    emptyMsg.innerHTML = '<td colspan="7" class="text-center text-muted" class="result">Nessun risultato per "' + escapeHtml(query) + '"</td>';
                     tbody.appendChild(emptyMsg);
                 } else {
                     emptyMsg.querySelector('td').textContent = 'Nessun risultato per "' + query + '"';

@@ -16,8 +16,8 @@
 
         function mostraForm(mostra) {
             if (mostra) {
-                formModifica.style.display = 'block';
-                datiVis.style.display = 'none';
+                formModifica.classList.add('is-visible');
+                datiVis.classList.add('is-hidden');
                 toggleBtn.textContent = 'Nascondi modifica';
                 toggleBtn.setAttribute('aria-expanded', 'true');
                 // Focus sul primo campo del form
@@ -28,8 +28,8 @@
                     }, 100);
                 }
             } else {
-                formModifica.style.display = 'none';
-                datiVis.style.display = 'block';
+                formModifica.classList.remove('is-visible');
+                datiVis.classList.remove('is-hidden');
                 toggleBtn.textContent = 'Modifica dati';
                 toggleBtn.setAttribute('aria-expanded', 'false');
                 // Riporta il focus al pulsante
@@ -39,7 +39,7 @@
 
         // Mostra/Nascondi al click del pulsante
         toggleBtn.addEventListener('click', function () {
-            const visibile = formModifica.style.display === 'block';
+            const visibile = formModifica.classList.contains('is-visible');
             mostraForm(!visibile);
         });
 
@@ -58,7 +58,7 @@
 
         // Accessibilità: premere ESC chiude il form
         document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape' && formModifica.style.display === 'block') {
+            if (e.key === 'Escape' && formModifica.classList.contains('is-visible')) {
                 mostraForm(false);
             }
         });

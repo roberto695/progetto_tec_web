@@ -66,6 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accedi – VitalPath</title>
     <meta name="description" content="Accedi al tuo account VitalPath per gestire i tuoi appuntamenti.">
+    <meta name="keywords" content="Accedi, VitalPath, centro prelievi Padova, login, Padova">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -97,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="auth-card">
 
             <!-- Logo centrato -->
-            <div class="auth-card__logo" aria-hidden="true">
+            <div class="auth-card__logo">
                 <?php $logo_class = 'logo-no-link'; include 'logo.php'; ?>
             </div>
 
@@ -219,7 +220,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <strong>VitalPath</strong> – Centro Prelievi del Sangue
                 Via Roma 12 – Padova &bull; Tel. 049 000 0000 &bull;
                 <a href="mailto:info@vitalpath.it"
-                   style="color: #93c5fd;">info@vitalpath.it</a>
+                   class="link-mail">info@vitalpath.it</a>
             </p>
             <p>
                 &copy; 2026 VitalPath &bull; Corso di Tecnologie Web &bull;

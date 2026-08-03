@@ -104,6 +104,7 @@ function formattaDataBreve($data_ora) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Area Personale - Centro Prelievi Sanitario</title>
     <meta name="description" content="Gestisci i tuoi appuntamenti e visualizza lo storico delle prenotazioni.">
+    <meta name="keywords" content="area personale, gestisci dati personali, appuntamenti, prenotazioni, centro prelievi Padova, VitalPath">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -136,7 +137,7 @@ function formattaDataBreve($data_ora) {
         <!-- Ciao -->
         <section class="user-welcome-section" aria-labelledby="welcome-title">
             <div class="card welcome-card">
-                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-16); margin-bottom: var(--space-16);">
+                <div class="welcome-header">
                 <h2 id="welcome-title">Ciao, <?php echo htmlspecialchars($nome . ' ' . $cognome); ?></h2>
                 <p id="section-description">In questa sezione puoi visualizzare e gestire i tuoi dati personali.</p>
                 <button id="toggle-modifica" class="btn btn--secondary btn--sm">
@@ -165,7 +166,7 @@ function formattaDataBreve($data_ora) {
                     <p><strong>Telefono:</strong> <span id="vis-telefono"><?= htmlspecialchars($telefono ?: 'Non disponibile', ENT_QUOTES, 'UTF-8') ?></span></p>
                     <p><strong>Email:</strong> <span id="vis-email"><?= htmlspecialchars($email, ENT_QUOTES, 'UTF-8') ?></span></p>
                 </div>
-                <div id="form-modifica" style="display: none; margin-top: var(--space-24);">
+                <div id="form-modifica" class="form-modifica">
             <form method="POST" action="dashboard.php" novalidate>
                 <div class="form-row">
                     <div class="form-group">
@@ -185,7 +186,7 @@ function formattaDataBreve($data_ora) {
                     <label class="form-label" for="edit-email">Email *</label>
                     <input type="email" id="edit-email" name="email" required autocomplete="email" class="form-input" value="<?= htmlspecialchars($email, ENT_QUOTES, 'UTF-8') ?>" required />
                 </div>
-                <div style="display: flex; gap: var(--space-12); flex-wrap: wrap;">
+                <div class="form-actions">
                     <button type="submit" name="aggiorna_dati" class="btn btn--primary">Salva modifiche</button>
                     <button type="button" id="annulla-modifica" class="btn btn--ghost">Annulla</button>
                 </div>
@@ -198,7 +199,7 @@ function formattaDataBreve($data_ora) {
             <span class="alert__icon" aria-hidden="true">⚠</span>
             <div>
                 <strong><?php echo htmlspecialchars($warning); ?></strong>
-                <p style="margin-top: 8px; font-weight: 400;">
+                <p class="warning-text">
                     Puoi visualizzare la tua prenotazione qui sotto o annullarla se necessario.
                 </p>
             </div>
@@ -233,7 +234,7 @@ function formattaDataBreve($data_ora) {
                         </span>
                     </div>
 
-                    <div class="card card--warning mt-16" style="padding:var(--space-16);">
+                    <div class="card card--warning mt-16" class="card-warning-sm">
                         <p class="text-sm mb-0">
                             <strong>⚠ Ricorda:</strong> Porta con te la tessera sanitaria.
                         </p>
@@ -251,7 +252,7 @@ function formattaDataBreve($data_ora) {
             <?php else: ?>
                 <div class="empty-state card">
                     <span class="empty-state__icon" aria-hidden="true">📅</span>
-                    <p class="empty-state__title">Nessun appuntamento attivo</p>
+                    <h3 class="empty-state__title">Nessun appuntamento attivo</h3>
                     <p class="empty-state__text">
                         Non hai prenotazioni in corso. Prenota subito il tuo prossimo esame.
                     </p>
@@ -269,7 +270,7 @@ function formattaDataBreve($data_ora) {
             <?php if (empty($prenotazioni_storico)): ?>
                 <div class="empty-state card">
                     <span class="empty-state__icon" aria-hidden="true">🗂</span>
-                    <p class="empty-state__title">Nessuno storico disponibile</p>
+                    <h3 class="empty-state__title">Nessuno storico disponibile</h3>
                     <p class="empty-state__text">Qui appariranno i tuoi appuntamenti passati.</p>
                 </div>
             <?php else: ?>
@@ -316,14 +317,7 @@ function formattaDataBreve($data_ora) {
                     queste indicazioni prima di presentarsi al centro:
                 </p>
                 <ul aria-labelledby="prep-title"
-                    style="
-                    list-style: disc;
-                    padding-left: var(--space-24);
-                    margin-top: var(--space-16);
-                    display: flex;
-                    flex-direction: column;
-                    gap: var(--space-8);
-                ">
+                    class="prep-list">
                     <li>Digiunare per almeno <strong>8 ore</strong> prima del prelievo.</li>
                     <li>È consentito bere <strong>acqua naturale</strong>.</li>
                     <li>Evitare attività fisica intensa nelle 24 ore precedenti.</li>
@@ -341,7 +335,7 @@ function formattaDataBreve($data_ora) {
                 <strong>VitalPath</strong> – Centro Prelievi del Sangue
                 Via Roma 12 – Padova &bull; Tel. 049 000 0000 &bull;
                 <a href="mailto:info@vitalpath.it"
-                   style="color: #93c5fd;">info@vitalpath.it</a>
+                   class="link-mail">info@vitalpath.it</a>
             </p>
             <p>
                 &copy; 2026 VitalPath &bull; Corso di Tecnologie Web &bull;

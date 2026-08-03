@@ -127,6 +127,7 @@ function fmt_mese(DateTime $d): string {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prenotazione - Centro Prelievi Sanitario</title>
     <meta name="description" content="Scegli data e ora per il tuo prelievo del sangue presso il Centro Prelievi.">
+    <meta name="keywords" content="prenota esame del sangue, centro prelievi Padova, VitalPath">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -158,12 +159,12 @@ function fmt_mese(DateTime $d): string {
         <!-- CONFERMA SUCCESSO -->
         <?php if ($success): ?>
         <section aria-labelledby="conferma-title">
-            <div class="card card--success" style="max-width:640px;margin:0 auto;text-align:center;padding:var(--space-48);">
-                <div style="font-size:3rem;margin-bottom:var(--space-16);" aria-hidden="true">✅</div>
-                <h2 id="conferma-title" style="color:var(--color-success);margin-bottom:var(--space-16);">
+            <div class="card card--success card--success-centered">
+                <div class="icon-large" aria-hidden="true">✅</div>
+                <h2 id="conferma-title" class="confirmation-title">
                     Prenotazione confermata!
                 </h2>
-                <p style="font-size:var(--font-size-lg);margin-bottom:var(--space-8);">
+                <p class="confirmation-detail">
                     Il tuo appuntamento è fissato per: 
                     <strong><?= htmlspecialchars(
                         (new DateTime($booking['data_ora']))->format('d/m/Y') . ' alle ' .
@@ -172,7 +173,7 @@ function fmt_mese(DateTime $d): string {
                     ) ?></strong>
                 </p>
 
-                <div class="card card--warning mt-24" style="text-align:left;">
+                <div class="card card--warning mt-24 card--warning-inner">
                     <p class="mb-0 text-sm">
                         <strong>⚠ Ricorda:</strong> presentati a digiuno da almeno 8 ore.
                         È consentito bere acqua. Porta con te documento d'identità e tessera sanitaria.
@@ -206,10 +207,10 @@ function fmt_mese(DateTime $d): string {
 
                     <!-- SELEZIONE GIORNO -->
                     <div class="card mb-24">
-                        <h2 style="font-size:var(--font-size-lg);margin-bottom:var(--space-16);">
+                        <h2 class="booking-title">
                             1. Scegli il giorno
                         </h2>
-                        <fieldset style="border:none;margin:0;padding:0;">
+                        <fieldset class="booking-fieldset">
                             <legend class="sr-only">Seleziona il giorno del prelievo</legend>
                             <div class="booking-grid" id="griglia-giorni">
                                 <?php foreach ($giorni_disp as $i => $giorno):
@@ -236,10 +237,10 @@ function fmt_mese(DateTime $d): string {
 
                     <!-- SELEZIONE ORARIO -->
                     <div class="card mb-24">
-                        <h2 style="font-size:var(--font-size-lg);margin-bottom:var(--space-16);">
+                        <h2 class="booking-title">
                             2. Scegli l'orario
                         </h2>
-                        <fieldset style="border:none;margin:0;padding:0;">
+                        <fieldset class="booking-fieldset">
                             <legend class="sr-only">Seleziona l'orario del prelievo</legend>
                             <?php
                             // Costruisce mappa JSON degli slot occupati per tutti i giorni
@@ -287,14 +288,14 @@ function fmt_mese(DateTime $d): string {
                 <!-- COLONNA DESTRA: riepilogo + conferma -->
                 <aside class="booking-sidebar" aria-label="Riepilogo prenotazione">
                     <div class="card card--accent">
-                        <h2 style="font-size:var(--font-size-lg);margin-bottom:var(--space-24);">
+                        <h2 class="summary-title">
                             Riepilogo
                         </h2>
 
                         <dl class="summary-list">
                             <div class="summary-item">
                                 <dt class="summary-label">Paziente</dt>
-                                <dd class="summary-value" style="font-size:var(--font-size-base);color:var(--color-text);">
+                                <dd class="summary-value summary-value-text">
                                     <?= htmlspecialchars($nome . ' ' . $cognome, ENT_QUOTES, 'UTF-8') ?>
                                 </dd>
                             </div>
@@ -310,7 +311,7 @@ function fmt_mese(DateTime $d): string {
                             </div>
                             <div class="summary-item">
                                 <dt class="summary-label">Luogo</dt>
-                                <dd style="font-size:var(--font-size-base);color:var(--color-text-secondary);">
+                                <dd class="summary-location">
                                     Centro Prelievi - Via Roma 12, Padova
                                 </dd>
                             </div>
@@ -326,11 +327,11 @@ function fmt_mese(DateTime $d): string {
 
                     <!-- Promemoria preparazione -->
                     <div class="card card--warning mt-24">
-                        <h3 id="prep-title" style="font-size:var(--font-size-base);margin-bottom:var(--space-8);">
+                        <h3 id="prep-title" class="prep-header">
                             ⚠ Preparazione all'esame
                         </h3>
                         <ul aria-labelledby="prep-title"
-                            style="list-style:disc;padding-left:var(--space-16);display:flex;flex-direction:column;gap:var(--space-8);">
+                            class="prep-list-sidebar">
                             <li class="text-sm">Digiuno da almeno <strong>8 ore</strong></li>
                             <li class="text-sm">Puoi bere <strong>acqua naturale</strong></li>
                             <li class="text-sm">Porta <strong>tessera sanitaria</strong></li>
@@ -352,7 +353,7 @@ function fmt_mese(DateTime $d): string {
                 <strong>VitalPath</strong> – Centro Prelievi del Sangue
                 Via Roma 12 – Padova &bull; Tel. 049 000 0000 &bull;
                 <a href="mailto:info@vitalpath.it"
-                   style="color: #93c5fd;">info@vitalpath.it</a>
+                   class="link-mail">info@vitalpath.it</a>
             </p>
             <p>
                 &copy; 2026 VitalPath &bull; Corso di Tecnologie Web &bull;

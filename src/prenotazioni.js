@@ -31,6 +31,8 @@
 
     // Aggiorna il riepilogo quando si sceglie un giorno
     document.querySelectorAll('.day-label').forEach(function (label) {
+        const radio = document.getElementById(label.getAttribute('for'));
+        if (!radio) return;
         // Rendi focusabile
         label.setAttribute('tabindex', '0');
         
@@ -69,12 +71,16 @@
 
     // ✅ AGGIUNTA: Gestione navigazione tastiera per orari
     document.querySelectorAll('.time-option label').forEach(function (label) {
+        const radio = document.getElementById(label.getAttribute('for'));
+        if (!radio) return;
+
         // Rendi focusabile
         label.setAttribute('tabindex', '0');
         
         // Aggiungi role per accessibilità
         label.setAttribute('role', 'radio');
-        
+        label.setAttribute('aria-checked', radio.checked ? 'true' : 'false');
+
         label.addEventListener('keydown', function (e) {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();

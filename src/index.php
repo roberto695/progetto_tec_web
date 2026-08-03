@@ -40,7 +40,7 @@ if ($utente_loggato) {
     <meta name="description"
           content="Prenota il tuo esame del sangue online con VitalPath. Servizio rapido, accessibile e professionale. Referti digitali, gestione appuntamenti semplice.">
     <meta name="keywords"
-          content="prenotazione analisi del sangue, centro prelievi, esami del sangue, referti online, prenotazione online esami">
+          content="prenotazione analisi del sangue, centro prelievi Padova, esami del sangue, referti online, prenotazione online esami, prenotazione analisi Padova, VitalPath">
 
     <!-- Font Google -->
      <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -169,15 +169,11 @@ if ($utente_loggato) {
         <!-- COME FUNZIONA -->
         <section aria-labelledby="come-title">
             <h2 id="come-title" class="section-title">Come funziona</h2>
-            <ol aria-labelledby="prep-title" class="grid grid--3" style="list-style: none;">
+            <ol aria-labelledby="prep-title" class="grid grid--3 step-list">
 
                 <li class="card card--accent">
-                    <div aria-hidden="true" style="
-                        font-size: 2rem;
-                        font-weight: 800;
-                        color: var(--color-primary);
-                        margin-bottom: var(--space-12);
-                    ">01</div>
+                    <div aria-hidden="true" class="step-number">
+                    01</div>
                     <h3>Registrati</h3>
                     <p>
                         Crea il tuo <span lang="en">account</span> con nome, cognome, Codice Fiscale ed email.
@@ -186,12 +182,8 @@ if ($utente_loggato) {
                 </li>
 
                 <li class="card card--accent">
-                    <div aria-hidden="true" style="
-                        font-size: 2rem;
-                        font-weight: 800;
-                        color: var(--color-primary);
-                        margin-bottom: var(--space-12);
-                    ">02</div>
+                    <div aria-hidden="true" class="step-number">
+                    02</div>
                     <h3>Scegli data e ora</h3>
                     <p>
                         Seleziona il giorno e l'orario più comodo tra gli <span lang="en">slot</span> disponibili,
@@ -200,12 +192,8 @@ if ($utente_loggato) {
                 </li>
 
                 <li class="card card--accent">
-                    <div aria-hidden="true" style="
-                        font-size: 2rem;
-                        font-weight: 800;
-                        color: var(--color-primary);
-                        margin-bottom: var(--space-12);
-                    ">03</div>
+                    <div aria-hidden="true" class="step-number">
+                    03</div>
                     <h3>Presentati al centro</h3>
                     <p>
                         Vieni a digiuno (minimo 8 ore), puoi bere acqua. Ti aspettiamo in Via Roma 12 Padova.
@@ -253,14 +241,7 @@ if ($utente_loggato) {
                     queste indicazioni prima di presentarsi al centro:
                 </p>
                 <ul aria-labelledby="prep-title"
-                    style="
-                    list-style: disc;
-                    padding-left: var(--space-24);
-                    margin-top: var(--space-16);
-                    display: flex;
-                    flex-direction: column;
-                    gap: var(--space-8);
-                ">
+                    class="prep-list">
                     <li>Digiunare per almeno <strong>8 ore</strong> prima del prelievo.</li>
                     <li>È consentito bere <strong>acqua naturale</strong>.</li>
                     <li>Evitare attività fisica intensa nelle 24 ore precedenti.</li>
@@ -281,7 +262,7 @@ if ($utente_loggato) {
                 <strong>VitalPath</strong> – Centro Prelievi del Sangue
                 Via Roma 12 – Padova &bull; Tel. 049 000 0000 &bull;
                 <a href="mailto:info@vitalpath.it"
-                   style="color: #93c5fd;">info@vitalpath.it</a>
+                   class="link-mail">info@vitalpath.it</a>
             </p>
             <p>
                 &copy; 2026 VitalPath &bull; Corso di Tecnologie Web &bull;

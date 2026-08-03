@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrazione – VitalPath</title>
     <meta name="description" content="Crea il tuo account VitalPath per prenotare esami del sangue online.">
+    <meta name="keywords" content="account, registrati, prenota esami, centro prelievi Padova, prenota online, VitalPath">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,9 +32,9 @@
 
 <main id="main-content" tabindex="-1">
     <div class="auth-page">
-        <div class="auth-card" style="max-width:560px;">
+        <div class="auth-card auth-card--large">
 
-            <div class="auth-card__logo" aria-hidden="true">
+            <div class="auth-card__logo">
                 <?php $logo_class = 'logo-no-link'; include 'logo.php'; ?>
             </div>
 
@@ -80,7 +81,7 @@
                 <div class="form-group">
                     <label class="form-label" for="telefono">
                         Numero di telefono
-                        <span class="text-muted text-sm" style="font-weight:400;">(facoltativo)</span>
+                        <span class="text-muted text-sm optional-text">(facoltativo)</span>
                     </label>
                     <input type="tel" id="telefono" name="telefono"
                            class="form-input" value=""
@@ -131,7 +132,7 @@
             <strong>VitalPath</strong> – Centro Prelievi del Sangue
             Via Roma 12 – Padova &bull; Tel. 049 000 0000 &bull;
             <a href="mailto:info@vitalpath.it"
-               style="color: #93c5fd;">info@vitalpath.it</a>
+               class="link-mail">info@vitalpath.it</a>
         </p>
         <p>
             &copy; 2026 VitalPath &bull; Corso di Tecnologie Web &bull;

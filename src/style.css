@@ -405,6 +405,44 @@ section:last-child {
     background-color: var(--color-success-bg);
 }
 
+.card--success-centered {
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+    padding: var(--space-48);
+}
+
+.icon-large {
+    font-size: 3rem;
+    margin-bottom: var(--space-16);
+}
+
+.confirmation-title {
+    color: var(--color-success);
+    margin-bottom: var(--space-16);
+}
+
+.confirmation-detail {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--space-8);
+}
+
+.card--warning-inner {
+    text-align: left;
+}
+
+.auth-card--large {
+    max-width: 35rem;
+}
+
+.welcome-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-16);
+    margin-bottom: var(--space-16);
+}
 
 /* ============================================================
    10. BOTTONI
@@ -618,6 +656,29 @@ resize:     vertical;
     accent-color: var(--color-primary);
 }
 
+.form-modifica {
+    display: none;
+    margin-top: var(--space-24);
+}
+
+.form-modifica.is-visible {
+    display: block;
+}
+
+.form-actions {
+    display: flex;
+    gap: var(--space-12);
+    flex-wrap: wrap;
+}
+
+.dati-visualizzazione {
+    display: block;  /* Default: visibile */
+}
+
+.dati-visualizzazione.is-hidden {
+    display: none;
+}
+
 /* Riepilogo errori (in cima al form) */
 .error-summary {
     background-color: var(--color-error-bg);
@@ -765,6 +826,28 @@ resize:     vertical;
 .status-badge::before {
     content:     "●";
     font-size:   var(--font-size-sm);
+}
+
+.badge-admin {
+    font-size: var(--font-size-sm);
+    padding: var(--space-8) var(--space-16);
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--color-primary);
+}
+
+.code-cf {
+    font-size: var(--font-size-sm);
+    background: #f1f5f9;
+    padding: 2px 6px;
+    border-radius: var(--border-radius-sm);
+}
+
+.table-cell-nowrap {
+    white-space: nowrap;
 }
 
 .status--prenotato {
@@ -929,6 +1012,16 @@ resize:     vertical;
     gap:                   var(--space-12);
 }
 
+.booking-title {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--space-16);
+}
+
+.booking-fieldset {
+    border: none;
+    margin: 0;
+    padding: 0;
+}
 /* Card radio giorno */
 .day-option,
 .time-option {
@@ -1054,6 +1147,53 @@ resize:     vertical;
     color:       var(--color-primary);
 }
 
+.summary-title {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--space-24);
+}
+
+.summary-value-text {
+    font-size: var(--font-size-base);
+    color: var(--color-text);
+}
+
+.summary-location {
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+}
+
+.prep-heading {
+    font-size: var(--font-size-base);
+    margin-bottom: var(--space-8);
+}
+
+.prep-list {
+    list-style: disc;
+    padding-left: var(--space-24);
+    margin-top: var(--space-16);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+}
+
+.prep-list-sidebar {
+    list-style: disc;
+    padding-left: var(--space-16);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+}
+
+.step-list {
+    list-style: none;
+}
+
+.step-number {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    margin-bottom: var(--space-12);
+}
 
 /* ============================================================
    18. LOGIN / REGISTRAZIONE – Pagine centrate
@@ -1169,6 +1309,18 @@ resize:     vertical;
     border:           0.0625rem solid #93c5fd;
 }
 
+.card-warning-sm {
+    padding: var(--space-16);
+}
+
+.warning-text {
+    margin-top: var(--space-8);
+    font-weight: 400;
+}
+
+.optional-text {
+    font-weight: 400;
+}
 
 /* ============================================================
    20. UTILITY
@@ -1220,6 +1372,13 @@ resize:     vertical;
     color: #9B59B6;  /* Viola chiaro */
     text-decoration: underline;
 }
+.link-mail{
+    color: #93c5fd;
+}
+.result {
+        padding: var(--space-32);
+    }
+
 /* ============================================================
    22. MEDIA QUERIES (tablet e desktop)
    ============================================================ */
