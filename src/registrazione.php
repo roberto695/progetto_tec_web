@@ -67,7 +67,7 @@
                            value="" autocomplete="off" maxlength="16"
                            required
                            aria-describedby="cf-hint">
-                    <span class="form-hint" id="cf-hint">16 caratteri alfanumerici - es. RSSMRA80A01H501X</span>
+                    <span class="form-hint" id="cf-hint">16 caratteri alfanumerici - es. BNCMRA80A01H501X</span>
                 </div>
 
                 <div class="form-group">
@@ -86,7 +86,7 @@
                     <input type="tel" id="telefono" name="telefono"
                            class="form-input" value=""
                            autocomplete="tel" maxlength="20" aria-describedby="telefono-hint">
-                    <span class="form-hint" id="telefono-hint">es. 3331234567</span>
+                    <span class="form-hint" id="telefono-hint">es. 3333333333</span>
                 </div>
 
                 <div class="form-group">

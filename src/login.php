@@ -149,7 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         aria-describedby="<?= isset($errori['cf']) ? 'cf-error' : 'cf-hint' ?>"
                     >
                     <span class="form-hint" id="cf-hint">
-                        16 caratteri alfanumerici - es. RSSMRA80A01H501X
+                        16 caratteri alfanumerici - es. BNCMRA80A01H501X
                     </span>
     
                     <?php if (isset($errori['cf'])): ?>
