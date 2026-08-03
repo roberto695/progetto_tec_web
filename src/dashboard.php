@@ -105,7 +105,7 @@ function formattaDataBreve($data_ora) {
     <title>Area Personale - Centro Prelievi Sanitario</title>
     <meta name="description" content="Gestisci i tuoi appuntamenti e visualizza lo storico delle prenotazioni.">
     <meta name="keywords" content="area personale, gestisci dati personali, appuntamenti, prenotazioni, centro prelievi Padova, VitalPath">
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -143,7 +143,7 @@ function formattaDataBreve($data_ora) {
                 <button id="toggle-modifica" class="btn btn--secondary btn--sm">
                     Modifica dati
                 </button>
-                
+            </div>
                 
             <?php if (!empty($messaggio)): ?>
             <div class="alert alert--success" role="status" aria-live="polite">
@@ -171,20 +171,20 @@ function formattaDataBreve($data_ora) {
                 <div class="form-row">
                     <div class="form-group">
                         <label class="form-label" for="edit-nome">Nome *</label>
-                        <input type="text" id="edit-nome" name="nome" required autocomplete="given-name" class="form-input" value="<?= htmlspecialchars($nome, ENT_QUOTES, 'UTF-8') ?>" required />
+                        <input type="text" id="edit-nome" name="nome" required autocomplete="given-name" class="form-input" value="<?= htmlspecialchars($nome, ENT_QUOTES, 'UTF-8') ?>">
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="edit-cognome">Cognome *</label>
-                        <input type="text" id="edit-cognome" name="cognome" required autocomplete="family-name" class="form-input" value="<?= htmlspecialchars($cognome, ENT_QUOTES, 'UTF-8') ?>" required />
+                        <input type="text" id="edit-cognome" name="cognome" required autocomplete="family-name" class="form-input" value="<?= htmlspecialchars($cognome, ENT_QUOTES, 'UTF-8') ?>">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="edit-telefono">Telefono</label>
-                    <input type="tel" id="edit-telefono" name="telefono" autocomplete="tel" class="form-input" value="<?= htmlspecialchars($telefono !== 'Non disponibile' ? $telefono : '', ENT_QUOTES, 'UTF-8') ?>" />
+                    <input type="tel" id="edit-telefono" name="telefono" autocomplete="tel" class="form-input" value="<?= htmlspecialchars($telefono !== 'Non disponibile' ? $telefono : '', ENT_QUOTES, 'UTF-8') ?>">
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="edit-email">Email *</label>
-                    <input type="email" id="edit-email" name="email" required autocomplete="email" class="form-input" value="<?= htmlspecialchars($email, ENT_QUOTES, 'UTF-8') ?>" required />
+                    <input type="email" id="edit-email" name="email" required autocomplete="email" class="form-input" value="<?= htmlspecialchars($email, ENT_QUOTES, 'UTF-8') ?>">
                 </div>
                 <div class="form-actions">
                     <button type="submit" name="aggiorna_dati" class="btn btn--primary">Salva modifiche</button>
@@ -234,14 +234,14 @@ function formattaDataBreve($data_ora) {
                         </span>
                     </div>
 
-                    <div class="card card--warning mt-16" class="card-warning-sm">
+                    <div class="card card--warning mt-16 card-warning-sm">
                         <p class="text-sm mb-0">
                             <strong>⚠ Ricorda:</strong> Porta con te la tessera sanitaria.
                         </p>
                     </div>
 
                     <div class="appointment-card__actions">
-                        <a href="annulla-prenotazione.php?id=<?= $attivo['id'] ?>" 
+                        <a href="cancella_prenotazione.php?id=<?= urlencode($attivo['id']) ?>" 
                            class="btn btn--danger btn--sm"
                            onclick="return confirm('Sei sicuro di voler cancellare questo appuntamento?');">
                             Cancella appuntamento

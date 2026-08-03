@@ -128,7 +128,7 @@ function fmt_mese(DateTime $d): string {
     <title>Prenotazione - Centro Prelievi Sanitario</title>
     <meta name="description" content="Scegli data e ora per il tuo prelievo del sangue presso il Centro Prelievi.">
     <meta name="keywords" content="prenota esame del sangue, centro prelievi Padova, VitalPath">
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">

@@ -43,7 +43,7 @@ if ($utente_loggato) {
           content="prenotazione analisi del sangue, centro prelievi Padova, esami del sangue, referti online, prenotazione online esami, prenotazione analisi Padova, VitalPath">
 
     <!-- Font Google -->
-     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">

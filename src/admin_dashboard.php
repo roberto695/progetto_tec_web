@@ -127,7 +127,7 @@ function statoClasse($stato) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Admin – Centro Prelievi</title>
     <meta name="robots" content="noindex, nofollow">
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -193,21 +193,21 @@ function statoClasse($stato) {
             </div>
 
             <div class="card text-center">
-                <div class="stat-number">
+                <div class="stat-number-b">
                     <?= (int)$stats['attive'] ?>
                 </div>
                 <div class="text-sm text-muted mt-8">Attive</div>
             </div>
 
             <div class="card text-center">
-                <div class="stat-number">
+                <div class="stat-number-v">
                     <?= (int)$stats['effettuate'] ?>
                 </div>
                 <div class="text-sm text-muted mt-8">Effettuate</div>
             </div>
 
             <div class="card text-center">
-                <div class="stat-number">
+                <div class="stat-number-r">
                     <?= (int)$stats['cancellate'] ?>
                 </div>
                 <div class="text-sm text-muted mt-8">Cancellate</div>

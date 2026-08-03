@@ -836,7 +836,25 @@ resize:     vertical;
 .stat-number {
     font-size: 2rem;
     font-weight: 800;
+    color: var(--color-text);
+}
+
+.stat-number-b {
+    font-size: 2rem;
+    font-weight: 800;
     color: var(--color-primary);
+}
+
+.stat-number-v {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--color-success);
+}
+
+.stat-number-r {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--color-error);
 }
 
 .code-cf {
