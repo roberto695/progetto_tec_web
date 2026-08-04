@@ -1,6 +1,6 @@
 <?php
 // ============================================================
-// pages/logout.php – Distrugge la sessione e reindirizza
+// logout.php – Distrugge la sessione e reindirizza
 // ============================================================
 session_start();
 session_unset();

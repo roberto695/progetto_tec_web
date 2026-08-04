@@ -1,11 +1,11 @@
 // ============================================================
-// js/registrazione.js – Validazione client-side registrazione
+// registrazione.js – Validazione client-side registrazione
 // ============================================================
 
 (function () {
     'use strict';
 
-    // --- Toggle password ---
+    // Toggle password
     const toggleBtn     = document.getElementById('toggle-password');
     const passwordInput = document.getElementById('password');
 
@@ -19,7 +19,7 @@
         });
     }
 
-    // --- Validazione al submit ---
+    // Validazione al submit
     const form = document.getElementById('form-registrazione');
     if (!form) return;
 
@@ -95,7 +95,6 @@
 
         errori.forEach(function ({ field, msg }) {
             if (field.type === 'checkbox') {
-                // Errore privacy sotto al label
                 const label = field.closest('label') || field.parentElement;
                 let errEl = document.getElementById('privacy-error-js');
                 if (!errEl) {
@@ -120,7 +119,6 @@
                 errEl.id = errorId;
                 errEl.className = 'form-error';
                 errEl.setAttribute('role', 'alert');
-                // Inserisci dopo il wrapper password o dopo l'input
                 const parent = field.closest('.password-wrapper') || field;
                 parent.insertAdjacentElement('afterend', errEl);
             }

@@ -1,11 +1,10 @@
 <?php
 // ============================================================
-// pages/login.php – Login utente VitalPath
+// login.php – Login utente VitalPath
 // ============================================================
 session_start();
 
-// Se già loggato, reindirizza
-
+// Includi la connessione al database
 require_once __DIR__ . '/db.php';
 
 $errori = [];
@@ -13,13 +12,13 @@ $cf_val = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    // --- Recupero e sanitizzazione input ---
+    // Recupero e sanitizzazione input
     $cf       = trim($_POST['cf']       ?? '');
     $password = trim($_POST['password'] ?? '');
 
     $cf_val = htmlspecialchars($cf, ENT_QUOTES, 'UTF-8');
 
-    // --- Validazione server ---
+    // Validazione server
     if ($cf === '') {
         $errori['cf'] = 'Il Codice Fiscale è obbligatorio.';
     }
@@ -28,7 +27,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errori['password'] = 'La password è obbligatoria.';
     }
 
-    // --- Query DB (solo se non ci sono errori di formato) ---
     if (empty($errori)) {
         $stmt = $pdo->prepare(
         'SELECT cf, nome, cognome, telefono, email, password 
@@ -76,6 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 
+<!-- Salta al contenuto principale (accessibilità tastiera) -->
 <a href="#main-content" class="skip-link">Salta al contenuto principale</a>
 
 <!-- HEADER -->

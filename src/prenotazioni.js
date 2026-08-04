@@ -1,14 +1,10 @@
 // ============================================================
-// prenotazione.js – Riepilogo dinamico + validazione client
+// prenotazione.js – Riepilogo dinamico e validazione client
 // ============================================================
 
 (function () {
     'use strict';
 
-    // Dati degli slot occupati passati dal PHP via attributo data-*
-    // (letti dai radio button disabled)
-
-    // Mappa data -> label leggibile (dal DOM)
     function buildDataMap() {
         const map = {};
         document.querySelectorAll('input[name="data_esame"]').forEach(function (radio) {
@@ -69,7 +65,7 @@
         });
     });
 
-    // ✅ AGGIUNTA: Gestione navigazione tastiera per orari
+    // Gestione navigazione tastiera per orari
     document.querySelectorAll('.time-option label').forEach(function (label) {
         const radio = document.getElementById(label.getAttribute('for'));
         if (!radio) return;
@@ -104,7 +100,7 @@
             if (riepilogoData) {
                 riepilogoData.textContent = dataMap[this.value] ?? this.value;
             }
-            // Aggiorna disponibilità orari per la data scelta (visivo)
+            // Aggiorna disponibilità orari per la data scelta
             aggiornaOrari(this.value);
         });
     });
@@ -126,7 +122,6 @@
 
     // Navigazione tra orari con frecce
     document.addEventListener('keydown', function (e) {
-        // Solo se stiamo navigando sugli orari
         const target = e.target;
         if (!target.closest('.time-option')) return;
         
@@ -150,7 +145,6 @@
         
         if (newIndex !== currentIndex) {
             orari[newIndex].focus();
-            // Attiva il radio corrispondente
             const radio = document.getElementById(orari[newIndex].getAttribute('for'));
             if (radio && !radio.disabled) {
                 radio.checked = true;
@@ -162,17 +156,10 @@
         }
     });
 
-    // ============================================================
-    // Aggiornamento disponibilità orari al cambio giorno
-    // Gli slot occupati sono resi disponibili/disabilitati tramite
-    // un attributo data-occupati sull'elemento griglia, popolato
-    // inline dal PHP (vedi sotto). Se non presente, funzione no-op.
-    // ============================================================
     function aggiornaOrari(dataSelezionata) {
         const griglia = document.getElementById('griglia-orari');
         if (!griglia) return;
 
-        // Leggi JSON degli slot occupati per giorno (iniettato dal PHP)
         const rawJson = griglia.getAttribute('data-occupati') || '{}';
         let occupati = {};
         try { occupati = JSON.parse(rawJson); } catch (e) { return; }
@@ -207,7 +194,6 @@
                 }
             }
 
-            // Aggiorna aria-label
             radio.setAttribute('aria-label',
                 radio.value + (isOccupato ? ' – non disponibile' : '')
             );

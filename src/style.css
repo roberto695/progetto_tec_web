@@ -1,7 +1,5 @@
 /* ============================================================
-   VitalPath – Design System CSS
-   Corso di Tecnologie Web – Università di Padova
-   Mobile-first, WCAG 2.1 AA, puro CSS (no framework)
+   VitalPath – Design System CSS puro
    ============================================================ */
 
 
@@ -10,9 +8,9 @@
    ============================================================ */
 :root {
     /* --- Colori principali --- */
-    --color-primary:        #0066cc;   /* Blu clinico (WCAG AA su bianco) */
-    --color-primary-dark:   #004d99;   /* Hover / stato attivo */
-    --color-primary-light:  #e8f0fb;   /* Sfondo highlight leggero */
+    --color-primary:        #0066cc;
+    --color-primary-dark:   #004d99;
+    --color-primary-light:  #e8f0fb;
 
     /* --- Colori di testo --- */
     --color-text:           #1a1a1a;   /* Testo principale (rapporto 16.7:1) */
@@ -54,12 +52,12 @@
     /* --- Tipografia --- */
     --font-family:          'Inter', 'Arial', 'Helvetica', sans-serif;
     --font-size-base:       1.125rem;  /* 18px */
-    --font-size-sm:         0.9rem;    /* ~14px */
+    --font-size-sm:         0.9rem;    /* 14.4px */
     --font-size-lg:         1.25rem;   /* 20px */
     --font-size-xl:         1.5rem;    /* 24px */
     --font-size-2xl:        1.875rem;  /* 30px */
     --font-size-3xl:        2.25rem;   /* 36px */
-    --line-height:          1.5;
+    --line-height:          1.5;      
 
     /* --- Spaziature (multipli di 8px) --- */
     --space-2:  0.125rem;
@@ -85,63 +83,8 @@
     --shadow-lg:   0 8px 24px rgba(0,0,0,0.10);
 }
 
-
 /* ============================================================
-   2. RESET & BASE
-   ============================================================ */
-@media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-        animation-duration:       0.01ms !important;
-        animation-iteration-count: 1;
-        transition-duration:      0.01ms !important;
-        scroll-behavior:          auto;
-    }
-}
-
-*, *::before, *::after {
-    box-sizing: border-box;
-    margin:  0;
-    padding: 0;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family:      var(--font-family);
-    font-size:        var(--font-size-base);
-    line-height:      var(--line-height);
-    color:            var(--color-text);
-    background-color: var(--color-bg-body);
-    min-height:       100vh;
-    display:          flex;
-    flex-direction:   column;
-}
-
-img {
-    max-width: 100%;
-    height:    auto;
-    display:   block;
-}
-
-ul, ol {
-    list-style: none;
-}
-
-a {
-    color:           var(--color-primary);
-    text-decoration: underline;
-}
-
-a:hover {
-    color:           var(--color-primary-dark);
-    text-decoration: none;
-}
-
-
-/* ============================================================
-   3. FOCUS (doppio anello)
+   2. FOCUS (doppio anello)
    ============================================================ */
 :focus-visible {
     outline:        0.1875rem solid var(--focus-outer);
@@ -158,7 +101,7 @@ a:hover {
 
 
 /* ============================================================
-   4. SKIP LINK (accessibilità tastiera)
+   3. SKIP LINK (accessibilità tastiera)
    ============================================================ */
 .skip-link {
     position:         fixed;
@@ -181,7 +124,7 @@ a:hover {
 
 
 /* ============================================================
-   5. TIPOGRAFIA
+   4. TIPOGRAFIA
    ============================================================ */
 h1, h2, h3, h4, h5, h6 {
     font-family:  var(--font-family);
@@ -204,7 +147,6 @@ p:last-child { margin-bottom: 0; }
 .text-center  { text-align: center; }
 .font-bold    { font-weight: 700; }
 
-/* Utility screen-reader only */
 .sr-only {
     position:    absolute;
     width:       0.0625rem;
@@ -219,7 +161,7 @@ p:last-child { margin-bottom: 0; }
 
 
 /* ============================================================
-   6. LAYOUT WRAPPER
+   5. LAYOUT WRAPPER
    ============================================================ */
 .container {
     width:         100%;
@@ -249,7 +191,7 @@ section:last-child {
 
 
 /* ============================================================
-   7. HEADER & NAVIGAZIONE
+   6. HEADER & NAVIGAZIONE
    ============================================================ */
 #intestazione {
     background-color: var(--color-bg);
@@ -335,7 +277,6 @@ section:last-child {
     color:            var(--color-primary);
 }
 
-/* Nav logout/azioni utente */
 .nav-actions {
     display:     flex;
     align-items: center;
@@ -351,7 +292,7 @@ section:last-child {
 
 
 /* ============================================================
-   8. FOOTER
+   7. FOOTER
    ============================================================ */
 .site-footer {
     background-color: #0f172a;
@@ -376,7 +317,7 @@ section:last-child {
 
 
 /* ============================================================
-   9. CARD
+   8. CARD
    ============================================================ */
 .card {
     background-color: var(--color-bg);
@@ -445,7 +386,7 @@ section:last-child {
 }
 
 /* ============================================================
-   10. BOTTONI
+   9. BOTTONI
    ============================================================ */
 .btn {
     display:         inline-flex;
@@ -536,7 +477,7 @@ section:last-child {
 }
 
 /* ============================================================
-   11. FORM
+   10. FORM
    ============================================================ */
 .form-group {
     margin-bottom: var(--space-24);
@@ -631,13 +572,11 @@ resize:     vertical;
     margin-top: var(--space-4);
 }
 
-/* Griglia 2 colonne per campi affiancati */
 .form-row {
     display: grid;
     gap:     var(--space-16);
 }
 
-/* Checkbox e radio accessibili */
 .form-check {
     display:     flex;
     align-items: flex-start;
@@ -672,14 +611,14 @@ resize:     vertical;
 }
 
 .dati-visualizzazione {
-    display: block;  /* Default: visibile */
+    display: block;
 }
 
 .dati-visualizzazione.is-hidden {
     display: none;
 }
 
-/* Riepilogo errori (in cima al form) */
+/* Riepilogo errori */
 .error-summary {
     background-color: var(--color-error-bg);
     border:           0.125rem solid var(--color-error);
@@ -743,7 +682,7 @@ resize:     vertical;
 
 
 /* ============================================================
-   12. HERO SECTION (Homepage)
+   11. HERO SECTION (Homepage)
    ============================================================ */
 .hero {
     background-color: var(--color-bg-hero);
@@ -775,7 +714,7 @@ resize:     vertical;
 
 
 /* ============================================================
-   13. CARDS GRIGLIA (servizi, notizie)
+   12. CARDS GRIGLIA (servizi, notizie)
    ============================================================ */
 .grid {
     display:               grid;
@@ -791,7 +730,7 @@ resize:     vertical;
     border-bottom: 0.125rem solid var(--color-border);
 }
 
-/* Badge colorato (notizie, tipo) */
+/* Badge */
 .badge {
     display:      inline-block;
     font-size:    var(--font-size-sm);
@@ -810,7 +749,7 @@ resize:     vertical;
 
 
 /* ============================================================
-   14. STATO APPUNTAMENTI (badge)
+   13. STATO APPUNTAMENTI
    ============================================================ */
 .status-badge {
     display:      inline-flex;
@@ -890,7 +829,7 @@ resize:     vertical;
 
 
 /* ============================================================
-   15. TABELLA ADMIN
+   14. TABELLA ADMIN
    ============================================================ */
 .table-wrapper {
     width:        100%;
@@ -908,7 +847,6 @@ resize:     vertical;
 }
 
 .table caption {
-    /* Visibile solo agli screen reader */
     position:    absolute;
     width:       0.0625rem;
     height:      0.0625rem;
@@ -953,7 +891,7 @@ resize:     vertical;
 
 
 /* ============================================================
-   16. DASHBOARD UTENTE – Appuntamento attivo
+   15. DASHBOARD UTENTE – Appuntamento attivo
    ============================================================ */
 .appointment-card {
     border:        0.125rem solid var(--color-primary);
@@ -1016,7 +954,7 @@ resize:     vertical;
 
 
 /* ============================================================
-   17. PRENOTAZIONE – Selezione data/ora
+   16. PRENOTAZIONE – Selezione data/ora
    ============================================================ */
 .booking-layout {
     display:        flex;
@@ -1040,7 +978,7 @@ resize:     vertical;
     margin: 0;
     padding: 0;
 }
-/* Card radio giorno */
+
 .day-option,
 .time-option {
     position: relative;
@@ -1214,7 +1152,7 @@ resize:     vertical;
 }
 
 /* ============================================================
-   18. LOGIN / REGISTRAZIONE – Pagine centrate
+   17. LOGIN / REGISTRAZIONE – Pagine centrate
    ============================================================ */
 .auth-page {
     display:         flex;
@@ -1279,12 +1217,12 @@ resize:     vertical;
 }
 
 .logo-no-link {
-    pointer-events: none;  /* Disabilita il click */
-    cursor: default;        /* Cursore normale, non mano */
+    pointer-events: none;
+    cursor: default;
 }
 
 /* ============================================================
-   19. MESSAGGI FEEDBACK (alert)
+   18. MESSAGGI FEEDBACK (alert)
    ============================================================ */
 .alert {
     display:       flex;
@@ -1341,7 +1279,7 @@ resize:     vertical;
 }
 
 /* ============================================================
-   20. UTILITY
+   19. UTILITY
    ============================================================ */
 .mt-0  { margin-top: 0; }
 .mt-8  { margin-top: var(--space-8); }
@@ -1375,7 +1313,7 @@ resize:     vertical;
 }
 
 /* ============================================================
-   21. LINK PRIVACY
+   20. LINK PRIVACY
    ============================================================ */
 .link-privacy {
     text-decoration: underline;
@@ -1398,10 +1336,63 @@ resize:     vertical;
     }
 
 /* ============================================================
-   22. MEDIA QUERIES (tablet e desktop)
+   21. RESET & BASE
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration:       0.01ms !important;
+        animation-iteration-count: 1;
+        transition-duration:      0.01ms !important;
+        scroll-behavior:          auto;
+    }
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin:  0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family:      var(--font-family);
+    font-size:        var(--font-size-base);
+    line-height:      var(--line-height);
+    color:            var(--color-text);
+    background-color: var(--color-bg-body);
+    min-height:       100vh;
+    display:          flex;
+    flex-direction:   column;
+}
+
+img {
+    max-width: 100%;
+    height:    auto;
+    display:   block;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+a {
+    color:           var(--color-primary);
+    text-decoration: underline;
+}
+
+a:hover {
+    color:           var(--color-primary-dark);
+    text-decoration: none;
+}
+
+/* ============================================================
+   22. MEDIA QUERIES (mobile e desktop)
    ============================================================ */
 
-/* Tablet – 640px */
+/* Mobile – 640px */
 @media (min-width: 640px) {
     .form-row {
         grid-template-columns: 1fr 1fr;
@@ -1420,9 +1411,6 @@ resize:     vertical;
     }
 }
 
-/* ============================================================
-   TABELLA - Aaron Gustafson (mobile)
-   ============================================================ */
 /* Desktop – 768px */
 @media (min-width: 768px) {
     h1 { font-size: var(--font-size-2xl); }
@@ -1557,15 +1545,16 @@ resize:     vertical;
     }
 }
 
-
-/* stile differente per stampa*/
+/* ============================================================
+   23. STILE DIFFERENTE PER STAMPA
+   ============================================================ */
 @media print {
 
     @page {
         margin: 2cm;
     }
 
-    /* Cambia solo il font con grazie */
+    /* Cambia il font con grazie */
     body, p, h1, h2, h3, h4, h5, h6, 
     .btn, .form-input, .form-select, .form-textarea {
         font-family: 'Georgia', 'Times New Roman', 'Times', serif;
@@ -1590,7 +1579,7 @@ resize:     vertical;
         text-shadow: none;
     }
     
-    /* Ma per i paragrafi lascia che si spezzino naturalmente */
+    /* Consenti la spezzatura di pagina */
     p, li, td {
         page-break-inside: auto;
         break-inside: auto;

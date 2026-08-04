@@ -7,7 +7,7 @@ USE localhost;
 -- ============================================================
 -- TABELLA: persona
 -- La chiave primaria è il Codice Fiscale (cf).
--- Il login avviene con cf + password (in chiaro).
+-- Il login avviene con cf + password.
 -- ============================================================
 CREATE TABLE IF NOT EXISTS persona (
     cf          VARCHAR(16)  NOT NULL,
@@ -40,8 +40,8 @@ CREATE TABLE IF NOT EXISTS prenotazione (
  
 -- ============================================================
 -- DATI DI DEFAULT
--- Admin: cf=admin  password=admin
--- User:  cf=user  password=user
+-- Admin: cf=admin             password=admin
+-- User:  cf=user              password=user
 -- User:  cf=RSSMRA80A01H501X  password=user
 -- User:  cf=BNCANN85B45F205Y  password=user
 -- ============================================================

@@ -1,6 +1,6 @@
 <?php
 // ============================================================
-// logo.php – Logo del sito (da includere in tutte le pagine)
+// logo.php – Logo del sito
 // ============================================================
 $logo_class = $logo_class ?? '';
 ?>

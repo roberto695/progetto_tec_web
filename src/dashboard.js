@@ -1,5 +1,5 @@
 // ============================================================
-// dashboard.js – Modifica dati personali (toggle)
+// dashboard.js – Modifica dati personali e prenotazioni
 // ============================================================
 
 (function () {
@@ -11,7 +11,6 @@
         const datiVis = document.getElementById('dati-visualizzazione');
         const annullaBtn = document.getElementById('annulla-modifica');
 
-        // Se gli elementi non esistono, esci (es. se non sei in dashboard)
         if (!toggleBtn || !formModifica || !datiVis) return;
 
         function mostraForm(mostra) {
@@ -50,13 +49,12 @@
             });
         }
 
-        // Se ci sono errori di salvataggio (PHP), mostra il form aperto
-        // Il flag è settato da PHP via variabile JS
+        // Se ci sono errori di salvataggio (PHP), mostra il form già aperto
         if (typeof mostraFormErrore !== 'undefined' && mostraFormErrore === true) {
             mostraForm(true);
         }
 
-        // Accessibilità: premere ESC chiude il form
+        // Premere ESC chiude il form
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape' && formModifica.classList.contains('is-visible')) {
                 mostraForm(false);

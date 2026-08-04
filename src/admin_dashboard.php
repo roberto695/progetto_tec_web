@@ -29,7 +29,7 @@ $nome_admin = $_SESSION['nome'] ?? 'Admin';
 $cognome_admin = $_SESSION['cognome'] ?? '';
 
 // ============================================================
-// Gestione POST – annulla appuntamento (azione admin)
+// Gestione annulla appuntamento (azione admin)
 // ============================================================
 $msg_successo = '';
 $msg_errore   = '';
@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['annulla_id'])) {
 }
 
 // ============================================================
-// Filtro / ricerca
+// Filtro / Ricerca
 // ============================================================
 $filtro      = trim($_GET['q'] ?? '');
 $filtro_safe = htmlspecialchars($filtro, ENT_QUOTES, 'UTF-8');
@@ -63,7 +63,7 @@ $filtro_safe = htmlspecialchars($filtro, ENT_QUOTES, 'UTF-8');
 $stats = $pdo->query(
     "SELECT
         COUNT(*) AS totale,
-        SUM(stato IN ('prenotato')) AS attive,
+        SUM(stato = 'prenotato') AS attive,
         SUM(stato = 'effettuato')   AS effettuate,
         SUM(stato = 'cancellato')   AS cancellate
      FROM prenotazione"
@@ -96,7 +96,6 @@ if ($filtro !== '') {
 }
 $prenotazioni = $stmt->fetchAll();
 
-// Helper
 function fmt_data_admin(string $data_ora): string {
     $dt = new DateTime($data_ora);
     return $dt->format('d/m/Y') . ' ' . $dt->format('H:i');
@@ -113,11 +112,11 @@ function etichetta_stato(string $stato): string {
 
 function statoClasse($stato) {
     $classi = [
-        'prenotato' => 'status-pending',
-        'cancellato' => 'status-cancelled',
-        'expired' => 'status-expired'
+        'prenotato' => 'status--pending',
+        'cancellato' => 'status--cancelled',
+        'expired' => 'status--expired'
     ];
-    return $classi[$stato] ?? 'status-pending';
+    return $classi[$stato] ?? 'status--pending';
 }
 ?>
 <!DOCTYPE html>
@@ -135,6 +134,7 @@ function statoClasse($stato) {
 </head>
 <body>
 
+<!-- Salta al contenuto principale (accessibilità tastiera) -->
 <a href="#main-content" class="skip-link">Salta al contenuto principale</a>
 
 <!-- HEADER -->
@@ -272,13 +272,23 @@ function statoClasse($stato) {
             <table class="table" id="tabella-prenotazioni" aria-describedby="tabella-desc">
                 <caption>Elenco di tutti gli appuntamenti registrati nel sistema</caption>
                 <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Paziente</th>
-                        <th scope="col">Codice Fiscale</th>
-                        <th scope="col">Data e ora</th>
-                        <th scope="col">Stato</th>
-                        <th scope="col">Azione</th>
+                        <tr>
+                            <th scope="col">
+                                <button class="sort-btn" data-col="0" aria-label="Ordina per ID"># <span aria-hidden="true">↕</span></button>
+                            </th>
+                            <th scope="col">
+                                <button class="sort-btn" data-col="1" aria-label="Ordina per paziente">Paziente <span aria-hidden="true">↕</span></button>
+                            </th>
+                            <th scope="col">
+                                <button class="sort-btn" data-col="2" aria-label="Ordina per Codice Fiscale">Codice Fiscale <span aria-hidden="true">↕</span></button>
+                            </th>
+                            <th scope="col">
+                                <button class="sort-btn" data-col="3" aria-label="Ordina per data">Data e ora <span aria-hidden="true">↕</span></button>
+                            </th>
+                            <th scope="col">
+                            <button class="sort-btn" data-col="4" aria-label="Ordina per stato">Stato <span aria-hidden="true">↕</span></button>
+                        </th>
+                        <th scope="col">Azione</th> <!-- colonna non ordinabile -->
                     </tr>
                 </thead>
                 <tbody>
@@ -348,9 +358,6 @@ function statoClasse($stato) {
 
 </main>
 
-<!-- =====================================================
-         FOOTER
-    ===================================================== -->
     <footer class="site-footer">
         <div class="footer-container">
             <p>

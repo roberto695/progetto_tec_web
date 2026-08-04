@@ -1,11 +1,11 @@
 // ============================================================
-// js/login.js – Validazione client-side login + toggle password
+// login.js – Validazione client-side login e toggle password
 // ============================================================
 
 (function () {
     'use strict';
 
-    // --- Toggle mostra/nascondi password ---
+    // Toggle mostra/nascondi password
     const toggleBtn = document.getElementById('toggle-password');
     const passwordInput = document.getElementById('password');
 
@@ -19,7 +19,7 @@
         });
     }
     
-    // --- Validazione client-side al submit ---
+    // Validazione client-side al submit
     const form = document.getElementById('form-login');
     if (!form) return;
 
@@ -29,7 +29,6 @@
         const cf = document.getElementById('cf');
         const pwd = document.getElementById('password');
 
-        // Pulisci errori precedenti
         clearErrors();
 
         // Valida CF
@@ -57,7 +56,6 @@
     });
 
     function showErrors(errori) {
-        // Crea o aggiorna il riepilogo in cima
         let summary = document.querySelector('.error-summary');
         if (!summary) {
             summary = document.createElement('div');

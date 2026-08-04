@@ -1,5 +1,5 @@
 // ============================================================
-// admin_dashboard.js – Filtro live, conferma annulla, sort tabella
+// admin_dashboard.js – Filtro live, conferma annulla e sort tabella
 // ============================================================
 
 (function () {
@@ -20,8 +20,7 @@
     });
 
     // ============================================================
-    // 2. FILTRO LIVE lato client (filtra le righe della tabella
-    //    mentre si digita, senza ricaricare la pagina)
+    // 2. FILTRO LIVE lato client (ricerca in tabella)
     // ============================================================
     const inputRicerca = document.getElementById('q');
     const tbody        = document.querySelector('#tabella-prenotazioni tbody');
@@ -40,7 +39,6 @@
                 if (mostra) visibili++;
             });
 
-            // Aggiorna il contatore accessibile
             if (contatore) {
                 contatore.textContent = visibili + ' risultati trovati';
             }
@@ -126,7 +124,7 @@
     }
 
     // ============================================================
-    // Utility: escape HTML per output sicuro nel DOM
+    // 4. Utility: escape HTML per output sicuro nel DOM
     // ============================================================
     function escapeHtml(str) {
         return str

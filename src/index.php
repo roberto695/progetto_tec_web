@@ -3,6 +3,8 @@
 // index.php – Homepage VitalPath
 // ============================================================
 session_start();
+
+// Includi la connessione al database
 require_once __DIR__ . '/db.php';
 
 define('ADMIN_CF', 'admin');
@@ -24,7 +26,6 @@ if ($utente_loggato) {
         $stmt->execute([':cf' => $cf_utente]);
         $appuntamento_attivo = $stmt->fetch() ? true : false;
     } catch (PDOException $e) {
-        // Se c'è un errore, consideriamo che non ha appuntamenti
         $appuntamento_attivo = false;
     }
 }
@@ -35,15 +36,10 @@ if ($utente_loggato) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- SEO -->
     <title>VitalPath – Centro Prelievi del Sangue | Prenotazione Online</title>
-    <meta name="description"
-          content="Prenota il tuo esame del sangue online con VitalPath. Servizio rapido, accessibile e professionale. Referti digitali, gestione appuntamenti semplice.">
-    <meta name="keywords"
-          content="prenotazione analisi del sangue, centro prelievi Padova, esami del sangue, referti online, prenotazione online esami, prenotazione analisi Padova, VitalPath">
-
-    <!-- Font Google -->
-     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="description" content="Prenota il tuo esame del sangue online con VitalPath. Servizio rapido, accessibile e professionale. Referti digitali, gestione appuntamenti semplice.">
+    <meta name="keywords" content="prenotazione analisi del sangue, centro prelievi Padova, esami del sangue, referti online, prenotazione online esami, prenotazione analisi Padova, VitalPath">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -52,12 +48,10 @@ if ($utente_loggato) {
 </head>
 <body>
 
-    <!-- Salta al contenuto principale (accessibilità tastiera) -->
-    <a href="#main-content" class="skip-link">Salta al contenuto principale</a>
+<!-- Salta al contenuto principale (accessibilità tastiera) -->
+<a href="#main-content" class="skip-link">Salta al contenuto principale</a>
 
-    <!-- =====================================================
-         HEADER
-    ===================================================== -->
+    <!-- HEADER -->
     <header id="intestazione">
         <div class="header-container">
 
@@ -90,9 +84,7 @@ if ($utente_loggato) {
         </div>
     </header>
 
-    <!-- =====================================================
-         CONTENUTO PRINCIPALE
-    ===================================================== -->
+    <!-- MAIN -->
     <main id="main-content" tabindex="-1">
 
         <!-- HERO -->
@@ -253,9 +245,6 @@ if ($utente_loggato) {
 
     </main>
 
-    <!-- =====================================================
-         FOOTER
-    ===================================================== -->
     <footer class="site-footer">
         <div class="footer-container">
             <p>

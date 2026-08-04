@@ -74,7 +74,7 @@ function statoClasse($stato) {
     return $classi[$stato] ?? 'status-pending';
 }
 
-// Funzione per formattare la data in italiano (versione dashboard)
+// Funzione per formattare la data in italiano (per dashboard)
 function formattaDataDashboard($data_ora) {
     $dt = new DateTime($data_ora);
     $giorni = ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'];
@@ -113,8 +113,10 @@ function formattaDataBreve($data_ora) {
 </head>
 <body>
 
-    <a href="#main-content" class="skip-link">Salta al contenuto principale</a>
+<!-- Salta al contenuto principale (accessibilità tastiera) -->
+<a href="#main-content" class="skip-link">Salta al contenuto principale</a>
 
+    <!-- HEADER -->
     <header id="intestazione">
         <div class="header-container">
             <?php include 'logo.php'; ?>
@@ -131,10 +133,10 @@ function formattaDataBreve($data_ora) {
         </div>
     </header>
 
+    <!-- MAIN -->
     <main id="main-content" tabindex="-1">
         <h1 class="hero__title">Area Personale</h1>
         <h2 class="section-title">Gestisci i tuoi dati personali, i tuoi appuntamenti e visualizza lo storico delle prenotazioni.</h2>
-        <!-- Ciao -->
         <section class="user-welcome-section" aria-labelledby="welcome-title">
             <div class="card welcome-card">
                 <div class="welcome-header">
@@ -212,12 +214,12 @@ function formattaDataBreve($data_ora) {
         </div>
         <?php endif; ?>
 
-        <!-- Appuntamento attivo (versione dashboard) -->
+        <!-- Appuntamento attivo -->
         <section aria-labelledby="attivo-title">
             <h2 id="attivo-title" class="section-title">Appuntamento attivo</h2>
 
             <?php if (!empty($prenotazioni_attive)): 
-                $attivo = $prenotazioni_attive[0]; // Prendi il primo appuntamento attivo
+                $attivo = $prenotazioni_attive[0];
             ?>
                 <div class="appointment-card" role="group" aria-label="Appuntamento prenotato">
                     <div class="appointment-card__header">
@@ -263,7 +265,7 @@ function formattaDataBreve($data_ora) {
             <?php endif; ?>
         </section>
 
-        <!-- Storico (versione dashboard) -->
+        <!-- Storico -->
         <section aria-labelledby="storico-title">
             <h2 id="storico-title" class="section-title">Storico appuntamenti</h2>
 
@@ -304,7 +306,6 @@ function formattaDataBreve($data_ora) {
             <?php endif; ?>
         </section>
 
-        <!-- Promemoria -->
         <!-- INFO PREPARAZIONE -->
         <section aria-labelledby="prep-title">
             <div class="card card--warning">

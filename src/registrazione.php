@@ -15,8 +15,10 @@
 </head>
 <body>
 
+<!-- Salta al contenuto principale (accessibilità tastiera) -->
 <a href="#main-content" class="skip-link">Salta al contenuto principale</a>
 
+<!-- HEADER -->
 <header id="intestazione">
     <div class="header-container">
         <?php include 'logo.php'; ?>
@@ -30,6 +32,7 @@
     </div>
 </header>
 
+<!-- MAIN -->
 <main id="main-content" tabindex="-1">
     <div class="auth-page">
         <div class="auth-card auth-card--large">

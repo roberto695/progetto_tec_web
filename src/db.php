@@ -1,13 +1,13 @@
 <?php
 // ============================================================
-// includes/db.php – Connessione PDO al database VitalPath
+// db.php – Connessione PDO al database Localhost per il progetto VitalPath
 // ============================================================
 
-// Credenziali CORRETTE dal tuo progetto
+// Credenziali
 define('DB_HOST', 'database');
 define('DB_NAME', 'localhost');
 define('DB_USER', 'user_web');
-define('DB_PASS', '8A2cU25SoU9zmUrewcib2FgGsY9juEyPrSnFdXBJypa6xfhOmC');  // ← CORRETTO
+define('DB_PASS', '8A2cU25SoU9zmUrewcib2FgGsY9juEyPrSnFdXBJypa6xfhOmC');
 define('DB_CHARSET', 'utf8mb4');
 
 $dsn = sprintf(

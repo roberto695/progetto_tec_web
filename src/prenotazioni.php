@@ -29,10 +29,7 @@ if ($stmt->fetch()) {
     exit;
 }
 
-// ============================================================
 // Genera gli slot disponibili: lunedì–sabato, 08:00–12:30
-// per i prossimi 6 giorni lavorativi a partire da domani
-// ============================================================
 $orari = ['08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30'];
 
 $giorni_disp = [];
@@ -48,7 +45,6 @@ while ($trovati < 6) {
     $data->modify('+1 day');
 }
 
-// Slot già occupati nel DB (per le date generate) - solo 'prenotato'
 $date_str = array_map(fn($d) => $d->format('Y-m-d'), $giorni_disp);
 $in       = implode(',', array_fill(0, count($date_str), '?'));
 
@@ -65,7 +61,7 @@ foreach ($stmt->fetchAll() as $row) {
 }
 
 // ============================================================
-// Gestione POST – conferma prenotazione
+// Gestione POST: conferma prenotazione
 // ============================================================
 $errori  = [];
 $success = false;
@@ -109,7 +105,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Helpers
 function fmt_dow(DateTime $d): string {
     $g = ['Dom','Lun','Mar','Mer','Gio','Ven','Sab'];
     return $g[(int)$d->format('w')];
@@ -136,8 +131,9 @@ function fmt_mese(DateTime $d): string {
 </head>
 <body>
 
-    <a href="#main-content" class="skip-link">Salta al contenuto principale</a>
-
+<!-- Salta al contenuto principale (accessibilità tastiera) -->
+<a href="#main-content" class="skip-link">Salta al contenuto principale</a>
+    <!-- HEADER -->
     <header id="intestazione">
         <div class="header-container">
          <?php include 'logo.php'; ?>
@@ -152,6 +148,7 @@ function fmt_mese(DateTime $d): string {
         </div>
     </header>
 
+<!-- MAIN -->
     <main id="main-content" tabindex="-1">
 
         <h1 class="section-title">Prenota un esame del sangue</h1>
@@ -253,7 +250,6 @@ function fmt_mese(DateTime $d): string {
                             <div class="booking-grid time-booking-grid" id="griglia-orari"
                                  data-occupati="<?= htmlspecialchars(json_encode($occupati_json), ENT_QUOTES, 'UTF-8') ?>">
                                 <?php
-                                // Per il primo giorno disponibile, precarica gli slot occupati
                                 $primo_giorno = $giorni_disp[0]->format('Y-m-d');
                                 foreach ($orari as $j => $ora):
                                     $ora_db     = $ora . ':00';
@@ -283,7 +279,7 @@ function fmt_mese(DateTime $d): string {
                         </fieldset>
                     </div>
 
-                </div><!-- /booking-main -->
+                </div>
 
                 <!-- COLONNA DESTRA: riepilogo + conferma -->
                 <aside class="booking-sidebar" aria-label="Riepilogo prenotazione">
@@ -340,7 +336,7 @@ function fmt_mese(DateTime $d): string {
                     </div>
                 </aside>
 
-            </div><!-- /booking-layout -->
+            </div>
         </form>
 
         <?php endif; ?>
