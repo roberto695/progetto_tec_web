@@ -476,6 +476,48 @@ section:last-child {
     box-shadow: none;
 }
 
+.sort-btn {
+    background: transparent;
+    border: 0.125rem solid var(--color-border);
+    color: var(--color-text-secondary);
+    padding: var(--space-8) var(--space-16);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-family: var(--font-family);
+    font-size: var(--font-size-base);
+    font-weight: 700;
+    transition: all 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-4);
+}
+
+.sort-btn:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+/* Bordo e sfondo per la colonna attiva */
+th[aria-sort="ascending"] .sort-btn,
+th[aria-sort="descending"] .sort-btn {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    background-color: var(--color-primary-light);
+}
+
+/* Focus tastiera */
+.sort-btn:focus-visible {
+    outline: 0.1875rem solid var(--focus-outer);
+    outline-offset: 0.125rem;
+}
+
+/* Clic attivo */
+.sort-btn:active {
+    border-color: var(--color-primary-dark);
+    background-color: var(--color-primary-dark);
+    color: #ffffff;
+}
+
 /* ============================================================
    10. FORM
    ============================================================ */

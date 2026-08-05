@@ -274,19 +274,19 @@ function statoClasse($stato) {
                 <thead>
                         <tr>
                             <th scope="col">
-                                <button class="sort-btn" data-col="0" aria-label="Ordina per ID"># <span aria-hidden="true">↕</span></button>
+                                <button class="sort-btn" data-col="0" aria-label="Ordina per ID"># <span class="sort-icon" aria-hidden="true">↕</span></button>
                             </th>
                             <th scope="col">
-                                <button class="sort-btn" data-col="1" aria-label="Ordina per paziente">Paziente <span aria-hidden="true">↕</span></button>
+                                <button class="sort-btn" data-col="1" aria-label="Ordina per paziente">Paziente <span class="sort-icon" aria-hidden="true">↕</span></button>
                             </th>
                             <th scope="col">
-                                <button class="sort-btn" data-col="2" aria-label="Ordina per Codice Fiscale">Codice Fiscale <span aria-hidden="true">↕</span></button>
+                                <button class="sort-btn" data-col="2" aria-label="Ordina per Codice Fiscale">Codice Fiscale <span class="sort-icon" aria-hidden="true">↕</span></button>
                             </th>
                             <th scope="col">
-                                <button class="sort-btn" data-col="3" aria-label="Ordina per data">Data e ora <span aria-hidden="true">↕</span></button>
+                                <button class="sort-btn" data-col="3" aria-label="Ordina per data">Data e ora <span class="sort-icon" aria-hidden="true">↕</span></button>
                             </th>
                             <th scope="col">
-                            <button class="sort-btn" data-col="4" aria-label="Ordina per stato">Stato <span aria-hidden="true">↕</span></button>
+                            <button class="sort-btn" data-col="4" aria-label="Ordina per stato">Stato <span class="sort-icon" aria-hidden="true">↕</span></button>
                         </th>
                         <th scope="col">Azione</th> <!-- colonna non ordinabile -->
                     </tr>
