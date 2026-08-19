@@ -56,19 +56,19 @@
     });
 
     function showErrors(errori) {
-        let summary = document.querySelector('.error-summary');
+        let summary = form.querySelector('.error-summary');
         if (!summary) {
             summary = document.createElement('div');
             summary.className = 'error-summary';
             summary.setAttribute('role', 'alert');
             summary.setAttribute('aria-live', 'assertive');
-            form.insertAdjacentElement('beforebegin', summary);
+            form.insertAdjacentElement('afterbegin', summary);
         }
 
-        const titolo = errori.length === 1 ? '1 errore' : errori.length + ' errori';
+        const n = errori.length;
         summary.innerHTML = `
-            <h2><span aria-hidden="true">⚠</span> Si sono verificati ${titolo}</h2>
-            <ul>${errori.map(e => `<li>${e.msg}</li>`).join('')}</ul>
+            <h2><span aria-hidden="true">⚠</span> Si ${n === 1 ? 'è verificato 1 errore' : 'sono verificati ' + n + ' errori'}</h2>
+            <ul aria-label="Elenco degli errori">${errori.map(e => `<li>${e.msg}</li>`).join('')}</ul>
         `;
 
         // Mostra errore accanto al campo
@@ -91,13 +91,13 @@
     }
 
     function clearErrors() {
-        document.querySelectorAll('.form-input--error').forEach(function (el) {
+        document.querySelectorAll('.form-input--error').forEach(el => {
             el.classList.remove('form-input--error');
             el.removeAttribute('aria-invalid');
         });
-        document.querySelectorAll('[id$="-error-js"]').forEach(function (el) {
-            el.remove();
-        });
+        document.querySelectorAll('[id$="-error-js"]').forEach(el => el.remove());
+        const summary = form ? form.querySelector('.error-summary') : null;
+        if (summary) summary.remove();
     }
 
 })();

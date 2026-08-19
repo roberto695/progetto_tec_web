@@ -31,6 +31,7 @@
         const cognome  = document.getElementById('cognome');
         const cf       = document.getElementById('cf');
         const email    = document.getElementById('email');
+        const telefono = document.getElementById('telefono');
         const password = document.getElementById('password');
         const privacy  = document.getElementById('privacy');
 
@@ -53,7 +54,16 @@
         if (email.value.trim() === '') {
             errori.push({ field: email, msg: "L'indirizzo email è obbligatorio." });
         } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
-            errori.push({ field: email, msg: 'Inserisci un indirizzo email valido.' });
+            errori.push({ field: email, msg: "L'indirizzo email non è valido." });
+        }
+
+        if (telefono) {
+            const telVal = telefono.value.trim();
+            if (telVal !== '') {
+                if (!/^\d{10}$/.test(telVal)) {
+            errori.push({ field: telefono, msg: 'Il numero di telefono non è valido.' });
+                }
+            }
         }
 
         if (password.value === '') {
@@ -86,7 +96,6 @@
             form.insertAdjacentElement('afterbegin', summary);
         }
 
-        
         const n = errori.length;
         summary.innerHTML = `
             <h2><span aria-hidden="true">⚠</span> Si ${n === 1 ? 'è verificato 1 errore' : 'sono verificati ' + n + ' errori'}</h2>

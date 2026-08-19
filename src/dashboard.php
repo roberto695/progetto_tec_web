@@ -19,6 +19,75 @@ $cognome = $_SESSION['cognome'] ?? '';
 $telefono = $_SESSION['telefono'] ?? 'Non disponibile';
 $email = $_SESSION['email'] ?? 'Non disponibile';
 
+$messaggio = '';
+if (isset($_GET['success']) && $_GET['success'] == 1) {
+    $messaggio = 'Dati aggiornati con successo!';
+}
+$errori = [];
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['aggiorna_dati'])) {
+    $nuovo_nome = trim($_POST['nome'] ?? '');
+    $nuovo_cognome = trim($_POST['cognome'] ?? '');
+    $nuovo_telefono = trim($_POST['telefono'] ?? '');
+    $nuova_email = trim($_POST['email'] ?? '');
+
+    // Validazione email (obbligatoria)
+    if (empty($nuova_email)) {
+        $errori['email'] = 'L\'indirizzo email è obbligatorio.';
+    } elseif (!filter_var($nuova_email, FILTER_VALIDATE_EMAIL)) {
+        $errori['email'] = "L'indirizzo email non è valido.";
+    }
+
+    // Validazione telefono (se compilato, 10 cifre)
+    if ($nuovo_telefono !== '' && $nuovo_telefono !== '' && !preg_match('/^\d{10}$/', $nuovo_telefono)) {
+        $errori['telefono'] = 'Il numero di telefono non è valido.';
+    }
+
+    // Controllo duplicato email (escludendo l'utente corrente)
+    if (empty($errori)) {
+        $stmt = $pdo->prepare("SELECT cf FROM persona WHERE email = ? AND cf != ?");
+        $stmt->execute([$nuova_email, $cf]);
+        if ($stmt->fetch()) {
+            $errori['email'] = 'Questa email è già in uso da un altro utente.';
+        }
+    }
+
+    if (empty($errori)) {
+        // Costruisci la query dinamicamente
+        $sql = "UPDATE persona SET email = :email";
+        $params = [':email' => $nuova_email, ':cf' => $cf];
+
+        if (!empty($nuovo_nome)) {
+            $sql .= ", nome = :nome";
+            $params[':nome'] = $nuovo_nome;
+        }
+        if (!empty($nuovo_cognome)) {
+            $sql .= ", cognome = :cognome";
+            $params[':cognome'] = $nuovo_cognome;
+        }
+        if (!empty($nuovo_telefono)) {
+            $sql .= ", telefono = :telefono";
+            $params[':telefono'] = $nuovo_telefono;
+        }
+
+        $sql .= " WHERE cf = :cf";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute($params);
+
+        // Aggiorna la sessione (solo i campi non vuoti)
+        $_SESSION['email'] = $nuova_email;
+        if (!empty($nuovo_nome)) $_SESSION['nome'] = $nuovo_nome;
+        if (!empty($nuovo_cognome)) $_SESSION['cognome'] = $nuovo_cognome;
+        if (!empty($nuovo_telefono)) $_SESSION['telefono'] = $nuovo_telefono;
+
+        header('Location: dashboard.php?success=1');
+        exit;
+    }
+}
+
+// Variabile per riaprire il form in caso di errore
+$mostra_form_errore = !empty($errori);
+
 $prenotazioni_attive = [];
 $prenotazioni_storico = [];
 $error = '';
@@ -154,10 +223,17 @@ function formattaDataBreve($data_ora) {
             </div>
         <?php endif; ?>
 
-        <?php if (!empty($errore_modifica)): ?>
-            <div class="alert alert--error" role="alert" aria-live="assertive">
-                <span class="alert__icon" aria-hidden="true">⚠</span>
-                <span><?= htmlspecialchars($errore_modifica, ENT_QUOTES, 'UTF-8') ?></span>
+        <?php if (!empty($errori)): ?>
+            <div class="error-summary" role="alert" aria-live="assertive">
+                <h2>
+                    <span aria-hidden="true">⚠</span>
+                    Si sono verificati <?= count($errori) ?> errori:
+                </h2>
+                <ul aria-label="Elenco degli errori">
+                    <?php foreach ($errori as $campo => $msg): ?>
+                        <li><?= htmlspecialchars($msg ?? '', ENT_QUOTES, 'UTF-8') ?></li>
+                    <?php endforeach; ?>
+                </ul>
             </div>
         <?php endif; ?>
 
@@ -168,25 +244,31 @@ function formattaDataBreve($data_ora) {
                     <p><strong>Telefono:</strong> <span id="vis-telefono"><?= htmlspecialchars($telefono ?: 'Non disponibile', ENT_QUOTES, 'UTF-8') ?></span></p>
                     <p><strong>Email:</strong> <span id="vis-email"><?= htmlspecialchars($email, ENT_QUOTES, 'UTF-8') ?></span></p>
                 </div>
-                <div id="form-modifica" class="form-modifica">
+                <div id="form-modifica" class="form-modifica <?= !empty($errori) ? 'is-visible' : '' ?>">
             <form method="POST" action="dashboard.php" novalidate>
                 <div class="form-row">
                     <div class="form-group">
                         <label class="form-label" for="edit-nome">Nome *</label>
-                        <input type="text" id="edit-nome" name="nome" required autocomplete="given-name" class="form-input" value="<?= htmlspecialchars($nome, ENT_QUOTES, 'UTF-8') ?>">
+                        <input type="text" id="edit-nome" name="nome" autocomplete="given-name" class="form-input" value="<?= htmlspecialchars($nome, ENT_QUOTES, 'UTF-8') ?>">
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="edit-cognome">Cognome *</label>
-                        <input type="text" id="edit-cognome" name="cognome" required autocomplete="family-name" class="form-input" value="<?= htmlspecialchars($cognome, ENT_QUOTES, 'UTF-8') ?>">
+                        <input type="text" id="edit-cognome" name="cognome" autocomplete="family-name" class="form-input" value="<?= htmlspecialchars($cognome, ENT_QUOTES, 'UTF-8') ?>">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="edit-telefono">Telefono</label>
-                    <input type="tel" id="edit-telefono" name="telefono" autocomplete="tel" class="form-input" value="<?= htmlspecialchars($telefono !== 'Non disponibile' ? $telefono : '', ENT_QUOTES, 'UTF-8') ?>">
+                    <input type="tel" id="edit-telefono" name="telefono" autocomplete="tel" class="form-input<?= isset($errori['telefono']) ? ' form-input--error' : '' ?>" value="<?= htmlspecialchars($telefono !== 'Non disponibile' ? $telefono : '', ENT_QUOTES, 'UTF-8') ?>" maxlength="10">
+                <?php if (isset($errori['telefono'])): ?>
+                    <span class="form-error" id="telefono-error" role="alert"><?= htmlspecialchars($errori['telefono'], ENT_QUOTES, 'UTF-8') ?></span>
+                <?php endif; ?>
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="edit-email">Email *</label>
-                    <input type="email" id="edit-email" name="email" required autocomplete="email" class="form-input" value="<?= htmlspecialchars($email, ENT_QUOTES, 'UTF-8') ?>">
+                    <input type="email" id="edit-email" name="email" required autocomplete="email" class="form-input<?= isset($errori['email']) ? ' form-input--error' : '' ?>" value="<?= htmlspecialchars($email, ENT_QUOTES, 'UTF-8') ?>">
+                <?php if (isset($errori['email'])): ?>
+                    <span class="form-error" id="email-error" role="alert"><?= htmlspecialchars($errori['email'], ENT_QUOTES, 'UTF-8') ?></span>
+                <?php endif; ?>
                 </div>
                 <div class="form-actions">
                     <button type="submit" name="aggiorna_dati" class="btn btn--primary">Salva modifiche</button>
