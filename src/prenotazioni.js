@@ -34,7 +34,8 @@
         
         // Aggiungi role per accessibilità
         label.setAttribute('role', 'radio');
-        
+        label.setAttribute('aria-checked', radio.checked ? 'true' : 'false');
+
         label.addEventListener('keydown', function (e) {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();

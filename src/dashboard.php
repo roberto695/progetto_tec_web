@@ -230,9 +230,7 @@ function formattaDataBreve($data_ora) {
                     Si sono verificati <?= count($errori) ?> errori:
                 </h2>
                 <ul aria-label="Elenco degli errori">
-                    <?php foreach ($errori as $campo => $msg): ?>
-                        <li><?= htmlspecialchars($msg ?? '', ENT_QUOTES, 'UTF-8') ?></li>
-                    <?php endforeach; ?>
+                    <?php foreach ($errori as $campo => $msg): ?><li><?= htmlspecialchars($msg ?? '', ENT_QUOTES, 'UTF-8') ?></li><?php endforeach; ?>
                 </ul>
             </div>
         <?php endif; ?>
