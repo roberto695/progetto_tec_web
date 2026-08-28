@@ -33,9 +33,13 @@
             let visibili = 0;
 
             righe.forEach(function (riga) {
+                if (riga.id === 'no-results-live') {
+                    riga.style.display = 'none';  // ← MODIFICA QUI
+                    return;
+                }
                 const testo = riga.textContent.toLowerCase();
                 const mostra = query === '' || testo.includes(query);
-                riga.hidden = !mostra;
+                riga.style.display = mostra ? '' : 'none';
                 if (mostra) visibili++;
             });
 
@@ -49,14 +53,14 @@
                 if (!emptyMsg) {
                     emptyMsg = document.createElement('tr');
                     emptyMsg.id = 'no-results-live';
-                    emptyMsg.innerHTML = '<td colspan="7" class="text-center text-muted" class="result">Nessun risultato per "' + escapeHtml(query) + '"</td>';
+                    emptyMsg.innerHTML = '<td colspan="7" class="text-center text-muted result">Nessun risultato per "' + escapeHtml(query) + '"</td>';
                     tbody.appendChild(emptyMsg);
                 } else {
                     emptyMsg.querySelector('td').textContent = 'Nessun risultato per "' + query + '"';
-                    emptyMsg.hidden = false;
+                    emptyMsg.style.display = '';
                 }
             } else if (emptyMsg) {
-                emptyMsg.hidden = true;
+                emptyMsg.style.display = 'none';
             }
         });
     }
