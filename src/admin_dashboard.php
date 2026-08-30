@@ -19,7 +19,7 @@ if (!isset($_SESSION['cf'])) {
 
 // Se il CF non corrisponde a quello dell'admin, reindirizza all'area personale
 if ($_SESSION['cf'] !== ADMIN_CF) {
-    header('Location: account.php');
+    header('Location: login.php');
     exit;
 }
 
